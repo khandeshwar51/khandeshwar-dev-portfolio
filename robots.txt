@@ -1,0 +1,27 @@
+# Robots.txt for Khandeshwar Suryavanshi Portfolio
+# https://khandeshwarportfolio.netlify.app
+
+User-agent: *
+Allow: /
+
+# Search Engine & AI Crawler Discoverability
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Host: https://khandeshwarportfolio.netlify.app
+Sitemap: https://khandeshwarportfolio.netlify.app/sitemap.xml

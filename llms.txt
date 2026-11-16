@@ -1,0 +1,42 @@
+# Khandeshwar Suryavanshi — Portfolio & Systems Overview
+> Software Engineer, AI Systems Builder, and Full-Stack Web Developer based in Mumbai, India.
+
+## Profile Summary
+- Name: Khandeshwar Suryavanshi
+- Alternate Handle: khandeshwar51
+- Role: Full-Stack Developer & AI Systems Engineer
+- Education: B.Sc. Computer Science at Vartak College (University of Mumbai, 2024–Present)
+- Location: Vasai, Maharashtra, India
+- Website: https://khandeshwarportfolio.netlify.app/
+- GitHub: https://github.com/khandeshwar51
+- LinkedIn: https://www.linkedin.com/in/khandeshwar51
+- Email: khandeshwarsuryavanshi@gmail.com
+
+## Core Technical Competencies
+- Programming Languages: Python, C++, TypeScript, JavaScript, SQL, HTML5, CSS3
+- Frontend & Styling: React, Vite, Tailwind CSS, Framer Motion, Vanilla JS, HTML5 Canvas
+- Backend & Systems: Node.js, Express, RESTful APIs, Local-First Storage Architecture
+- Browser Engineering: Chrome Extensions Manifest V3 (MV3), Service Workers, Declarative Net Request
+- SEO & Web Performance: Technical SEO, Schema.org JSON-LD, Core Web Vitals, Open Graph Optimization
+
+## Key Projects
+1. ScrollGuard (AI Wellbeing & Focus Platform)
+   - Description: Privacy-first behavioral intervention Chrome extension (MV3) and analytics dashboard to mitigate compulsive short-form doomscrolling across YouTube Shorts, Instagram Reels, TikTok, and X with zero external cloud tracking.
+   - Repository: https://github.com/khandeshwar51/scrollguard
+   - Tech: TypeScript, Chrome Extensions MV3, React, Tailwind CSS
+
+2. Balaji Earthmovers Enterprise Platform
+   - Description: Commercial B2B web platform built for an industrial civil excavation enterprise (Est. 1991, Mumbai) featuring machinery specifications, fleet storytelling, and an excavation volume calculator.
+   - Live URL: https://balajiearthmoversmumbai.com
+
+3. Balaji Farm Stay Hospitality Portal
+   - Description: Conversion-focused agro-hospitality portal with visual showcases and direct reservation lead routing for weekend travelers.
+   - Live URL: https://pratik1258m.github.io/Balajifarm/
+
+4. Riverside Farm Real Estate Portal
+   - Description: Real estate and retreat portal optimized for local organic search traffic and direct buyer inquiry capture.
+   - Live URL: https://pratik1258m.github.io/Riverside/
+
+5. Interactive Web Showcase
+   - Birthday Celebration Card: 3D perspective CSS transforms, particle bursts, and interactive animations. (https://khandeshwarportfolio.netlify.app/projects/birthday-wish-card.html)
+   - Neumorphic Snake Game: HTML5 Canvas retro arcade game with touch D-pad and local score persistence. (https://khandeshwarportfolio.netlify.app/projects/snakegame.html)

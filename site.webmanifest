@@ -1,0 +1,17 @@
+{
+  "name": "Khandeshwar Suryavanshi | Full-Stack Developer & AI Systems",
+  "short_name": "Khandeshwar S.",
+  "description": "Portfolio of Khandeshwar Suryavanshi — Full-Stack Developer, AI Systems builder (ScrollGuard), and B.Sc. CS student at Vartak College, Mumbai.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64 128x128 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

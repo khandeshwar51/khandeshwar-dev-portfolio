@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Celebration Card | Khandeshwar Suryavanshi</title>
+    <meta name="description" content="An interactive 3D browser celebration card built by Khandeshwar Suryavanshi featuring hypnotic CSS gradients, 3D perspective card flips, interactive cake cutting, and animations." />
+    <meta name="author" content="Khandeshwar Suryavanshi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://khandeshwarportfolio.netlify.app/projects/birthday-wish-card.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://khandeshwarportfolio.netlify.app/projects/birthday-wish-card.html" />
+    <meta property="og:title" content="Interactive 3D Celebration Card | Khandeshwar Suryavanshi" />
+    <meta property="og:description" content="An interactive 3D browser celebration card with hypnotic CSS gradients and particle effects." />
+    <meta property="og:image" content="https://khandeshwarportfolio.netlify.app/assets/og-preview.svg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Interactive 3D Celebration Card | Khandeshwar Suryavanshi" />
+    <meta name="twitter:description" content="Interactive 3D celebration card built by Khandeshwar Suryavanshi." />
+    <meta name="twitter:image" content="https://khandeshwarportfolio.netlify.app/assets/og-preview.svg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Interactive 3D Celebration Card",
+      "url": "https://khandeshwarportfolio.netlify.app/projects/birthday-wish-card.html",
+      "applicationCategory": "EntertainmentApplication",
+      "browserRequirements": "Requires JavaScript and modern CSS 3D transforms",
+      "author": {
+        "@type": "Person",
+        "name": "Khandeshwar Suryavanshi",
+        "url": "https://khandeshwarportfolio.netlify.app/"
+      }
+    }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;700&display=swap');
+        
+        .hypno-bg {
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255,182,193,0.2) 0%,
+                rgba(255,105,180,0.2) 25%,
+                rgba(255,20,147,0.2) 50%,
+                rgba(255,105,180,0.2) 75%,
+                rgba(255,182,193,0.2) 100%
+            );
+            background-size: 100px 100px;
+            animation: hypno-spin 20s linear infinite;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        @keyframes hypno-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        :root {
+            --primary: #FF69B4;
+            --secondary: #FFB6C1;
+            --dark: #33001b;
+            --light: #FFF0F5;
+            --accent: #FF1493;
+            --cake-base: #FFD1DC;
+            --icing: #FFB6C1;
+            --shine: rgba(255,255,255,0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #660033 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 60%, rgba(51,0,27,0.8));
+            z-index: 1;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(255,105,180,0.5);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .name {
+            font-size: 4rem;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .reveal-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-family: 'Dancing Script', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .cake-container {
+            position: relative;
+            margin: 2rem 0;
+            display: none;
+            animation: cakeAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            z-index: 2;
+        }
+        
+        .cake {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        
+        .cake-layer {
+            position: absolute;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .bottom-layer {
+            width: 250px;
+            height: 100px;
+            bottom: 0;
+            left: 25px;
+            background: var(--cake-base);
+        }
+        
+        .top-layer {
+            width: 200px;
+            height: 80px;
+            bottom: 80px;
+            left: 50px;
+            background: var(--icing);
+        }
+        
+        .candles {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .candle {
+            width: 12px;
+            height: 60px;
+            background: #fff;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .candle:hover {
+            transform: scale(1.1);
+        }
+        
+        .flame {
+            width: 10px;
+            height: 20px;
+            background: #ffcc00;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -25px;
+            left: 1px;
+            animation: flicker 0.1s infinite alternate;
+            box-shadow: 0 0 20px rgba(255,204,0,0.5);
+        }
+        
+        .candle.blown .flame {
+            animation: blow-out 0.5s forwards;
+        }
+        
+        .smoke {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: smoke 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+        
+        .birthday-card {
+            background: rgba(51, 0, 27, 0.9);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--primary);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .card-visible {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,105,180,0.3);
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,182,193,0.1);
+            border-radius: 10px;
+            border: 1px solid var(--primary);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .signature {
+            font-style: italic;
+            text-align: right;
+            color: var(--secondary);
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .hearts {
+            position: fixed;
+            font-size: 20px;
+            animation: float-up 4s linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+        
+        @keyframes blow-out {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+        
+        @keyframes smoke {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(3); opacity: 0; }
+        }
+        
+        @keyframes cakeAppear {
+            0% { transform: translateY(100px) scale(0); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .glitter {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 999;
+            animation: glitter-fall 3s linear forwards;
+        }
+        
+        @keyframes glitter-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hypno-bg"></div>
+    
+    <div class="hero">
+        <h1>HAPPY BIRTHDAY</h1>
+        <div class="name">Purva</div>
+        
+        <button class="reveal-btn" id="cutCakeBtn">Let's Cut the Cake! 🎂</button>
+        
+        <div class="cake-container" id="cakeContainer">
+            <div class="cake">
+                <div class="cake-layer bottom-layer"></div>
+                <div class="cake-layer top-layer"></div>
+                <div class="candles">
+                    <div class="candle" data-blown="false">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" data-blown="false">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" data-blown="false">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="birthday-card" id="birthdayCard">
+        <div class="card-title">To The Most Beautiful Soul ✨</div>
+        <div class="message">
+            <p>Dearest <strong>Purva</strong>,</p>
+            <p>On your special day, may your world be filled with as much joy and happiness as you bring to others!</p>
+            <p>You shine brighter than the stars and make every moment magical just by being you.</p>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-icon">💖</div>
+                <div>Love +∞</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon">✨</div>
+                <div>Sparkle MAX</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon">🌹</div>
+                <div>Beauty 100%</div>
+            </div>
+        </div>
+        <div class="message">
+            <p>Wishing you a year filled with laughter, love, and all your heart desires!</p>
+        </div>
+        <div class="signature">
+            <p>Best wishes from</p>
+            <p>Khandeshwar</p>
+        </div>
+    </div>
+
+    <script>
+        class BirthdayExperience {
+            constructor() {
+                this.cutCakeBtn = document.getElementById('cutCakeBtn');
+                this.cakeContainer = document.getElementById('cakeContainer');
+                this.candles = document.querySelectorAll('.candle');
+                this.birthdayCard = document.getElementById('birthdayCard');
+                this.blownCandles = 0;
+                
+                this.initializeEventListeners();
+                this.createHypnoEffect();
+            }
+
+            initializeEventListeners() {
+                this.cutCakeBtn.addEventListener('click', () => this.handleCakeReveal());
+                this.candles.forEach(candle => {
+                    candle.addEventListener('click', () => this.handleCandleBlow(candle));
+                });
+            }
+
+            createHypnoEffect() {
+                document.addEventListener('mousemove', (e) => {
+                    const hypno = document.querySelector('.hypno-bg');
+                    const x = (window.innerWidth/2 - e.pageX)/50;
+                    const y = (window.innerHeight/2 - e.pageY)/50;
+                    hypno.style.transform = `rotate(${x}deg) translate(${y}px, ${x}px)`;
+                });
+            }
+
+            handleCakeReveal() {
+                this.cutCakeBtn.style.display = 'none';
+                this.cakeContainer.style.display = 'block';
+                this.cakeContainer.style.animation = 'cakeAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
+            }
+
+            handleCandleBlow(candle) {
+                if (candle.dataset.blown === 'false') {
+                    candle.dataset.blown = 'true';
+                    candle.classList.add('blown');
+                    this.createSmokeEffect(candle);
+                    this.blownCandles++;
+                    
+                    if (this.blownCandles === 3) {
+                        setTimeout(() => this.revealBirthdayCard(), 1000);
+                    }
+                }
+            }
+
+            createSmokeEffect(candle) {
+                const smoke = document.createElement('div');
+                smoke.className = 'smoke';
+                candle.appendChild(smoke);
+                setTimeout(() => smoke.remove(), 1500);
+            }
+
+            revealBirthdayCard() {
+                this.birthdayCard.style.display = 'block';
+                this.birthdayCard.classList.add('card-visible');
+                this.createHearts();
+                this.cakeContainer.style.display = 'none';
+                this.addCardHoverEffect();
+            }
+
+            createHearts() {
+                const heartSymbols = ['💖', '💗', '💓', '💘', '💝', '💞'];
+                for (let i = 0; i < 30; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'hearts';
+                    heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }
+                
+                for (let i = 0; i < 50; i++) {
+                    const glitter = document.createElement('div');
+                    glitter.className = 'glitter';
+                    glitter.style.left = Math.random() * 100 + 'vw';
+                    glitter.style.width = Math.random() * 10 + 5 + 'px';
+                    glitter.style.height = glitter.style.width;
+                    glitter.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    document.body.appendChild(glitter);
+                    setTimeout(() => glitter.remove(), 5000);
+                }
+            }
+
+            addCardHoverEffect() {
+                this.birthdayCard.addEventListener('mousemove', (e) => {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    this.birthdayCard.style.transform = `translate(-50%, -50%) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                });
+
+                this.birthdayCard.addEventListener('mouseleave', () => {
+                    this.birthdayCard.style.transform = 'translate(-50%, -50%) rotateY(0) rotateX(0)';
+                    this.birthdayCard.style.transition = 'all 0.5s ease';
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new BirthdayExperience();
+        });
+    </script>
+</body>
+</html>
