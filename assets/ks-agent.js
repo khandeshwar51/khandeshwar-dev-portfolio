@@ -152,9 +152,13 @@
 
       if (events && Array.isArray(events)) {
         const pushEvent = events.find(e => e.type === 'PushEvent');
-        if (pushEvent && pushEvent.payload && pushEvent.payload.commits && pushEvent.payload.commits.length > 0) {
-          liveGitHubData.latestCommit = pushEvent.payload.commits[0].message.split('\n')[0];
-          liveGitHubData.latestRepo = pushEvent.repo.name.replace('khandeshwar51/', '');
+        if (pushEvent) {
+          liveGitHubData.latestRepo = pushEvent.repo ? pushEvent.repo.name.replace('khandeshwar51/', '') : 'portfolio';
+          if (pushEvent.payload && pushEvent.payload.commits && pushEvent.payload.commits.length > 0) {
+            liveGitHubData.latestCommit = pushEvent.payload.commits[0].message.split('\n')[0];
+          } else {
+            liveGitHubData.latestCommit = "Updated repository via main branch push";
+          }
           const eventDate = new Date(pushEvent.created_at);
           liveGitHubData.latestTime = timeAgo(eventDate);
           liveGitHubData.synced = true;
