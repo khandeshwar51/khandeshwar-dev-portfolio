@@ -107,8 +107,7 @@
         tech: "Python, Groq AI LLM, Node.js, WhatsApp API, Resend API, jsPDF",
         howHeUsesIt: "Engineered automated pipeline scraping 500+ daily articles from 32 RSS feeds, Jaccard similarity deduplication, Groq AI LLM summaries, automated 8:00 AM WhatsApp and Email broadcasts, and dynamic branded PDF reports."
       }
-    ],
-    collaborator: "Pratik Mishra (@pratik1258m)"
+    ]
   };
 
   // State Management
@@ -994,7 +993,6 @@ You are "KS Thinking Agent", the autonomous, highly articulate AI representative
    - Automated CI/CD journal tracking daily engineering practice and Conventional Commits.
 
 === COMMERCIAL CLIENT DELIVERABLES ===
-(Co-Authored with Pratik Mishra @pratik1258m):
 1. Balaji Earthmovers (https://balajiearthmoversmumbai.com): React, Tailwind, sticky machinery storytelling, excavation volume estimator, sub-1.2s LCP load time.
 2. Balaji Farm Stay (https://pratik1258m.github.io/Balajifarm/): Agro-hospitality booking portal with direct WhatsApp conversion funnel (+40% booking rate).
 3. Riverside Farm (https://pratik1258m.github.io/Riverside/): Mobile-first real estate & farm stay portal with Google Search Console indexing.
@@ -1093,7 +1091,6 @@ ScrollGuard is Khandeshwar's flagship browser extension engineered to intercept 
 
       const res = `
 💼 **Production & Commercial Client Deliveries:**
-*(Co-Authored with [Pratik Mishra @pratik1258m](https://github.com/pratik1258m))*
 
 1. 🚜 **[Balaji Earthmovers](https://balajiearthmoversmumbai.com)**
    - Heavy excavation & civil engineering platform (Est. 1991).
