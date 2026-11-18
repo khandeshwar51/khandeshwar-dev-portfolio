@@ -44,14 +44,15 @@
         ]
       },
       {
-        name: "Engineering Journal (auto_green)",
-        badge: "Automated Telemetry Sync",
-        scope: "Daily CI/CD GitHub Actions telemetry synchronization logging algorithmic milestones and coding consistency.",
-        tech: "GitHub Actions, Bash, Conventional Commits, Git Automation",
-        repo: "https://github.com/khandeshwar51/auto_green",
+        name: "Modern Portfolio & KS Thinking Agent",
+        badge: "Autonomous AI Representative",
+        scope: "High-performance developer platform featuring live GitHub telemetry synchronization, keyless cognitive LLM inference, and multi-step reasoning.",
+        tech: "React, Tailwind CSS, Vite, Vanilla JS, Keyless LLM Inference",
+        repo: "https://github.com/khandeshwar51/portfolio",
         howHeUsesIt: [
-          "Runs automated cron synchronization at 20:00 IST daily to maintain unbroken telemetry.",
-          "Enforces strict Conventional Commits standards across all repositories."
+          "Dual-engine AI architecture connecting to live cloud LLM inference and GitHub REST APIs.",
+          "Schema.org JSON-LD microdata and semantic crawl hierarchy for Google Search ranking.",
+          "Optimized asset bundles and critical rendering path to achieve sub-1.2s First Contentful Paint."
         ]
       }
     ],
@@ -120,10 +121,10 @@
     synced: false,
     publicRepos: 5,
     latestCommit: "Automated engineering journal sync & telemetry update",
-    latestRepo: "auto_green",
+    latestRepo: "portfolio",
     latestTime: "recently",
     contributions: "1,006+ green contributions (1-year streak)",
-    recentRepos: ["scrollguard", "auto_green", "khandeshwar51"],
+    recentRepos: ["scrollguard", "portfolio", "khandeshwar51"],
     readmeBio: ""
   };
 
@@ -684,7 +685,7 @@
               <br/><br/>
               <b>What I do:</b>
               <ul>
-                <li>🛡️ <b>Projects &amp; Architectures:</b> Explain what tech stack Khandeshwar uses and how he architects systems (ScrollGuard, auto_green, commercial portals).</li>
+                <li>🛡️ <b>Projects &amp; Architectures:</b> Explain what tech stack Khandeshwar uses and how he architects systems (ScrollGuard, Modern Portfolio, commercial portals).</li>
                 <li>⚡ <b>Live Updates:</b> Read his daily GitHub commits, push events, and repo streak in real time.</li>
                 <li>💡 <b>General AI Chatbot:</b> Ask me any programming challenge, algorithm, system design, or computer science concept like ChatGPT!</li>
               </ul>
@@ -986,15 +987,16 @@ You are "KS Thinking Agent", the autonomous, highly articulate AI representative
 - Latest GitHub Commit: "${liveGitHubData.latestCommit}" on repo "${liveGitHubData.latestRepo}" (${liveGitHubData.latestTime})
 - Public Repos Count: ${liveGitHubData.publicRepos}
 - Active Repositories: ${liveGitHubData.recentRepos.join(', ')}
-- Daily Automation: "auto_green" runs daily GitHub Actions cron sync at 20:00 IST for continuous engineering journal telemetry.
+- Continuous Activity: 1,006+ contributions over the past year across open-source systems, client deliverables, and algorithmic practice.
 
 === FLAGSHIPS & HOW HE USES TECH ===
 1. ScrollGuard (https://github.com/khandeshwar51/scrollguard):
    - Tech: TypeScript, React, Chrome Manifest V3, IndexedDB, Focus scoring heuristics.
    - Purpose: Real-time privacy-first behavioral intervention stopping short-form doomscrolling (Reels, Shorts, TikTok, X).
    - How he engineered it: Solved Chrome MV3 ephemeral service worker termination cycles using IndexedDB state hydration. Zero external cloud tracking. 60fps velocity monitoring.
-2. auto_green (https://github.com/khandeshwar51/auto_green):
-   - Automated CI/CD journal tracking daily engineering practice and Conventional Commits.
+2. Modern Portfolio & KS Thinking Agent (https://github.com/khandeshwar51/portfolio):
+   - Tech: React, Tailwind CSS, Vite, Vanilla JS, Keyless LLM Inference.
+   - Purpose: High-performance portfolio platform and autonomous AI representative.
 
 === COMMERCIAL CLIENT DELIVERABLES ===
 1. Balaji Earthmovers (https://balajiearthmoversmumbai.com): React, Tailwind, sticky machinery storytelling, excavation volume estimator, sub-1.2s LCP load time.
@@ -1061,7 +1063,7 @@ You are "KS Thinking Agent", the autonomous, highly articulate AI representative
 - **Latest Work:** Committed to \`${liveGitHubData.latestRepo}\` (${liveGitHubData.latestTime})
 - **Latest Commit Message:** \`${liveGitHubData.latestCommit}\`
 - **Contribution Streak:** **1,006+ contributions** over the past year with a completely solid green calendar!
-- **Daily Telemetry:** Automated via \`auto_green\` workflow running daily at 20:00 IST to log continuous milestones.
+- **Continuous Activity:** 1,006+ contributions over the past year across open-source platforms, client deliverables, and algorithmic practice.
 - **Active Repos:** ${liveGitHubData.recentRepos.map(r => `\`${r}\``).join(', ')}
 
 You can inspect his live commits directly on his [GitHub Profile](https://github.com/khandeshwar51)!
@@ -1250,7 +1252,7 @@ Regarding: *"**${originalQuery}**"*
 I am continuously indexing Khandeshwar's newest GitHub commits, algorithmic repositories, and client platforms.
 
 Feel free to ask about:
-- **Khandeshwar's Stack & Projects:** Ask about **ScrollGuard**, **Balaji Earthmovers**, or **auto_green**.
+- **Khandeshwar's Stack & Projects:** Ask about **ScrollGuard**, **Balaji Earthmovers**, or **Modern Portfolio**.
 - **Tech Stack:** Ask about his work in **C++**, **Python**, **React**, or **Manifest V3**.
 - **Live Updates:** Ask *"What did he commit recently?"* to check real-time telemetry!
 - **Hiring:** Reach him directly at [khandeshwarsuryavanshi@gmail.com](mailto:khandeshwarsuryavanshi@gmail.com).

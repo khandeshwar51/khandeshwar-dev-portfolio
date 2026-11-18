@@ -49,4 +49,5 @@
 @media (min-width:768px){.ks-proj-matrix{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
 .ks-matrix-panel{background:rgba(15,23,42,0.58) !important;border:1px solid rgba(148,163,184,0.14) !important;border-radius:0.85rem !important;padding:1.1rem 1.2rem !important}
 .ks-tech-row{display:flex !important;flex-wrap:wrap !important;gap:0.5rem !important;padding-top:1rem !important;border-top:1px solid rgba(148,163,184,0.15) !important}
-.ks-tech-pill{font-size:0.75rem !important;font-weight:500 !important;padding:0.3rem 0.8rem !important;border-radius:9999px !important;background:rgba(56,189,248,0.1) !important;color:#7dd3fc !important;border:1px solid rgba(56,189,248,0.28) !important}
+.ks-tech-pill{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;font-size:0.72rem !important;font-weight:500 !important;letter-spacing:0.02em !important;padding:0.25rem 0.75rem !important;border-radius:9999px !important;background:rgba(255,255,255,0.03) !important;color:#e4e4e7 !important;border:1px solid rgba(255,255,255,0.08) !important;transition:all 0.2s ease !important}
+.ks-tech-pill:hover{background:rgba(255,255,255,0.08) !important;border-color:rgba(255,255,255,0.2) !important;color:#ffffff !important}
