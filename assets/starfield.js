@@ -29,13 +29,13 @@
   // Parallax coordinates (smoothed via linear interpolation)
   var mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
-  // Star colors: diamond white (70%), ice blue (20%), subtle lilac (10%)
+  // Star colors: diamond white, silver white, electric teal (#00E5E5), electric cyan (#00CFFF)
   var COLOR_PALETTES = [
     { r: 255, g: 255, b: 255 }, // Crisp White
-    { r: 255, g: 255, b: 255 },
-    { r: 255, g: 255, b: 255 },
-    { r: 186, g: 230, b: 253 }, // Ice Blue (Tailwind sky-200)
-    { r: 224, g: 231, b: 255 }  // Soft Indigo/Lavender
+    { r: 241, g: 245, b: 249 }, // Silver White
+    { r: 0, g: 229, b: 229 },   // Electric Teal (#00E5E5)
+    { r: 0, g: 207, b: 255 },   // Electric Cyan (#00CFFF)
+    { r: 160, g: 235, b: 245 }  // Aqua Ice
   ];
 
   function resize() {
@@ -184,9 +184,9 @@
       }
 
       var grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-      grad.addColorStop(0.7, 'rgba(186, 230, 253, ' + (0.35 * fade) + ')');
-      grad.addColorStop(1, 'rgba(255, 255, 255, ' + (0.85 * fade) + ')');
+      grad.addColorStop(0, 'rgba(0, 229, 229, 0)');
+      grad.addColorStop(0.7, 'rgba(0, 229, 229, ' + (0.45 * fade) + ')');
+      grad.addColorStop(1, 'rgba(0, 207, 255, ' + (0.95 * fade) + ')');
 
       ctx.beginPath();
       ctx.moveTo(tailX, tailY);

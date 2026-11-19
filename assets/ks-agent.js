@@ -205,20 +205,19 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Compact Futuristic Robot Head Launcher */
+    /* Compact Futuristic Miniature Robot Head Launcher */
     #ks-agent-launcher {
       position: relative;
-      width: 54px;
-      height: 54px;
+      width: 56px;
+      height: 56px;
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(14, 20, 36, 0.94) 0%, rgba(8, 10, 20, 0.98) 100%);
+      background: linear-gradient(135deg, rgba(7, 23, 29, 0.94) 0%, rgba(2, 9, 13, 0.98) 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(56, 189, 248, 0.38);
+      border: 1.5px solid rgba(0, 229, 229, 0.45);
       box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.85),
-                  0 0 20px rgba(56, 189, 248, 0.25),
-                  0 0 10px rgba(168, 85, 247, 0.2),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.15);
+                  0 0 25px rgba(0, 229, 229, 0.35),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -230,30 +229,50 @@
 
     #ks-agent-launcher:hover {
       transform: translateY(-4px) scale(1.06);
-      border-color: rgba(56, 189, 248, 0.85);
+      border-color: #00E5E5;
       box-shadow: 0 16px 35px -5px rgba(0, 0, 0, 0.95),
-                  0 0 28px rgba(56, 189, 248, 0.5),
-                  0 0 16px rgba(192, 132, 252, 0.4),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.25);
+                  0 0 35px rgba(0, 229, 229, 0.65),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     #ks-agent-launcher:active {
       transform: translateY(-1px) scale(0.98);
     }
 
+    /* Permanent Futuristic Glass Badge above Launcher */
+    .ks-robot-pill-badge {
+      position: absolute;
+      bottom: calc(100% + 9px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(7, 23, 29, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 229, 229, 0.35);
+      padding: 4px 11px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #F1F5F9;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.65), 0 0 12px rgba(0, 229, 229, 0.2);
+    }
+
     .ks-robot-icon-wrap {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .ks-robot-svg {
-      width: 36px;
-      height: 36px;
-      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45));
+      width: 38px;
+      height: 38px;
+      filter: drop-shadow(0 0 10px rgba(0, 229, 229, 0.55));
       transition: transform 0.25s ease;
     }
 
@@ -270,7 +289,7 @@
       height: 9px;
       border-radius: 50%;
       background: #10b981;
-      border: 2px solid #080a14;
+      border: 2px solid #02090D;
       box-shadow: 0 0 8px #10b981;
       animation: ks-dot-pulse 2.4s infinite;
     }
@@ -281,7 +300,7 @@
         opacity: 1;
       }
       50% {
-        box-shadow: 0 0 12px #10b981, 0 0 4px #34d399;
+        box-shadow: 0 0 12px #10b981, 0 0 4px #00E5A3;
         opacity: 0.85;
       }
     }
@@ -356,14 +375,13 @@
       max-width: calc(100vw - 32px);
       height: 640px;
       max-height: calc(100vh - 110px);
-      background: linear-gradient(180deg, rgba(12, 16, 32, 0.95) 0%, rgba(6, 8, 18, 0.98) 100%);
+      background: linear-gradient(180deg, rgba(7, 23, 29, 0.96) 0%, rgba(2, 9, 13, 0.98) 100%);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(0, 229, 229, 0.35);
       border-radius: 20px;
       box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9),
-                  0 0 35px rgba(56, 189, 248, 0.18),
-                  0 0 15px rgba(168, 85, 247, 0.15),
+                  0 0 35px rgba(0, 229, 229, 0.2),
                   inset 0 1px 0 rgba(255, 255, 255, 0.1);
       display: flex;
       flex-direction: column;
@@ -382,8 +400,8 @@
 
     .ks-header {
       padding: 13px 18px;
-      background: linear-gradient(135deg, rgba(18, 26, 48, 0.85) 0%, rgba(10, 14, 28, 0.95) 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(135deg, rgba(10, 30, 38, 0.9) 0%, rgba(6, 18, 24, 0.98) 100%);
+      border-bottom: 1px solid rgba(0, 229, 229, 0.18);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -412,7 +430,7 @@
 
     .ks-header-status {
       font-size: 11px;
-      color: #38bdf8;
+      color: #00E5E5;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -435,7 +453,7 @@
 
     .ks-header-btn {
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 229, 229, 0.2);
       color: #94a3b8;
       border-radius: 8px;
       width: 28px;
@@ -449,30 +467,31 @@
     }
 
     .ks-header-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(0, 229, 229, 0.15);
       color: #ffffff;
+      border-color: #00E5E5;
     }
 
     .ks-live-ribbon {
-      background: linear-gradient(90deg, rgba(2, 132, 199, 0.15), rgba(124, 58, 237, 0.15));
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      background: linear-gradient(90deg, rgba(0, 207, 255, 0.12), rgba(0, 143, 156, 0.12));
+      border-bottom: 1px solid rgba(0, 229, 229, 0.2);
       padding: 6px 16px;
       font-size: 11px;
-      color: #38bdf8;
+      color: #00E5E5;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .ks-live-ribbon a {
-      color: #a855f7;
+      color: #00CFFF;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s;
     }
 
     .ks-live-ribbon a:hover {
-      color: #c084fc;
+      color: #00E5E5;
       text-decoration: underline;
     }
 
@@ -491,7 +510,7 @@
     }
 
     .ks-messages::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(0, 229, 229, 0.25);
       border-radius: 10px;
     }
 
@@ -512,13 +531,14 @@
     }
 
     .ks-msg-user .ks-bubble {
-      background: linear-gradient(135deg, #0284c7, #2563eb);
-      color: #ffffff;
+      background: linear-gradient(135deg, #00CFFF, #008F9C);
+      color: #02090D;
+      font-weight: 600;
       border-radius: 16px 16px 4px 16px;
       padding: 10px 14px;
       font-size: 13px;
       line-height: 1.45;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      box-shadow: 0 4px 14px rgba(0, 229, 229, 0.35);
     }
 
     .ks-msg-bot {
@@ -527,9 +547,9 @@
     }
 
     .ks-msg-bot .ks-bubble {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #e2e8f0;
+      background: rgba(7, 23, 29, 0.9);
+      border: 1px solid rgba(0, 229, 229, 0.25);
+      color: #F1F5F9;
       border-radius: 16px 16px 16px 4px;
       padding: 12px 15px;
       font-size: 13px;
@@ -546,20 +566,20 @@
       color: #ffffff;
     }
     .ks-bubble a {
-      color: #38bdf8;
+      color: #00E5E5;
       text-decoration: underline;
     }
     .ks-bubble code {
-      background: rgba(15, 23, 42, 0.8);
-      color: #38bdf8;
+      background: rgba(2, 9, 13, 0.85);
+      color: #00E5E5;
       padding: 2px 5px;
       border-radius: 4px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 12px;
     }
     .ks-bubble pre {
-      background: #090d16;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #040d12;
+      border: 1px solid rgba(0, 229, 229, 0.2);
       border-radius: 8px;
       padding: 10px 12px;
       overflow-x: auto;
@@ -579,14 +599,14 @@
       justify-content: space-between;
       margin-bottom: 6px;
       font-size: 10px;
-      color: #94a3b8;
+      color: #71838E;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .ks-copy-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: #38bdf8;
+      background: rgba(0, 229, 229, 0.15);
+      border: 1px solid rgba(0, 229, 229, 0.3);
+      color: #00E5E5;
       font-size: 10px;
       padding: 2px 6px;
       border-radius: 4px;
@@ -594,7 +614,8 @@
       transition: background 0.2s;
     }
     .ks-copy-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 229, 229, 0.3);
+      color: #ffffff;
     }
     .ks-bubble ul {
       margin: 6px 0;
@@ -607,8 +628,8 @@
     /* Reasoning Box (Thinking Chain) */
     .ks-thought-box {
       margin-bottom: 8px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(139, 92, 246, 0.35);
+      background: rgba(4, 15, 20, 0.9);
+      border: 1px solid rgba(0, 229, 229, 0.35);
       border-radius: 12px;
       overflow: hidden;
       font-size: 11px;
@@ -616,8 +637,8 @@
 
     .ks-thought-header {
       padding: 6px 10px;
-      background: rgba(139, 92, 246, 0.12);
-      color: #c084fc;
+      background: rgba(0, 229, 229, 0.12);
+      color: #00E5E5;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -628,8 +649,8 @@
 
     .ks-thought-content {
       padding: 8px 10px;
-      color: #94a3b8;
-      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      color: #AABBC5;
+      border-top: 1px solid rgba(0, 229, 229, 0.2);
       line-height: 1.45;
     }
 
@@ -646,8 +667,8 @@
       gap: 6px;
       overflow-x: auto;
       white-space: nowrap;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(15, 23, 42, 0.6);
+      border-top: 1px solid rgba(0, 229, 229, 0.12);
+      background: rgba(7, 23, 29, 0.7);
     }
 
     .ks-chips::-webkit-scrollbar {
@@ -655,9 +676,9 @@
     }
 
     .ks-chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #94a3b8;
+      background: rgba(0, 229, 229, 0.08);
+      border: 1px solid rgba(0, 229, 229, 0.22);
+      color: #AABBC5;
       border-radius: 9999px;
       padding: 4px 10px;
       font-size: 11px;
@@ -666,16 +687,16 @@
     }
 
     .ks-chip:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: #38bdf8;
+      background: rgba(0, 229, 229, 0.2);
+      border-color: #00E5E5;
       color: #ffffff;
       transform: translateY(-1px);
     }
 
     .ks-footer {
       padding: 12px 14px;
-      background: rgba(15, 23, 42, 0.95);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(4, 13, 18, 0.95);
+      border-top: 1px solid rgba(0, 229, 229, 0.15);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -683,25 +704,26 @@
 
     .ks-input {
       flex: 1;
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(7, 23, 29, 0.7);
+      border: 1px solid rgba(0, 229, 229, 0.25);
       border-radius: 12px;
       padding: 10px 14px;
       font-size: 13px;
-      color: #f8fafc;
+      color: #F1F5F9;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .ks-input:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+      border-color: #00E5E5;
+      box-shadow: 0 0 0 2px rgba(0, 229, 229, 0.25);
     }
 
     .ks-send-btn {
-      background: linear-gradient(135deg, #0284c7, #7c3aed);
+      background: linear-gradient(135deg, #00CFFF, #008F9C);
       border: none;
-      color: #ffffff;
+      color: #02090D;
+      font-weight: 700;
       border-radius: 12px;
       width: 38px;
       height: 38px;
@@ -715,7 +737,7 @@
 
     .ks-send-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(2, 132, 199, 0.5);
+      box-shadow: 0 0 15px rgba(0, 229, 229, 0.6);
     }
 
     .ks-send-btn:disabled {
@@ -769,54 +791,54 @@
   // 4. UI CREATION & EVENT LISTENERS
   // ==========================================
   function createRobotSVG(size, idSuffix) {
-    const s = size || 34;
+    const s = size || 36;
     const uid = idSuffix || ('r' + Math.random().toString(36).slice(2, 6));
     return `
       <svg class="ks-robot-svg" viewBox="0 0 44 44" width="${s}" height="${s}" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="chassis-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b" />
-            <stop offset="50%" stop-color="#0f172a" />
-            <stop offset="100%" stop-color="#080c18" />
+            <stop offset="0%" stop-color="#162933" />
+            <stop offset="50%" stop-color="#0a1820" />
+            <stop offset="100%" stop-color="#030c10" />
           </linearGradient>
           <linearGradient id="border-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#38bdf8" />
-            <stop offset="50%" stop-color="#818cf8" />
-            <stop offset="100%" stop-color="#c084fc" />
+            <stop offset="0%" stop-color="#00CFFF" />
+            <stop offset="50%" stop-color="#00E5E5" />
+            <stop offset="100%" stop-color="#94a3b8" />
           </linearGradient>
           <linearGradient id="sheen-${uid}" x1="0%" y1="0%" x2="100%" y2="50%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32" />
-            <stop offset="60%" stop-color="#ffffff" stop-opacity="0.04" />
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
+            <stop offset="60%" stop-color="#ffffff" stop-opacity="0.06" />
             <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
           </linearGradient>
           <radialGradient id="eyeglow-${uid}" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="45%" stop-color="#22d3ee" />
-            <stop offset="100%" stop-color="#0284c7" />
+            <stop offset="45%" stop-color="#00E5E5" />
+            <stop offset="100%" stop-color="#008F9C" />
           </radialGradient>
         </defs>
         <!-- Antenna Pole & Glowing Sensor Beacon -->
-        <line x1="22" y1="2" x2="22" y2="7.5" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" />
-        <circle cx="22" cy="2.5" r="2.2" fill="#38bdf8" />
+        <line x1="22" y1="2" x2="22" y2="7.5" stroke="#00E5E5" stroke-width="1.8" stroke-linecap="round" />
+        <circle cx="22" cy="2.5" r="2.2" fill="#00E5E5" filter="drop-shadow(0 0 4px #00CFFF)" />
         <circle cx="22" cy="2.5" r="1.1" fill="#ffffff" />
-        <!-- Cybernetic Lateral Ear Nodes (Illuminated Violet / Cyan) -->
-        <rect x="2.5" y="15" width="3.5" height="11" rx="1.75" fill="#a855f7" />
-        <rect x="38" y="15" width="3.5" height="11" rx="1.75" fill="#a855f7" />
+        <!-- Cybernetic Lateral Ear Nodes (Illuminated Cyan / Teal) -->
+        <rect x="2.5" y="15" width="3.5" height="11" rx="1.75" fill="#008F9C" stroke="#00E5E5" stroke-width="0.8" />
+        <rect x="38" y="15" width="3.5" height="11" rx="1.75" fill="#008F9C" stroke="#00E5E5" stroke-width="0.8" />
         <!-- Robot Geometric Cranium -->
         <rect x="6" y="7.5" width="32" height="28" rx="8" fill="url(#chassis-${uid})" stroke="url(#border-${uid})" stroke-width="1.6" />
         <!-- Specular 3D Curved Glass Sheen -->
         <path d="M 8 13 Q 22 9 36 13 L 36 17 Q 22 13 8 17 Z" fill="url(#sheen-${uid})" />
         <!-- Dark Curved Visor Display -->
-        <rect x="10" y="13.5" width="24" height="13.5" rx="4.5" fill="#040612" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1" />
+        <rect x="10" y="13.5" width="24" height="13.5" rx="4.5" fill="#02090D" stroke="rgba(0, 229, 229, 0.45)" stroke-width="1" />
         <!-- Expressive Glowing Cyan Eyes -->
         <g class="ks-robot-eyes">
-          <rect class="ks-robot-eye" x="13" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" />
+          <rect class="ks-robot-eye" x="13" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 4px #00E5E5)" />
           <circle cx="15.2" cy="19.2" r="1.1" fill="#ffffff" />
-          <rect class="ks-robot-eye" x="24.5" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" />
+          <rect class="ks-robot-eye" x="24.5" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 4px #00E5E5)" />
           <circle cx="26.7" cy="19.2" r="1.1" fill="#ffffff" />
         </g>
         <!-- Audio / Communication Data Slit -->
-        <line x1="16.5" y1="30" x2="27.5" y2="30" stroke="rgba(56, 189, 248, 0.75)" stroke-width="1.4" stroke-linecap="round" />
+        <line x1="16.5" y1="30" x2="27.5" y2="30" stroke="rgba(0, 229, 229, 0.75)" stroke-width="1.4" stroke-linecap="round" />
       </svg>
     `;
   }
@@ -827,6 +849,16 @@
 
     root.innerHTML = `
       <div id="ks-agent-launcher" title="KS AI Assistant" aria-label="Open KS AI Assistant">
+        <div class="ks-robot-pill-badge">KS AI Assistant</div>
+        <div class="ks-robot-icon-wrap">
+          ${createRobotSVG(36, 'launcher')}
+          <div class="ks-robot-online-dot"></div>
+        </div>
+        <div class="ks-robot-tooltip">
+          <span class="ks-tooltip-title">KS AI Assistant</span>
+          <span class="ks-tooltip-sub">Ask anything • Live Brain</span>
+        </div>
+      </div>
         <div class="ks-robot-icon-wrap">
           ${createRobotSVG(34, 'launcher')}
           <div class="ks-robot-online-dot"></div>
