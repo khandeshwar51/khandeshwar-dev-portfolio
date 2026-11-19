@@ -26,8 +26,24 @@
   var programmerParallaxHandler = null;
 
   function isHomeRoute() {
-    var p = window.location.pathname;
-    return p === '/' || p === '' || p.endsWith('/index.html') || p === '/portfolio/' || p === '/portfolio/index.html';
+    var p = (window.location.pathname || '/').toLowerCase();
+    if (p.length > 1 && p.endsWith('/')) {
+      p = p.slice(0, -1);
+    }
+    return p === '/' || p === '' || p === '/index.html' || p === '/portfolio' || p === '/portfolio/index.html';
+  }
+
+  function findHeroContainer() {
+    var hero = document.querySelector('.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden');
+    if (hero) return hero;
+    var candidates = document.querySelectorAll('.min-h-screen');
+    for (var i = 0; i < candidates.length; i++) {
+      var c = candidates[i];
+      if (c.classList.contains('flex') && c.classList.contains('items-center') && c.classList.contains('justify-center')) {
+        return c;
+      }
+    }
+    return null;
   }
 
   /* -------------------------------------------------------------
@@ -210,14 +226,16 @@
   }
 
   function mountProgrammerPanels(targetContainer) {
-    if (panelsMounted) return;
     if (!isHomeRoute()) return;
 
-    var container = targetContainer || document.getElementById('ks-home-hero') || document.querySelector('.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden');
+    var container = targetContainer || findHeroContainer();
     if (!container) return;
 
     var existing = document.getElementById('ks-programmer-panels');
     if (existing) {
+      if (existing.parentElement !== container) {
+        container.appendChild(existing);
+      }
       panelsMounted = true;
       initTypewriter();
       initProgrammerParallax();
@@ -230,7 +248,7 @@
     wrap.setAttribute('aria-hidden', 'true');
     wrap.innerHTML = getProgrammerPanelsHTML();
 
-    container.insertBefore(wrap, container.firstChild);
+    container.appendChild(wrap);
     panelsMounted = true;
 
     initTypewriter();
@@ -398,37 +416,62 @@
     }, { passive: true });
   }
 
-  // Route-Level Navigation Interceptor
-  function handleRouteChange() {
-    if (!isHomeRoute()) {
-      unmountProgrammerPanels();
-    } else {
-      setTimeout(function () {
-        mountProgrammerPanels();
-      }, 50);
+  // Route-Level Navigation Interceptor & Auto-Sync
+  var isSyncing = false;
+  function syncProgrammerPanels() {
+    if (isSyncing) return;
+    isSyncing = true;
+    try {
+      if (!isHomeRoute()) {
+        unmountProgrammerPanels();
+      } else {
+        var hero = findHeroContainer();
+        if (hero) {
+          var existing = document.getElementById('ks-programmer-panels');
+          if (!existing) {
+            mountProgrammerPanels(hero);
+          } else if (existing.parentElement !== hero) {
+            hero.appendChild(existing);
+          }
+        }
+      }
+    } finally {
+      isSyncing = false;
     }
   }
 
-  window.addEventListener('popstate', handleRouteChange);
+  window.addEventListener('popstate', syncProgrammerPanels);
 
   var origPushState = history.pushState;
   history.pushState = function () {
     var res = origPushState.apply(this, arguments);
-    handleRouteChange();
+    syncProgrammerPanels();
     return res;
   };
 
   var origReplaceState = history.replaceState;
   history.replaceState = function () {
     var res = origReplaceState.apply(this, arguments);
-    handleRouteChange();
+    syncProgrammerPanels();
     return res;
   };
+
+  // Observe DOM mutations to keep panels synchronized with React client-side transitions
+  if (typeof MutationObserver !== 'undefined') {
+    var domObserver = new MutationObserver(function () {
+      syncProgrammerPanels();
+    });
+    var observeTarget = document.getElementById('root') || document.body || document.documentElement;
+    if (observeTarget) {
+      domObserver.observe(observeTarget, { childList: true, subtree: true });
+    }
+  }
 
   // Expose global controller
   window.KSHomeProgrammerPanels = {
     mount: mountProgrammerPanels,
     unmount: unmountProgrammerPanels,
+    sync: syncProgrammerPanels,
     isMounted: function () { return panelsMounted; },
     isHomeRoute: isHomeRoute
   };
@@ -436,11 +479,14 @@
   // Initialization
   function init() {
     mountAtmosphere();
-    if (isHomeRoute()) {
-      mountProgrammerPanels();
-    } else {
-      unmountProgrammerPanels();
-    }
+    syncProgrammerPanels();
+
+    var checks = 0;
+    var timer = setInterval(function () {
+      checks++;
+      syncProgrammerPanels();
+      if (checks >= 10) clearInterval(timer);
+    }, 250);
   }
 
   if (document.readyState === 'loading') {
