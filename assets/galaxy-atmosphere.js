@@ -57,57 +57,10 @@
   /* -------------------------------------------------------------
    * 1. Global Galaxy Atmosphere (Persistent on all pages)
    * ------------------------------------------------------------- */
-  function getGalaxyBackdropHTML() {
+    function getGalaxyBackdropHTML() {
     return [
-      '<!-- SVG Definitions & Gradients -->',
-      '<svg width="0" height="0" style="position:absolute;visibility:hidden;" aria-hidden="true">',
-      '  <defs>',
-      '    <linearGradient id="ks-grad-orbit-cyan" x1="0%" y1="0%" x2="100%" y2="100%">',
-      '      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.9" />',
-      '      <stop offset="50%" stop-color="#00E5E5" stop-opacity="0.55" />',
-      '      <stop offset="100%" stop-color="#008F9C" stop-opacity="0" />',
-      '    </linearGradient>',
-      '    <linearGradient id="ks-grad-orbit-teal" x1="0%" y1="0%" x2="100%" y2="100%">',
-      '      <stop offset="0%" stop-color="#00E5E5" stop-opacity="0.85" />',
-      '      <stop offset="60%" stop-color="#008F9C" stop-opacity="0.45" />',
-      '      <stop offset="100%" stop-color="#00CFFF" stop-opacity="0" />',
-      '    </linearGradient>',
-      '    <linearGradient id="ks-grad-lunar-rim" x1="0%" y1="0%" x2="100%" y2="100%">',
-      '      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.95" />',
-      '      <stop offset="45%" stop-color="#00E5E5" stop-opacity="0.8" />',
-      '      <stop offset="75%" stop-color="#008F9C" stop-opacity="0.35" />',
-      '      <stop offset="100%" stop-color="#00E5E5" stop-opacity="0" />',
-      '    </linearGradient>',
-      '    <radialGradient id="ks-grad-planet-mid" cx="32%" cy="28%" r="68%">',
-      '      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.85" />',
-      '      <stop offset="22%" stop-color="#008F9C" stop-opacity="0.7" />',
-      '      <stop offset="55%" stop-color="#07171D" stop-opacity="0.92" />',
-      '      <stop offset="100%" stop-color="#02090D" stop-opacity="1" />',
-      '    </radialGradient>',
-      '    <radialGradient id="ks-grad-planet-upper" cx="38%" cy="30%" r="65%">',
-      '      <stop offset="0%" stop-color="#00E5E5" stop-opacity="0.7" />',
-      '      <stop offset="25%" stop-color="#008F9C" stop-opacity="0.55" />',
-      '      <stop offset="60%" stop-color="#081A22" stop-opacity="0.9" />',
-      '      <stop offset="100%" stop-color="#02090D" stop-opacity="1" />',
-      '    </radialGradient>',
-      '    <radialGradient id="ks-grad-planet-br" cx="30%" cy="30%" r="70%">',
-      '      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.95" />',
-      '      <stop offset="25%" stop-color="#00E5E5" stop-opacity="0.8" />',
-      '      <stop offset="55%" stop-color="#061820" stop-opacity="0.95" />',
-      '      <stop offset="100%" stop-color="#02090D" stop-opacity="1" />',
-      '    </radialGradient>',
-      '    <linearGradient id="ks-grad-lunar-body" x1="0%" y1="0%" x2="50%" y2="100%">',
-      '      <stop offset="0%" stop-color="#0a1d27" stop-opacity="0.95" />',
-      '      <stop offset="40%" stop-color="#06151c" stop-opacity="0.98" />',
-      '      <stop offset="100%" stop-color="#02090d" stop-opacity="1" />',
-      '    </linearGradient>',
-      '  </defs>',
-      '</svg>',
-      '<!-- 1. Deep Space Teal & Cyan Nebulae Layers -->',
+      '<!-- Deep Space Nebula Glow & Readability Layers -->',
       '<div class="ks-nebula-layer">',
-      '  <div class="ks-nebula ks-nebula-cyan"></div>',
-      '  <div class="ks-nebula ks-nebula-teal"></div>',
-      '  <div class="ks-nebula ks-nebula-aurora"></div>',
       '  <div class="ks-nebula ks-nebula-hero-glow"></div>',
       '  <div class="ks-nebula ks-nebula-center"></div>',
       '</div>'
@@ -137,15 +90,8 @@
   /* -------------------------------------------------------------
    * 2. Home Page Only: Floating Programmer Clusters, Planets & Lunar Landscape
    * ------------------------------------------------------------- */
-  function getProgrammerPanelsHTML() {
+    function getProgrammerPanelsHTML() {
     return [
-      '<!-- Glowing Cyan Orbital Beams -->',
-      '<svg class="ks-orbital-paths" viewBox="0 0 1440 900" preserveAspectRatio="none">',
-      '  <path class="ks-orbit-line ks-orbit-cyan" d="M -60 260 C 180 180, 280 480, 520 420 S 760 300, 920 340" />',
-      '  <path class="ks-orbit-line ks-orbit-teal" d="M 1500 240 C 1260 160, 1140 460, 900 440 S 680 320, 500 360" />',
-      '  <path class="ks-orbit-line ks-orbit-cyan ks-orbit-lower" d="M -40 540 C 140 520, 260 620, 480 660 S 800 780, 1100 760" />',
-      '</svg>',
-      '',
       '<!-- Left Developer Cluster: 3D VS Code Explorer Window & Symbols -->',
       '<div class="ks-left-cluster" id="ks-left-cluster">',
       '  <!-- Floating </> Badge -->',
@@ -183,18 +129,6 @@
       '      <circle cx="50" cy="50" r="6" fill="#00CFFF" />',
       '    </svg>',
       '  </div>',
-      '</div>',
-      '',
-      '<!-- Mid-Left Floating Planet (Placed down and away from React Atom to prevent crowding) -->',
-      '<div class="ks-planet-mid-left" id="ks-planet-mid-left" title="Cosmic Orbit">',
-      '  <svg viewBox="0 0 160 160" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">',
-      '    <circle cx="80" cy="80" r="56" fill="url(#ks-grad-planet-mid)" />',
-      '    <circle cx="80" cy="80" r="56" stroke="rgba(0, 207, 255, 0.45)" stroke-width="1.2" />',
-      '    <!-- Subtle Crescent Atmospheric Rim -->',
-      '    <path d="M 32 54 A 56 56 0 0 1 118 36" stroke="#00CFFF" stroke-width="3" stroke-linecap="round" opacity="0.9" filter="drop-shadow(0 0 10px #00E5E5)" />',
-      '    <!-- Subtle Planetary Surface Texture Line -->',
-      '    <path d="M 40 85 Q 80 75 120 85" stroke="rgba(0, 229, 229, 0.25)" stroke-width="1.2" opacity="0.5" />',
-      '  </svg>',
       '</div>',
       '',
       '<!-- Right Developer Cluster: 3D Code Editor, Terminal, TS, GitHub -->',
@@ -241,49 +175,6 @@
       '      <span class="ks-terminal-cursor"></span>',
       '    </div>',
       '  </div>',
-      '</div>',
-      '',
-      '<!-- Upper-Right Floating Planet (Between Heading & Code Editor) -->',
-      '<div class="ks-planet-upper-right" id="ks-planet-upper-right">',
-      '  <svg viewBox="0 0 100 100" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">',
-      '    <circle cx="50" cy="50" r="32" fill="url(#ks-grad-planet-upper)" />',
-      '    <circle cx="50" cy="50" r="32" stroke="rgba(0, 229, 229, 0.4)" stroke-width="1" />',
-      '    <path d="M 24 38 A 32 32 0 0 1 72 26" stroke="#00E5E5" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="drop-shadow(0 0 8px #00CFFF)" />',
-      '  </svg>',
-      '</div>',
-      '',
-      '<!-- Bottom-Left Cinematic Lunar/Planetary Horizon Landscape with Craters & Cyan Rim Glow -->',
-      '<div class="ks-lunar-surface" id="ks-lunar-surface">',
-      '  <svg viewBox="0 0 640 280" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" class="ks-lunar-svg">',
-      '    <!-- Outer Atmospheric Cyan Haze -->',
-      '    <path d="M -40 280 C 60 70, 260 40, 540 180 L 560 280 Z" fill="url(#ks-grad-lunar-rim)" opacity="0.25" filter="blur(16px)" />',
-      '    <!-- Lunar Terrain Body -->',
-      '    <path d="M -20 280 L -20 130 Q 90 40 250 65 T 540 190 L 560 280 Z" fill="url(#ks-grad-lunar-body)" />',
-      '    <!-- Secondary Rocky Ridge with Craters -->',
-      '    <path d="M -10 280 L -10 145 C 50 95, 120 80, 180 100 C 240 120, 310 90, 380 130 C 450 160, 510 210, 550 280 Z" fill="#041219" stroke="rgba(0, 229, 229, 0.4)" stroke-width="1" opacity="0.95" />',
-      '    <!-- Foreground Rocky Crust with Craters -->',
-      '    <ellipse cx="150" cy="125" rx="32" ry="12" fill="#02090e" stroke="rgba(0, 229, 229, 0.5)" stroke-width="1.3" transform="rotate(-6 150 125)" />',
-      '    <ellipse cx="290" cy="155" rx="40" ry="14" fill="#02090e" stroke="rgba(0, 229, 229, 0.45)" stroke-width="1.3" transform="rotate(-4 290 155)" />',
-      '    <ellipse cx="85" cy="180" rx="24" ry="9" fill="#010609" stroke="rgba(0, 229, 229, 0.4)" stroke-width="1.2" />',
-      '    <!-- Sharp Illuminated Cyan Horizon Rim -->',
-      '    <path d="M -20 130 Q 90 40 250 65 T 540 190" stroke="url(#ks-grad-lunar-rim)" stroke-width="3.5" stroke-linecap="round" filter="drop-shadow(0 0 16px #00E5E5)" />',
-      '    <path d="M -10 132 Q 90 42 250 67 T 538 192" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.8" />',
-      '  </svg>',
-      '  <!-- Floating Asteroid Particles -->',
-      '  <div class="ks-asteroid ks-ast-1"></div>',
-      '  <div class="ks-asteroid ks-ast-2"></div>',
-      '  <div class="ks-asteroid ks-ast-3"></div>',
-      '</div>',
-      '',
-      '<!-- Bottom-Right Glowing Celestial Body -->',
-      '<div class="ks-planet-bottom-right" id="ks-planet-bottom-right">',
-      '  <svg viewBox="0 0 320 320" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">',
-      '    <circle cx="200" cy="200" r="130" fill="url(#ks-grad-planet-br)" />',
-      '    <circle cx="200" cy="200" r="130" stroke="rgba(0, 229, 229, 0.4)" stroke-width="1.5" />',
-      '    <!-- Intense Cyan Rim Crescent -->',
-      '    <path d="M 85 140 A 130 130 0 0 1 210 70" stroke="#00CFFF" stroke-width="3.5" stroke-linecap="round" filter="drop-shadow(0 0 20px #00E5E5)" />',
-      '    <path d="M 90 145 A 130 130 0 0 1 208 75" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.75" />',
-      '  </svg>',
       '</div>'
     ].join('\n');
   }
@@ -318,7 +209,7 @@
     initProgrammerParallax();
   }
 
-  function unmountProgrammerPanels() {
+    function unmountProgrammerPanels() {
     if (typewriterTimer) {
       clearTimeout(typewriterTimer);
       typewriterTimer = null;
@@ -332,7 +223,7 @@
     var panels = document.getElementById('ks-programmer-panels');
     if (panels) panels.remove();
 
-    var ids = ['ks-left-cluster', 'ks-right-cluster', 'ks-planet-mid-left', 'ks-planet-upper-right', 'ks-lunar-surface', 'ks-planet-bottom-right'];
+    var ids = ['ks-left-cluster', 'ks-right-cluster'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el && el.parentNode) el.parentNode.removeChild(el);
@@ -390,15 +281,13 @@
     typewriterTimer = setTimeout(tick, 3500);
   }
 
-  // Subtle Mouse Parallax for Programmer Panels and Planets on Desktop
+    // Subtle Mouse Parallax for Programmer Panels on Desktop
   function initProgrammerParallax() {
     if (prefersReducedMotion.matches) return;
     if (programmerParallaxHandler) return;
 
     var leftCluster = document.getElementById('ks-left-cluster');
     var rightCluster = document.getElementById('ks-right-cluster');
-    var midPlanet = document.getElementById('ks-planet-mid-left');
-    var upperPlanet = document.getElementById('ks-planet-upper-right');
     if (!leftCluster && !rightCluster) return;
 
     var targetX = 0;
@@ -438,55 +327,12 @@
         rightCluster.style.marginTop = (currentY * -14) + 'px';
       }
 
-      if (midPlanet) {
-        midPlanet.style.transform = 'translate(' + (currentX * -12) + 'px, ' + (currentY * -10) + 'px)';
-      }
-
-      if (upperPlanet) {
-        upperPlanet.style.transform = 'translate(' + (currentX * 10) + 'px, ' + (currentY * 8) + 'px)';
-      }
-
       if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
         requestAnimationFrame(updateParallax);
       } else {
         isTicking = false;
       }
     }
-  }
-
-  // Subtle Mouse Parallax for Global Planetary System
-  function initPlanetParallax() {
-    if (prefersReducedMotion.matches) return;
-    var planetSystem = document.getElementById('ks-planet-system');
-    if (!planetSystem) return;
-
-    var targetX = 0;
-    var targetY = 0;
-    var currentX = 0;
-    var currentY = 0;
-    var isTicking = false;
-
-    window.addEventListener('mousemove', function (e) {
-      if (window.innerWidth < 1024) return;
-      targetX = (e.clientX / window.innerWidth) - 0.5;
-      targetY = (e.clientY / window.innerHeight) - 0.5;
-
-      if (!isTicking) {
-        isTicking = true;
-        requestAnimationFrame(function () {
-          currentX += (targetX - currentX) * 0.05;
-          currentY += (targetY - currentY) * 0.05;
-          if (planetSystem) {
-            planetSystem.style.transform = 'translate(' + (currentX * -12) + 'px, ' + (currentY * -10) + 'px)';
-          }
-          if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
-            requestAnimationFrame(arguments.callee || function () {});
-          } else {
-            isTicking = false;
-          }
-        });
-      }
-    }, { passive: true });
   }
 
   // Route-Level Navigation Interceptor & Auto-Sync

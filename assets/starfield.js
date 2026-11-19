@@ -64,6 +64,7 @@
       var baseSize = (Math.random() * 0.9 + 0.4) * (depth > 0.7 ? 1.2 : 0.9);
       var baseAlpha = Math.random() * 0.5 + 0.25;
 
+      var isCross = depth > 0.72 && Math.random() > 0.45;
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -74,7 +75,9 @@
         twinkleOffset: Math.random() * Math.PI * 2,
         color: color,
         depth: depth,
-        hasHalo: depth > 0.85 && Math.random() > 0.6
+        hasHalo: depth > 0.8 && Math.random() > 0.5,
+        hasCrossGlint: isCross,
+        glintScale: Math.random() * 3 + 4.5
       });
     }
   }
@@ -166,6 +169,37 @@
       ctx.arc(offsetX, offsetY, s.size, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(' + s.color.r + ',' + s.color.g + ',' + s.color.b + ',' + currentAlpha + ')';
       ctx.fill();
+
+      // Sharp 4-point cross glints (telescope diffraction spikes / lens flares)
+      if (s.hasCrossGlint && currentAlpha > 0.25) {
+        var glintLen = s.size * s.glintScale;
+        var glintAlpha = currentAlpha * 0.75;
+        ctx.save();
+        ctx.strokeStyle = 'rgba(' + s.color.r + ',' + s.color.g + ',' + s.color.b + ',' + glintAlpha + ')';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        // Vertical diffraction spike
+        ctx.moveTo(offsetX, offsetY - glintLen);
+        ctx.lineTo(offsetX, offsetY + glintLen);
+        // Horizontal diffraction spike
+        ctx.moveTo(offsetX - glintLen, offsetY);
+        ctx.lineTo(offsetX + glintLen, offsetY);
+        ctx.stroke();
+
+        // Extra micro diagonal glints for very prominent focal stars
+        if (s.depth > 0.88 && s.size > 1.0) {
+          var microLen = glintLen * 0.38;
+          ctx.strokeStyle = 'rgba(' + s.color.r + ',' + s.color.g + ',' + s.color.b + ',' + (glintAlpha * 0.4) + ')';
+          ctx.lineWidth = 0.4;
+          ctx.beginPath();
+          ctx.moveTo(offsetX - microLen, offsetY - microLen);
+          ctx.lineTo(offsetX + microLen, offsetY + microLen);
+          ctx.moveTo(offsetX + microLen, offsetY - microLen);
+          ctx.lineTo(offsetX - microLen, offsetY + microLen);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
     }
 
     // Draw Shooting Stars

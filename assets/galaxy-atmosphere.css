@@ -50,8 +50,13 @@ body {
   height: 100vh !important;
   pointer-events: none !important;
   user-select: none !important;
-  z-index: 1 !important;
+  z-index: 0 !important;
   overflow: hidden !important;
+  background-color: #02090D !important;
+  background-image: url('/assets/galaxy-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
 }
 
 #root {
@@ -67,12 +72,12 @@ body {
   width: 100vw !important;
   height: 100vh !important;
   pointer-events: none !important;
-  z-index: 0 !important;
-  opacity: 0.9 !important;
+  z-index: 1 !important;
+  opacity: 0.8 !important;
 }
 
 /* -------------------------------------------------------------
- * 3. Cosmic Teal & Cyan Nebulae Layers
+ * 3. Cosmic Teal & Cyan Nebulae & Readability Core
  * ------------------------------------------------------------- */
 .ks-nebula-layer {
   position: absolute;
@@ -85,46 +90,13 @@ body {
 .ks-nebula {
   position: absolute;
   border-radius: 50%;
-  filter: blur(85px);
-  mix-blend-mode: screen;
   will-change: transform, opacity;
 }
 
-/* Top-Left Electric Turquoise/Cyan Nebula Cloud */
-.ks-nebula-cyan {
-  top: -15%;
-  left: -10%;
-  width: 70vw;
-  height: 70vw;
-  max-width: 1100px;
-  max-height: 1100px;
-  background: radial-gradient(circle at 40% 40%, rgba(0, 207, 255, 0.45) 0%, rgba(0, 229, 229, 0.3) 35%, rgba(0, 143, 156, 0.15) 60%, transparent 75%);
-  filter: blur(80px);
-  animation: ks-nebula-drift-1 24s ease-in-out infinite alternate;
-}
-
-/* Mid/Top-Right Electric Cyan & Deep Teal Nebula */
-.ks-nebula-teal {
-  top: 5%;
-  right: -12%;
-  width: 65vw;
-  height: 65vw;
-  max-width: 1000px;
-  max-height: 1000px;
-  background: radial-gradient(circle at 60% 40%, rgba(0, 229, 229, 0.4) 0%, rgba(0, 143, 156, 0.25) 40%, rgba(0, 207, 255, 0.12) 65%, transparent 75%);
-  filter: blur(85px);
-  animation: ks-nebula-drift-2 28s ease-in-out infinite alternate;
-}
-
-/* Cosmic Aurora Arch across upper screen */
+.ks-nebula-cyan,
+.ks-nebula-teal,
 .ks-nebula-aurora {
-  top: 0;
-  left: 10%;
-  width: 80vw;
-  height: 35vh;
-  background: radial-gradient(ellipse at 50% 0%, rgba(0, 229, 229, 0.28) 0%, rgba(0, 143, 156, 0.18) 45%, transparent 75%);
-  filter: blur(75px);
-  animation: ks-nebula-drift-1 20s ease-in-out infinite alternate;
+  display: none !important;
 }
 
 /* Soft luminous cyan glow behind the highlighted surname "Suryavanshi" */
@@ -134,8 +106,8 @@ body {
   transform: translateX(-50%);
   width: clamp(320px, 45vw, 650px);
   height: 180px;
-  background: radial-gradient(ellipse at center, rgba(0, 207, 255, 0.25) 0%, rgba(0, 229, 229, 0.12) 45%, transparent 75%);
-  filter: blur(50px);
+  background: radial-gradient(ellipse at center, rgba(0, 207, 255, 0.22) 0%, rgba(0, 229, 229, 0.1) 45%, transparent 75%);
+  filter: blur(45px);
   pointer-events: none;
 }
 
@@ -146,20 +118,9 @@ body {
   width: 60vw;
   height: 60vh;
   max-width: 800px;
-  background: radial-gradient(ellipse at center, rgba(2, 9, 13, 0.8) 0%, rgba(2, 9, 13, 0.5) 50%, transparent 75%);
+  background: radial-gradient(ellipse at center, rgba(2, 9, 13, 0.72) 0%, rgba(2, 9, 13, 0.4) 55%, transparent 75%);
+  filter: blur(40px);
   pointer-events: none;
-}
-
-@keyframes ks-nebula-drift-1 {
-  0% { transform: translate(0, 0) scale(1); opacity: 0.45; }
-  50% { transform: translate(25px, -15px) scale(1.08); opacity: 0.6; }
-  100% { transform: translate(-20px, 20px) scale(0.96); opacity: 0.48; }
-}
-
-@keyframes ks-nebula-drift-2 {
-  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-  50% { transform: translate(-30px, 20px) scale(1.06); opacity: 0.55; }
-  100% { transform: translate(15px, -25px) scale(0.95); opacity: 0.38; }
 }
 
 /* -------------------------------------------------------------
@@ -178,192 +139,16 @@ body {
 /* Strict Route Isolation: Completely hide all programmer panels on subpages */
 body.ks-is-subpage .ks-programmer-panels,
 body:not(.ks-is-home) .ks-programmer-panels,
+body.ks-is-subpage #ks-programmer-panels,
+body:not(.ks-is-home) #ks-programmer-panels,
 body.ks-is-subpage .ks-left-cluster,
+body:not(.ks-is-home) .ks-left-cluster,
 body.ks-is-subpage .ks-right-cluster,
-body.ks-is-subpage .ks-planet-mid-left,
-body.ks-is-subpage .ks-planet-upper-right,
-body.ks-is-subpage .ks-lunar-surface,
-body.ks-is-subpage .ks-planet-bottom-right,
-body.ks-is-subpage .ks-orbital-paths {
+body:not(.ks-is-home) .ks-right-cluster {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-}
-
-/* -------------------------------------------------------------
- * 5. Sweeping Cyan Orbital Beams
- * ------------------------------------------------------------- */
-.ks-orbital-paths {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
-  z-index: 1;
-}
-
-.ks-orbit-line {
-  fill: none;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  will-change: opacity, stroke-dashoffset;
-}
-
-.ks-orbit-cyan {
-  stroke: url(#ks-grad-orbit-cyan);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 229, 0.75));
-  stroke-dasharray: 600;
-  animation: ks-orbit-glow-cyan 10s ease-in-out infinite alternate;
-}
-
-.ks-orbit-teal {
-  stroke: url(#ks-grad-orbit-teal);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 10px rgba(0, 207, 255, 0.7));
-  stroke-dasharray: 650;
-  animation: ks-orbit-glow-teal 12s ease-in-out infinite alternate 1.5s;
-}
-
-.ks-orbit-lower {
-  opacity: 0.6;
-}
-
-@keyframes ks-orbit-glow-cyan {
-  0% { stroke-opacity: 0.4; stroke-dashoffset: 0; }
-  50% { stroke-opacity: 0.9; stroke-dashoffset: -40; }
-  100% { stroke-opacity: 0.5; stroke-dashoffset: -80; }
-}
-
-@keyframes ks-orbit-glow-teal {
-  0% { stroke-opacity: 0.4; stroke-dashoffset: 0; }
-  50% { stroke-opacity: 0.85; stroke-dashoffset: 50; }
-  100% { stroke-opacity: 0.45; stroke-dashoffset: 90; }
-}
-
-/* -------------------------------------------------------------
- * 6. Floating Celestial Bodies (Mid-Left Planet & Upper-Right Planet)
- * ------------------------------------------------------------- */
-/* Mid-Left Planet: Positioned comfortably below React Atom to prevent crowding */
-.ks-planet-mid-left {
-  position: absolute;
-  left: clamp(130px, 15vw, 240px);
-  top: clamp(480px, 60vh, 620px);
-  width: 110px;
-  height: 110px;
-  pointer-events: none;
-  z-index: 1;
-  animation: ks-planet-float-mid 14s ease-in-out infinite alternate;
-}
-
-@keyframes ks-planet-float-mid {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
-  100% { transform: translateY(6px) rotate(-1.5deg); }
-}
-
-/* Upper-Right Planet (Between Heading & Code Editor) */
-.ks-planet-upper-right {
-  position: absolute;
-  right: clamp(330px, 28vw, 420px);
-  top: clamp(160px, 20vh, 250px);
-  width: 64px;
-  height: 64px;
-  pointer-events: none;
-  z-index: 1;
-  animation: ks-planet-float-upper 12s ease-in-out infinite alternate;
-}
-
-@keyframes ks-planet-float-upper {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(4px); }
-}
-
-/* -------------------------------------------------------------
- * 7. Cinematic Planetary Landscapes (Bottom-Left & Bottom-Right)
- * ------------------------------------------------------------- */
-/* Bottom-Left Rocky Cratered Lunar Horizon */
-.ks-lunar-surface {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: clamp(420px, 46vw, 780px);
-  height: auto;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.98;
-}
-
-.ks-lunar-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Floating Asteroid Particles near horizon */
-.ks-asteroid {
-  position: absolute;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  background: radial-gradient(circle at 35% 30%, #0d2733 0%, #05141c 70%, #02090d 100%);
-  border: 1px solid rgba(0, 229, 229, 0.4);
-  box-shadow: 0 0 10px rgba(0, 229, 229, 0.3);
-  pointer-events: none;
-}
-
-.ks-ast-1 {
-  width: 14px;
-  height: 12px;
-  bottom: 140px;
-  left: 180px;
-  animation: ks-asteroid-float 8s ease-in-out infinite alternate;
-}
-
-.ks-ast-2 {
-  width: 20px;
-  height: 17px;
-  bottom: 90px;
-  left: 290px;
-  animation: ks-asteroid-float 11s ease-in-out infinite alternate 1s;
-}
-
-.ks-ast-3 {
-  width: 11px;
-  height: 9px;
-  bottom: 170px;
-  left: 120px;
-  animation: ks-asteroid-float 9s ease-in-out infinite alternate 0.5s;
-}
-
-@keyframes ks-asteroid-float {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-10px) rotate(15deg); }
-}
-
-/* Bottom-Right Glowing Celestial Body */
-.ks-planet-bottom-right {
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: clamp(260px, 26vw, 380px);
-  height: clamp(260px, 26vw, 380px);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.95;
-  animation: ks-planet-breathe 8s ease-in-out infinite alternate;
-}
-  height: clamp(240px, 24vw, 360px);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.9;
-  animation: ks-planet-breathe 8s ease-in-out infinite alternate;
-}
-
-@keyframes ks-planet-breathe {
-  0% { transform: scale(1); filter: drop-shadow(0 0 25px rgba(0, 229, 229, 0.5)); }
-  100% { transform: scale(1.02); filter: drop-shadow(0 0 40px rgba(0, 229, 229, 0.75)); }
 }
 
 /* -------------------------------------------------------------
@@ -744,6 +529,12 @@ h1 span:last-child,
   color: transparent !important;
   filter: drop-shadow(0 0 25px rgba(0, 229, 229, 0.45)) !important;
   font-weight: 800 !important;
+  transition: filter 0.3s ease !important;
+}
+
+h1 span:last-child:hover,
+.bg-gradient-to-r.from-blue-400.to-purple-400:hover {
+  filter: drop-shadow(0 0 35px rgba(0, 229, 229, 0.8)) brightness(1.1) !important;
 }
 
 /* Subtitle: Full-Stack Developer, AI Systems & Software Engineering */
@@ -1012,28 +803,15 @@ input:focus, textarea:focus {
     opacity: 0.8;
     right: 10px;
   }
-  .ks-planet-mid-left {
-    left: 100px;
-    top: 500px;
-    transform: scale(0.85);
-  }
-  .ks-planet-upper-right {
-    right: 280px;
-    transform: scale(0.85);
-  }
 }
 
 /* Tablets & Mobile (< 1024px):
-   Hide floating developer panels & celestial decorations so mobile
+   Hide floating developer panels so mobile
    bio, buttons, cards, and touch targets have 100% clarity and zero overlap!
    Keep the gorgeous cosmic teal atmosphere, stars, and nebulae active! */
 @media (max-width: 1023px) {
   .ks-left-cluster,
-  .ks-right-cluster,
-  .ks-planet-mid-left,
-  .ks-planet-upper-right,
-  .ks-lunar-surface,
-  .ks-planet-bottom-right {
+  .ks-right-cluster {
     display: none !important;
   }
 }
@@ -1041,18 +819,13 @@ input:focus, textarea:focus {
 /* Accessibility: prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .ks-nebula,
-  .ks-planet-mid-left,
-  .ks-planet-upper-right,
-  .ks-planet-bottom-right,
-  .ks-orbit-line,
   .ks-left-cluster,
   .ks-right-cluster,
   .ks-badge-code,
   .ks-badge-github,
   .ks-badge-ts,
   .ks-react-atom-wrap,
-  .ks-terminal-window,
-  .ks-asteroid {
+  .ks-terminal-window {
     animation: none !important;
     transform: none !important;
   }
