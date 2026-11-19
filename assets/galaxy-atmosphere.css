@@ -1,0 +1,666 @@
+/**
+ * Galaxy + Programmer Theme Atmosphere Engine
+ * Blends deep cosmic space (nebulae, ringed planets, twinkling stars)
+ * with futuristic developer IDE elements (VS Code Explorer, Code Editor,
+ * Terminal, React atom, TypeScript, GitHub, orbital neon lines, and cyber horizon).
+ */
+
+/* -------------------------------------------------------------
+ * 1. Root Atmosphere Container (Fixed, Non-Blocking, Behind App)
+ * ------------------------------------------------------------- */
+.ks-galaxy-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure #root and all interactive components sit safely on top */
+#root {
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+#ks-starfield-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0.85 !important;
+}
+
+/* -------------------------------------------------------------
+ * 2. Cosmic Nebulae (Deep Space Blue-Purple Volumetric Glows)
+ * ------------------------------------------------------------- */
+.ks-nebula-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ks-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+/* Top-Left Cosmic Blue/Indigo Nebula */
+.ks-nebula-blue {
+  top: -10%;
+  left: -5%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 850px;
+  max-height: 850px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, rgba(99, 102, 241, 0.2) 40%, transparent 70%);
+  animation: ks-nebula-drift-1 22s ease-in-out infinite alternate;
+}
+
+/* Mid-Right Electric Violet Nebula */
+.ks-nebula-purple {
+  top: 15%;
+  right: -8%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, rgba(139, 92, 246, 0.18) 45%, transparent 70%);
+  animation: ks-nebula-drift-2 26s ease-in-out infinite alternate;
+}
+
+/* Bottom Center Deep Cyan/Indigo Core */
+.ks-nebula-center {
+  bottom: -15%;
+  left: 25%;
+  width: 50vw;
+  height: 35vw;
+  max-width: 750px;
+  background: radial-gradient(ellipse, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.12) 50%, transparent 75%);
+  animation: ks-nebula-drift-1 30s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes ks-nebula-drift-1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  50% { transform: translate(25px, -15px) scale(1.08); opacity: 0.55; }
+  100% { transform: translate(-20px, 20px) scale(0.96); opacity: 0.42; }
+}
+
+@keyframes ks-nebula-drift-2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.38; }
+  50% { transform: translate(-30px, 20px) scale(1.06); opacity: 0.52; }
+  100% { transform: translate(15px, -25px) scale(0.95); opacity: 0.36; }
+}
+
+/* -------------------------------------------------------------
+ * 3. Subtle Planetary Elements (Ringed Planet & Satellite Moon)
+ * ------------------------------------------------------------- */
+.ks-planet-system {
+  position: absolute;
+  top: clamp(60px, 12vh, 140px);
+  left: clamp(10px, 4vw, 80px);
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+  will-change: transform;
+  animation: ks-planet-orbit 35s ease-in-out infinite alternate;
+}
+
+@keyframes ks-planet-orbit {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(12px, -10px); }
+}
+
+.ks-planet-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.3));
+}
+
+/* Small satellite moon orbiting on the left */
+.ks-moon {
+  position: absolute;
+  top: 15px;
+  left: 210px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #cbd5e1 0%, #475569 65%, #0f172a 100%);
+  box-shadow: 0 0 12px rgba(186, 230, 253, 0.4), inset -2px -2px 6px rgba(0, 0, 0, 0.8);
+  opacity: 0.75;
+  animation: ks-moon-float 16s ease-in-out infinite alternate;
+}
+
+@keyframes ks-moon-float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-8px, 14px); }
+}
+
+/* -------------------------------------------------------------
+ * 4. Glowing Orbital Lines (Connecting Galaxy & Developer Units)
+ * ------------------------------------------------------------- */
+.ks-orbital-paths {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.ks-orbit-line {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  will-change: opacity, stroke-dashoffset;
+}
+
+.ks-orbit-cyan {
+  stroke: url(#ks-grad-orbit-cyan);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.65));
+  stroke-dasharray: 600;
+  animation: ks-orbit-glow-cyan 10s ease-in-out infinite alternate;
+}
+
+.ks-orbit-purple {
+  stroke: url(#ks-grad-orbit-purple);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.65));
+  stroke-dasharray: 650;
+  animation: ks-orbit-glow-purple 12s ease-in-out infinite alternate 1.5s;
+}
+
+@keyframes ks-orbit-glow-cyan {
+  0% { stroke-opacity: 0.35; stroke-dashoffset: 0; }
+  50% { stroke-opacity: 0.85; stroke-dashoffset: -40; }
+  100% { stroke-opacity: 0.45; stroke-dashoffset: -80; }
+}
+
+@keyframes ks-orbit-glow-purple {
+  0% { stroke-opacity: 0.35; stroke-dashoffset: 0; }
+  50% { stroke-opacity: 0.9; stroke-dashoffset: 50; }
+  100% { stroke-opacity: 0.4; stroke-dashoffset: 90; }
+}
+
+/* -------------------------------------------------------------
+ * 5. Left Developer Cluster: 3D VS Code Explorer, React Atom, </>
+ * ------------------------------------------------------------- */
+.ks-left-cluster {
+  position: absolute;
+  top: clamp(140px, 18vh, 230px);
+  left: clamp(12px, 3vw, 55px);
+  width: 260px;
+  pointer-events: none;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: ks-float-left-window 9s ease-in-out infinite alternate;
+}
+
+@keyframes ks-float-left-window {
+  0% { transform: translateY(0px) rotateY(18deg) rotateX(4deg) rotateZ(-2deg); }
+  50% { transform: translateY(-10px) rotateY(16deg) rotateX(2deg) rotateZ(-1.5deg); }
+  100% { transform: translateY(6px) rotateY(20deg) rotateX(5deg) rotateZ(-2.5deg); }
+}
+
+/* Floating </> Symbol */
+.ks-badge-code {
+  position: absolute;
+  top: -46px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: rgba(10, 16, 32, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.75);
+  animation: ks-float-badge 6.5s ease-in-out infinite alternate;
+}
+
+@keyframes ks-float-badge {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-7px) rotate(-3deg); }
+}
+
+/* VS Code Explorer Window */
+.ks-vscode-window {
+  background: linear-gradient(145deg, rgba(12, 17, 34, 0.72) 0%, rgba(8, 12, 26, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8),
+              0 0 35px rgba(56, 189, 248, 0.18),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ks-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+}
+
+.ks-header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ks-header-left svg {
+  color: #38bdf8;
+}
+
+.ks-window-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.ks-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.ks-dot-red { background: #f87171; box-shadow: 0 0 6px rgba(248, 113, 113, 0.5); }
+.ks-dot-yellow { background: #fbbf24; box-shadow: 0 0 6px rgba(251, 191, 36, 0.5); }
+.ks-dot-green { background: #4ade80; box-shadow: 0 0 6px rgba(74, 222, 128, 0.5); }
+
+.ks-file-tree {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.ks-file-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2.5px 0;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.ks-file-item.ks-indent-1 { padding-left: 12px; }
+.ks-file-item.ks-indent-2 { padding-left: 24px; }
+.ks-file-item.ks-active-file {
+  color: #38bdf8;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.ks-folder-icon { color: #facc15; }
+.ks-react-icon { color: #38bdf8; }
+
+/* Floating React Atom Symbol */
+.ks-react-atom-wrap {
+  position: absolute;
+  bottom: -46px;
+  left: 35px;
+  width: 58px;
+  height: 58px;
+  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.6));
+  animation: ks-float-atom 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes ks-float-atom {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(8deg); }
+  100% { transform: translateY(-4px) rotate(-6deg); }
+}
+
+.ks-react-atom-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* -------------------------------------------------------------
+ * 6. Right Developer Cluster: 3D Code Editor, Terminal, TS, GitHub
+ * ------------------------------------------------------------- */
+.ks-right-cluster {
+  position: absolute;
+  top: clamp(140px, 19vh, 230px);
+  right: clamp(12px, 3vw, 55px);
+  width: 320px;
+  pointer-events: none;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: ks-float-right-window 9.5s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes ks-float-right-window {
+  0% { transform: translateY(0px) rotateY(-18deg) rotateX(4deg) rotateZ(2deg); }
+  50% { transform: translateY(-11px) rotateY(-16deg) rotateX(2.5deg) rotateZ(1.5deg); }
+  100% { transform: translateY(7px) rotateY(-20deg) rotateX(5deg) rotateZ(2.5deg); }
+}
+
+/* Top Floating Badges: GitHub & TypeScript */
+.ks-right-badges {
+  position: absolute;
+  top: -46px;
+  right: 15px;
+  display: flex;
+  gap: 12px;
+}
+
+.ks-badge-github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(16, 12, 28, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  animation: ks-float-badge 7s ease-in-out infinite alternate 0.4s;
+}
+
+.ks-badge-ts {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: rgba(10, 18, 38, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.75);
+  animation: ks-float-badge 8s ease-in-out infinite alternate 0.8s;
+}
+
+/* Code Editor Window */
+.ks-editor-window {
+  background: linear-gradient(145deg, rgba(16, 14, 34, 0.72) 0%, rgba(10, 8, 24, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8),
+              0 0 35px rgba(168, 85, 247, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  color: #e2e8f0;
+  font-size: 11.5px;
+  line-height: 1.7;
+}
+
+.ks-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ks-tab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  color: #e2e8f0;
+}
+
+.ks-code-body {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+}
+
+.ks-code-line {
+  display: block;
+}
+
+.ks-ln {
+  display: inline-block;
+  width: 18px;
+  color: #64748b;
+  user-select: none;
+  font-size: 10px;
+}
+
+/* Syntax Highlighting */
+.ks-syn-kw { color: #c084fc; font-weight: 600; } /* const, return */
+.ks-syn-fn { color: #38bdf8; font-weight: 600; text-shadow: 0 0 8px rgba(56, 189, 248, 0.3); } /* createBetterWeb */
+.ks-syn-op { color: #94a3b8; } /* =, =>, {} */
+.ks-syn-tag { color: #38bdf8; } /* <, />, ; */
+.ks-syn-comp { color: #34d399; font-weight: 600; text-shadow: 0 0 8px rgba(52, 211, 153, 0.4); } /* <Dream /> */
+
+/* Floating Terminal Window (Below Editor) */
+.ks-terminal-window {
+  margin-top: 14px;
+  background: linear-gradient(145deg, rgba(8, 12, 22, 0.85) 0%, rgba(5, 7, 16, 0.94) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.85),
+              0 0 25px rgba(56, 189, 248, 0.16),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  animation: ks-float-terminal 8s ease-in-out infinite alternate 1s;
+}
+
+@keyframes ks-float-terminal {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-7px); }
+}
+
+.ks-terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 9.5px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ks-terminal-body {
+  color: #38bdf8;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ks-terminal-prompt {
+  color: #c084fc;
+}
+
+.ks-terminal-text {
+  color: #f1f5f9;
+}
+
+.ks-terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: #38bdf8;
+  vertical-align: middle;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: ks-cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes ks-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* -------------------------------------------------------------
+ * 7. Cyber Horizon Grid & Synth Mountain Silhouette (Bottom)
+ * ------------------------------------------------------------- */
+.ks-cyber-horizon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(140px, 24vh, 260px);
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  overflow: hidden;
+}
+
+.ks-horizon-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* -------------------------------------------------------------
+ * 8. Responsive Design & Visual Hierarchy Guardrails
+ * ------------------------------------------------------------- */
+/* Large desktop screens: full glorious perspective */
+@media (min-width: 1536px) {
+  .ks-left-cluster {
+    left: 4.5vw;
+    width: 280px;
+  }
+  .ks-right-cluster {
+    right: 4.5vw;
+    width: 340px;
+  }
+  .ks-planet-system {
+    left: 4vw;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* Laptops / Desktops around 1280px - 1440px */
+@media (max-width: 1440px) {
+  .ks-left-cluster {
+    transform: scale(0.92) rotateY(18deg) rotateX(4deg);
+    transform-origin: left center;
+  }
+  .ks-right-cluster {
+    transform: scale(0.92) rotateY(-18deg) rotateX(4deg);
+    transform-origin: right center;
+  }
+}
+
+/* Medium Laptops (1024px - 1279px): Soften so central text has supreme focus */
+@media (max-width: 1279px) {
+  .ks-left-cluster {
+    transform: scale(0.82) rotateY(16deg);
+    opacity: 0.75;
+    left: 10px;
+  }
+  .ks-right-cluster {
+    transform: scale(0.82) rotateY(-16deg);
+    opacity: 0.75;
+    right: 10px;
+  }
+  .ks-planet-system {
+    opacity: 0.45;
+  }
+}
+
+/* Tablets & Mobile (< 1024px):
+   Hide floating IDE windows to guarantee zero overlap with mobile bio,
+   buttons, cards and touch targets. Keep the breathtaking cosmic galaxy,
+   ringed planet, nebulae, stars, and cyber grid fully active! */
+@media (max-width: 1023px) {
+  .ks-left-cluster,
+  .ks-right-cluster {
+    display: none !important;
+  }
+  .ks-planet-system {
+    top: 60px;
+    left: 15px;
+    width: 140px;
+    height: 140px;
+    opacity: 0.45;
+  }
+  .ks-moon {
+    left: 130px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+  }
+  .ks-cyber-horizon {
+    height: 120px;
+    opacity: 0.4;
+  }
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ks-nebula,
+  .ks-planet-system,
+  .ks-moon,
+  .ks-orbit-line,
+  .ks-left-cluster,
+  .ks-right-cluster,
+  .ks-badge-code,
+  .ks-badge-github,
+  .ks-badge-ts,
+  .ks-react-atom-wrap,
+  .ks-terminal-window {
+    animation: none !important;
+    transform: none !important;
+  }
+}
