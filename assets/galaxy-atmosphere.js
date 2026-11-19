@@ -1,10 +1,12 @@
 /**
  * Galaxy + Programmer Theme Atmosphere Engine
  * Khandeshwar Suryavanshi Portfolio
- * Combines cosmic deep space (ringed planets, nebulae, stars) with
- * futuristic programmer elements (3D VS Code windows, Code editor,
- * terminal with typing animation, React atom, TypeScript, GitHub,
- * orbital neon lines, and cyber horizon grid).
+ *
+ * Architecture:
+ * - Galaxy Atmosphere (nebulae, ringed planet, orbital paths): Active across all pages for consistent cosmic depth.
+ * - Programmer Panels (3D VS Code explorer, React atom, Code editor, terminal with typing, TS, GitHub):
+ *   Exclusively scoped to the Home page hero component via route-level lifecycle management.
+ *   Unmounts and stops all animations/timers when navigating to /about, /education, /skills, /projects, /contact.
  */
 (function () {
   'use strict';
@@ -19,7 +21,19 @@
     'const createBetterWeb = () => <Dream />;'
   ];
 
-  function getBackdropHTML() {
+  var panelsMounted = false;
+  var typewriterTimer = null;
+  var programmerParallaxHandler = null;
+
+  function isHomeRoute() {
+    var p = window.location.pathname;
+    return p === '/' || p === '' || p.endsWith('/index.html') || p === '/portfolio/' || p === '/portfolio/index.html';
+  }
+
+  /* -------------------------------------------------------------
+   * 1. Global Galaxy Atmosphere (Persistent on all pages)
+   * ------------------------------------------------------------- */
+  function getGalaxyBackdropHTML() {
     return [
       '<!-- SVG Definitions & Gradients -->',
       '<svg width="0" height="0" style="position:absolute;visibility:hidden;" aria-hidden="true">',
@@ -53,26 +67,21 @@
       '    </linearGradient>',
       '  </defs>',
       '</svg>',
-
       '<!-- 1. Deep Space Nebulae Layers -->',
       '<div class="ks-nebula-layer">',
       '  <div class="ks-nebula ks-nebula-blue"></div>',
       '  <div class="ks-nebula ks-nebula-purple"></div>',
       '  <div class="ks-nebula ks-nebula-center"></div>',
       '</div>',
-
       '<!-- 2. Subtle Planetary Elements (Ringed Planet & Satellite Moon) -->',
       '<div class="ks-planet-system" id="ks-planet-system">',
       '  <svg class="ks-planet-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">',
-      '    <!-- Back Half of Planetary Rings -->',
       '    <g transform="translate(130, 130) rotate(-26)">',
       '      <ellipse cx="0" cy="0" rx="118" ry="24" stroke="url(#ks-grad-ring)" stroke-width="6" opacity="0.45" stroke-dasharray="80 15 120 20" />',
       '      <ellipse cx="0" cy="0" rx="108" ry="20" stroke="url(#ks-grad-ring)" stroke-width="2.5" opacity="0.35" />',
       '    </g>',
-      '    <!-- Planet Sphere with Atmospheric Glow -->',
       '    <circle cx="130" cy="130" r="58" fill="url(#ks-grad-planet-body)" />',
       '    <circle cx="130" cy="130" r="58" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1.5" />',
-      '    <!-- Front Half of Planetary Rings (Overlaps Planet Sphere) -->',
       '    <g transform="translate(130, 130) rotate(-26)">',
       '      <path d="M -118 0 A 118 24 0 0 0 118 0" stroke="url(#ks-grad-ring)" stroke-width="6" opacity="0.85" stroke-linecap="round" />',
       '      <path d="M -108 0 A 108 20 0 0 0 108 0" stroke="url(#ks-grad-ring)" stroke-width="2.5" opacity="0.75" />',
@@ -80,16 +89,41 @@
       '  </svg>',
       '  <div class="ks-moon"></div>',
       '</div>',
-
       '<!-- 3. Glowing Orbital Lines -->',
       '<svg class="ks-orbital-paths" viewBox="0 0 1440 900" preserveAspectRatio="none">',
-      '  <!-- Left-to-Center Cyan Orbital Arc -->',
       '  <path class="ks-orbit-line ks-orbit-cyan" d="M -60 260 C 180 180, 280 480, 520 420 S 760 300, 920 340" />',
-      '  <!-- Right-to-Center Purple Orbital Arc -->',
       '  <path class="ks-orbit-line ks-orbit-purple" d="M 1500 240 C 1260 160, 1140 460, 900 440 S 680 320, 500 360" />',
-      '</svg>',
+      '</svg>'
+    ].join('\n');
+  }
 
-      '<!-- 4. Left Developer Cluster: 3D VS Code Explorer Window & Symbols -->',
+  function mountAtmosphere() {
+    var existing = document.getElementById('ks-galaxy-backdrop');
+    if (existing) return existing;
+
+    var container = document.createElement('div');
+    container.id = 'ks-galaxy-backdrop';
+    container.className = 'ks-galaxy-backdrop';
+    container.setAttribute('aria-hidden', 'true');
+    container.innerHTML = getGalaxyBackdropHTML();
+
+    var root = document.getElementById('root');
+    if (root && root.parentNode) {
+      root.parentNode.insertBefore(container, root);
+    } else {
+      document.body.appendChild(container);
+    }
+
+    initPlanetParallax();
+    return container;
+  }
+
+  /* -------------------------------------------------------------
+   * 2. Home Page Only: Floating Programmer Clusters (VS Code & Terminal)
+   * ------------------------------------------------------------- */
+  function getProgrammerPanelsHTML() {
+    return [
+      '<!-- Left Developer Cluster: 3D VS Code Explorer Window & Symbols -->',
       '<div class="ks-left-cluster" id="ks-left-cluster">',
       '  <!-- Floating </> Badge -->',
       '  <div class="ks-badge-code" title="Clean Code">&lt;/&gt;</div>',
@@ -127,8 +161,7 @@
       '    </svg>',
       '  </div>',
       '</div>',
-
-      '<!-- 5. Right Developer Cluster: 3D Code Editor, Terminal, TS, GitHub -->',
+      '<!-- Right Developer Cluster: 3D Code Editor, Terminal, TS, GitHub -->',
       '<div class="ks-right-cluster" id="ks-right-cluster">',
       '  <!-- Floating Badges -->',
       '  <div class="ks-right-badges">',
@@ -176,28 +209,63 @@
     ].join('\n');
   }
 
-  function mountAtmosphere() {
-    var existing = document.getElementById('ks-galaxy-backdrop');
-    if (existing) return existing;
+  function mountProgrammerPanels(targetContainer) {
+    if (panelsMounted) return;
+    if (!isHomeRoute()) return;
 
-    var container = document.createElement('div');
-    container.id = 'ks-galaxy-backdrop';
-    container.className = 'ks-galaxy-backdrop';
-    container.setAttribute('aria-hidden', 'true');
-    container.innerHTML = getBackdropHTML();
+    var container = targetContainer || document.getElementById('ks-home-hero') || document.querySelector('.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden');
+    if (!container) return;
 
-    var root = document.getElementById('root');
-    if (root && root.parentNode) {
-      root.parentNode.insertBefore(container, root);
-    } else {
-      document.body.appendChild(container);
+    var existing = document.getElementById('ks-programmer-panels');
+    if (existing) {
+      panelsMounted = true;
+      initTypewriter();
+      initProgrammerParallax();
+      return;
     }
 
-    return container;
+    var wrap = document.createElement('div');
+    wrap.id = 'ks-programmer-panels';
+    wrap.className = 'ks-programmer-panels';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML = getProgrammerPanelsHTML();
+
+    container.insertBefore(wrap, container.firstChild);
+    panelsMounted = true;
+
+    initTypewriter();
+    initProgrammerParallax();
+  }
+
+  function unmountProgrammerPanels() {
+    if (typewriterTimer) {
+      clearTimeout(typewriterTimer);
+      typewriterTimer = null;
+    }
+
+    if (programmerParallaxHandler) {
+      window.removeEventListener('mousemove', programmerParallaxHandler);
+      programmerParallaxHandler = null;
+    }
+
+    var panels = document.getElementById('ks-programmer-panels');
+    if (panels) panels.remove();
+
+    var left = document.getElementById('ks-left-cluster');
+    if (left) left.remove();
+
+    var right = document.getElementById('ks-right-cluster');
+    if (right) right.remove();
+
+    panelsMounted = false;
   }
 
   // Typewriter Loop for Terminal Panel
   function initTypewriter() {
+    if (typewriterTimer) {
+      clearTimeout(typewriterTimer);
+      typewriterTimer = null;
+    }
     var el = document.getElementById('ks-terminal-typewriter');
     if (!el || prefersReducedMotion.matches) return;
 
@@ -207,8 +275,9 @@
     var typingSpeed = 65;
 
     function tick() {
+      if (!panelsMounted) return;
       if (document.hidden) {
-        setTimeout(tick, 1000);
+        typewriterTimer = setTimeout(tick, 1000);
         return;
       }
 
@@ -220,7 +289,7 @@
         if (charIndex === 0) {
           isDeleting = false;
           phraseIndex = (phraseIndex + 1) % TERMINAL_PHRASES.length;
-          setTimeout(tick, 600);
+          typewriterTimer = setTimeout(tick, 600);
           return;
         }
       } else {
@@ -228,29 +297,77 @@
         el.textContent = currentPhrase.substring(0, charIndex);
         if (charIndex === currentPhrase.length) {
           isDeleting = true;
-          // Hold the complete phrase for 4.5 seconds before typing the next
-          setTimeout(tick, 4500);
+          typewriterTimer = setTimeout(tick, 4500);
           return;
         }
       }
 
       var delay = isDeleting ? 30 : typingSpeed;
-      setTimeout(tick, delay);
+      typewriterTimer = setTimeout(tick, delay);
     }
 
-    // Initial pause before first transition
-    setTimeout(tick, 4000);
+    typewriterTimer = setTimeout(tick, 3500);
   }
 
-  // Subtle Mouse Parallax on Desktop
-  function initParallax() {
+  // Subtle Mouse Parallax for Programmer Panels on Desktop
+  function initProgrammerParallax() {
     if (prefersReducedMotion.matches) return;
+    if (programmerParallaxHandler) return;
 
     var leftCluster = document.getElementById('ks-left-cluster');
     var rightCluster = document.getElementById('ks-right-cluster');
-    var planetSystem = document.getElementById('ks-planet-system');
+    if (!leftCluster && !rightCluster) return;
 
-    if (!leftCluster && !rightCluster && !planetSystem) return;
+    var targetX = 0;
+    var targetY = 0;
+    var currentX = 0;
+    var currentY = 0;
+    var isTicking = false;
+
+    programmerParallaxHandler = function (e) {
+      if (!panelsMounted || window.innerWidth < 1024) return;
+      targetX = (e.clientX / window.innerWidth) - 0.5;
+      targetY = (e.clientY / window.innerHeight) - 0.5;
+
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(updateParallax);
+      }
+    };
+
+    window.addEventListener('mousemove', programmerParallaxHandler, { passive: true });
+
+    function updateParallax() {
+      if (!panelsMounted) {
+        isTicking = false;
+        return;
+      }
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
+
+      if (leftCluster) {
+        leftCluster.style.marginLeft = (currentX * -18) + 'px';
+        leftCluster.style.marginTop = (currentY * -14) + 'px';
+      }
+
+      if (rightCluster) {
+        rightCluster.style.marginRight = (currentX * 18) + 'px';
+        rightCluster.style.marginTop = (currentY * -14) + 'px';
+      }
+
+      if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+        requestAnimationFrame(updateParallax);
+      } else {
+        isTicking = false;
+      }
+    }
+  }
+
+  // Subtle Mouse Parallax for Global Planetary System
+  function initPlanetParallax() {
+    if (prefersReducedMotion.matches) return;
+    var planetSystem = document.getElementById('ks-planet-system');
+    if (!planetSystem) return;
 
     var targetX = 0;
     var targetY = 0;
@@ -265,46 +382,70 @@
 
       if (!isTicking) {
         isTicking = true;
-        requestAnimationFrame(updateParallax);
+        requestAnimationFrame(function () {
+          currentX += (targetX - currentX) * 0.05;
+          currentY += (targetY - currentY) * 0.05;
+          if (planetSystem) {
+            planetSystem.style.transform = 'translate(' + (currentX * -12) + 'px, ' + (currentY * -10) + 'px)';
+          }
+          if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+            requestAnimationFrame(arguments.callee || function () {});
+          } else {
+            isTicking = false;
+          }
+        });
       }
     }, { passive: true });
+  }
 
-    function updateParallax() {
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
-
-      if (leftCluster) {
-        leftCluster.style.marginLeft = (currentX * -18) + 'px';
-        leftCluster.style.marginTop = (currentY * -14) + 'px';
-      }
-
-      if (rightCluster) {
-        rightCluster.style.marginRight = (currentX * 18) + 'px';
-        rightCluster.style.marginTop = (currentY * -14) + 'px';
-      }
-
-      if (planetSystem) {
-        planetSystem.style.transform = 'translate(' + (currentX * -12) + 'px, ' + (currentY * -10) + 'px)';
-      }
-
-      if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
-        requestAnimationFrame(updateParallax);
-      } else {
-        isTicking = false;
-      }
+  // Route-Level Navigation Interceptor
+  function handleRouteChange() {
+    if (!isHomeRoute()) {
+      unmountProgrammerPanels();
+    } else {
+      setTimeout(function () {
+        mountProgrammerPanels();
+      }, 50);
     }
   }
 
+  window.addEventListener('popstate', handleRouteChange);
+
+  var origPushState = history.pushState;
+  history.pushState = function () {
+    var res = origPushState.apply(this, arguments);
+    handleRouteChange();
+    return res;
+  };
+
+  var origReplaceState = history.replaceState;
+  history.replaceState = function () {
+    var res = origReplaceState.apply(this, arguments);
+    handleRouteChange();
+    return res;
+  };
+
+  // Expose global controller
+  window.KSHomeProgrammerPanels = {
+    mount: mountProgrammerPanels,
+    unmount: unmountProgrammerPanels,
+    isMounted: function () { return panelsMounted; },
+    isHomeRoute: isHomeRoute
+  };
+
   // Initialization
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      mountAtmosphere();
-      initTypewriter();
-      initParallax();
-    });
-  } else {
+  function init() {
     mountAtmosphere();
-    initTypewriter();
-    initParallax();
+    if (isHomeRoute()) {
+      mountProgrammerPanels();
+    } else {
+      unmountProgrammerPanels();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();

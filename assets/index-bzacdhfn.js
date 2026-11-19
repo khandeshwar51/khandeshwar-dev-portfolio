@@ -433,8 +433,22 @@ sC=()=>{
   })
 },
 
-oC=()=>d.jsxs("div",{
-  className:"min-h-screen flex items-center justify-center relative overflow-hidden pt-16",
+oC=()=>{
+  const heroRef=S.useRef(null);
+  S.useEffect(()=>{
+    if(window.KSHomeProgrammerPanels){
+      window.KSHomeProgrammerPanels.mount(heroRef.current);
+    }
+    return ()=>{
+      if(window.KSHomeProgrammerPanels){
+        window.KSHomeProgrammerPanels.unmount();
+      }
+    };
+  },[]);
+  return d.jsxs("div",{
+    ref:heroRef,
+    id:"ks-home-hero",
+    className:"min-h-screen flex items-center justify-center relative overflow-hidden pt-16",
   children:[
     d.jsxs("div",{
       className:"absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900",
@@ -546,7 +560,7 @@ oC=()=>d.jsxs("div",{
     }),
     d.jsx(M.div,{className:"absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60",animate:{y:[0,10,0]},transition:{duration:2,repeat:1/0},children:d.jsx(ax,{size:32})})
   ]
-}),
+})};
 
 aC=()=>{
   const e=[

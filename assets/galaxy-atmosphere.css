@@ -201,6 +201,16 @@
 /* -------------------------------------------------------------
  * 5. Left Developer Cluster: 3D VS Code Explorer, React Atom, </>
  * ------------------------------------------------------------- */
+.ks-programmer-panels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
 .ks-left-cluster {
   position: absolute;
   top: clamp(140px, 18vh, 230px);
