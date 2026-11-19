@@ -581,7 +581,7 @@ nav.fixed {
 /* Typography Polish */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.025em !important;
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 h1 {
@@ -589,9 +589,75 @@ h1 {
   font-weight: 800 !important;
 }
 
-/* Subtle, sophisticated gradient text */
+/* Pristine Gradient Text & Shield against Distortion */
 .bg-clip-text {
-  background-image: linear-gradient(135deg, #ffffff 0%, #cbd5e1 55%, #94a3b8 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Hero Name: "Suryavanshi" Vibrant Blue-to-Purple Gradient */
+h1 span.bg-gradient-to-r {
+  background-image: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* Pristine Hero Name Hover Effect: 100% stable, zero glitch, celestial glow */
+h1 span {
+  display: block !important;
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: none !important;
+  will-change: filter, text-shadow;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* "Khandeshwar" pure white celestial halo */
+h1 span:not(.bg-clip-text):hover {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.55), 0 0 35px rgba(56, 189, 248, 0.3) !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* "Suryavanshi" dual-tone cyan & purple letterform glow */
+h1 span.bg-clip-text:hover {
+  filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.65)) drop-shadow(0 0 32px rgba(192, 132, 252, 0.45)) !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* Guard: Never allow box-shadow or borders on any text elements */
+span.bg-clip-text,
+span.bg-clip-text:hover,
+.text-transparent,
+.text-transparent:hover,
+.bg-clip-text:hover {
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
 }
 
 /* Form Controls */
@@ -659,8 +725,9 @@ a.inline-flex:hover {
   transform: translateY(-2px) !important;
 }
 
-/* Primary Gradient Button ("Explore Projects") Enhanced Cosmic Hover */
-.bg-gradient-to-r:hover {
+/* Primary Gradient Button ("Explore Projects") Enhanced Cosmic Hover (strictly scoped to buttons/links) */
+button.bg-gradient-to-r:hover,
+a.bg-gradient-to-r:hover {
   box-shadow: 0 12px 30px -5px rgba(168, 85, 247, 0.45),
               0 0 20px rgba(56, 189, 248, 0.35) !important;
   filter: brightness(1.08) !important;

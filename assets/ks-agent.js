@@ -205,91 +205,173 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Compact Futuristic Robot Head Launcher */
     #ks-agent-launcher {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0369a1 100%);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      padding: 10px 18px 10px 12px;
-      border-radius: 9999px;
-      cursor: pointer;
-      box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      user-select: none;
-    }
-
-    #ks-agent-launcher:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.7), 0 0 25px rgba(56, 189, 248, 0.4);
-      border-color: rgba(56, 189, 248, 0.8);
-    }
-
-    .ks-avatar-ring {
       position: relative;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #00C7B7, #8B5CF6);
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(14, 20, 36, 0.94) 0%, rgba(8, 10, 20, 0.98) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.38);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.85),
+                  0 0 20px rgba(56, 189, 248, 0.25),
+                  0 0 10px rgba(168, 85, 247, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      animation: ks-robot-float 6s ease-in-out infinite alternate;
     }
 
-    .ks-online-dot {
+    #ks-agent-launcher:hover {
+      transform: translateY(-4px) scale(1.06);
+      border-color: rgba(56, 189, 248, 0.85);
+      box-shadow: 0 16px 35px -5px rgba(0, 0, 0, 0.95),
+                  0 0 28px rgba(56, 189, 248, 0.5),
+                  0 0 16px rgba(192, 132, 252, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    #ks-agent-launcher:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .ks-robot-icon-wrap {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ks-robot-svg {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45));
+      transition: transform 0.25s ease;
+    }
+
+    #ks-agent-launcher:hover .ks-robot-svg {
+      transform: scale(1.05);
+    }
+
+    /* Small Pulsing Online Status Indicator */
+    .ks-robot-online-dot {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      background: #10b981;
+      bottom: -1px;
+      right: -1px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      border: 2px solid #0f172a;
+      background: #10b981;
+      border: 2px solid #080a14;
       box-shadow: 0 0 8px #10b981;
+      animation: ks-dot-pulse 2.4s infinite;
     }
 
-    .ks-launcher-text {
+    @keyframes ks-dot-pulse {
+      0%, 100% {
+        box-shadow: 0 0 6px #10b981;
+        opacity: 1;
+      }
+      50% {
+        box-shadow: 0 0 12px #10b981, 0 0 4px #34d399;
+        opacity: 0.85;
+      }
+    }
+
+    /* Sleek Hover Tooltip */
+    .ks-robot-tooltip {
+      position: absolute;
+      right: 68px;
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      background: rgba(10, 14, 26, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 6px 12px;
+      border-radius: 9px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), 0 0 18px rgba(56, 189, 248, 0.2);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      line-height: 1.2;
+      gap: 2px;
     }
 
-    .ks-launcher-title {
+    .ks-tooltip-title {
+      font-size: 11.5px;
       font-weight: 700;
-      font-size: 13px;
-      background: linear-gradient(to right, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 0.3px;
+      color: #f1f5f9;
+      letter-spacing: 0.02em;
     }
 
-    .ks-launcher-subtitle {
-      font-size: 10px;
-      color: #94a3b8;
+    .ks-tooltip-sub {
+      font-size: 9.5px;
+      color: #38bdf8;
+    }
+
+    #ks-agent-launcher:hover .ks-robot-tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    /* Robot Animations */
+    @keyframes ks-robot-float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(2px); }
+    }
+
+    @keyframes ks-robot-blink {
+      0%, 46%, 50%, 96%, 100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+      48%, 98% {
+        transform: scaleY(0.1);
+        opacity: 0.25;
+      }
+    }
+
+    .ks-robot-eyes {
+      transform-origin: 22px 20px;
+      animation: ks-robot-blink 4.8s infinite;
     }
 
     #ks-agent-window {
       position: fixed;
-      bottom: 90px;
+      bottom: 88px;
       right: 24px;
-      width: 430px;
+      width: 420px;
       max-width: calc(100vw - 32px);
       height: 640px;
-      max-height: calc(100vh - 120px);
-      background: rgba(15, 23, 42, 0.96);
+      max-height: calc(100vh - 110px);
+      background: linear-gradient(180deg, rgba(12, 16, 32, 0.95) 0%, rgba(6, 8, 18, 0.98) 100%);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: 20px;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 35px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9),
+                  0 0 35px rgba(56, 189, 248, 0.18),
+                  0 0 15px rgba(168, 85, 247, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(20px) scale(0.96);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(18px) scale(0.96);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #ks-agent-window.ks-open {
@@ -299,8 +381,8 @@
     }
 
     .ks-header {
-      padding: 14px 18px;
-      background: rgba(30, 41, 59, 0.7);
+      padding: 13px 18px;
+      background: linear-gradient(135deg, rgba(18, 26, 48, 0.85) 0%, rgba(10, 14, 28, 0.95) 100%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       align-items: center;
@@ -311,6 +393,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    .ks-header-robot-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .ks-header-title {
@@ -325,7 +415,16 @@
       color: #38bdf8;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
+    }
+
+    .ks-status-indicator {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
     }
 
     .ks-header-actions {
@@ -632,38 +731,121 @@
     .ks-thinking-pulse {
       animation: ksPulse 1.2s infinite ease-in-out;
     }
+
+    @media (max-width: 640px) {
+      #ks-agent-root {
+        bottom: 16px;
+        right: 16px;
+      }
+      #ks-agent-window {
+        bottom: 78px;
+        right: 16px;
+        width: calc(100vw - 32px);
+        height: calc(100vh - 100px);
+      }
+      .ks-robot-tooltip {
+        display: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #ks-agent-launcher {
+        animation: none !important;
+      }
+      .ks-robot-eyes {
+        animation: none !important;
+      }
+      .ks-robot-online-dot {
+        animation: none !important;
+      }
+      #ks-agent-window {
+        transition: opacity 0.2s ease !important;
+      }
+    }
   `;
   document.head.appendChild(styleEl);
 
   // ==========================================
   // 4. UI CREATION & EVENT LISTENERS
   // ==========================================
+  function createRobotSVG(size, idSuffix) {
+    const s = size || 34;
+    const uid = idSuffix || ('r' + Math.random().toString(36).slice(2, 6));
+    return `
+      <svg class="ks-robot-svg" viewBox="0 0 44 44" width="${s}" height="${s}" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chassis-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="50%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#080c18" />
+          </linearGradient>
+          <linearGradient id="border-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" />
+            <stop offset="50%" stop-color="#818cf8" />
+            <stop offset="100%" stop-color="#c084fc" />
+          </linearGradient>
+          <linearGradient id="sheen-${uid}" x1="0%" y1="0%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32" />
+            <stop offset="60%" stop-color="#ffffff" stop-opacity="0.04" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </linearGradient>
+          <radialGradient id="eyeglow-${uid}" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="45%" stop-color="#22d3ee" />
+            <stop offset="100%" stop-color="#0284c7" />
+          </radialGradient>
+        </defs>
+        <!-- Antenna Pole & Glowing Sensor Beacon -->
+        <line x1="22" y1="2" x2="22" y2="7.5" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" />
+        <circle cx="22" cy="2.5" r="2.2" fill="#38bdf8" />
+        <circle cx="22" cy="2.5" r="1.1" fill="#ffffff" />
+        <!-- Cybernetic Lateral Ear Nodes (Illuminated Violet / Cyan) -->
+        <rect x="2.5" y="15" width="3.5" height="11" rx="1.75" fill="#a855f7" />
+        <rect x="38" y="15" width="3.5" height="11" rx="1.75" fill="#a855f7" />
+        <!-- Robot Geometric Cranium -->
+        <rect x="6" y="7.5" width="32" height="28" rx="8" fill="url(#chassis-${uid})" stroke="url(#border-${uid})" stroke-width="1.6" />
+        <!-- Specular 3D Curved Glass Sheen -->
+        <path d="M 8 13 Q 22 9 36 13 L 36 17 Q 22 13 8 17 Z" fill="url(#sheen-${uid})" />
+        <!-- Dark Curved Visor Display -->
+        <rect x="10" y="13.5" width="24" height="13.5" rx="4.5" fill="#040612" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1" />
+        <!-- Expressive Glowing Cyan Eyes -->
+        <g class="ks-robot-eyes">
+          <rect class="ks-robot-eye" x="13" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" />
+          <circle cx="15.2" cy="19.2" r="1.1" fill="#ffffff" />
+          <rect class="ks-robot-eye" x="24.5" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" />
+          <circle cx="26.7" cy="19.2" r="1.1" fill="#ffffff" />
+        </g>
+        <!-- Audio / Communication Data Slit -->
+        <line x1="16.5" y1="30" x2="27.5" y2="30" stroke="rgba(56, 189, 248, 0.75)" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    `;
+  }
+
   function createAgentUI() {
     const root = document.createElement('div');
     root.id = 'ks-agent-root';
 
     root.innerHTML = `
-      <div id="ks-agent-launcher" title="Open KS Thinking Agent">
-        <div class="ks-avatar-ring">
-          🧠
-          <div class="ks-online-dot"></div>
+      <div id="ks-agent-launcher" title="KS AI Assistant" aria-label="Open KS AI Assistant">
+        <div class="ks-robot-icon-wrap">
+          ${createRobotSVG(34, 'launcher')}
+          <div class="ks-robot-online-dot"></div>
         </div>
-        <div class="ks-launcher-text">
-          <span class="ks-launcher-title">KS Thinking Agent</span>
-          <span class="ks-launcher-subtitle">Ask anything • Live sync</span>
+        <div class="ks-robot-tooltip">
+          <span class="ks-tooltip-title">KS AI Assistant</span>
+          <span class="ks-tooltip-sub">Ask anything • Live Brain</span>
         </div>
       </div>
 
       <div id="ks-agent-window">
         <div class="ks-header">
           <div class="ks-header-left">
-            <div class="ks-avatar-ring" style="width:32px;height:32px;font-size:16px;">
-              🧠
-              <div class="ks-online-dot" style="width:8px;height:8px;"></div>
+            <div class="ks-header-robot-icon">
+              ${createRobotSVG(28, 'header')}
             </div>
             <div>
-              <div class="ks-header-title">KS Thinking Agent</div>
-              <div class="ks-header-status">Autonomous Brain • Live Synced</div>
+              <div class="ks-header-title">KS AI Assistant</div>
+              <div class="ks-header-status"><span class="ks-status-indicator"></span> Autonomous Brain • Live Synced</div>
             </div>
           </div>
           <div class="ks-header-actions">
@@ -681,7 +863,7 @@
         <div class="ks-messages" id="ks-msg-container">
           <div class="ks-msg ks-msg-bot">
             <div class="ks-bubble">
-              👋 <b>Hi! I am the KS Thinking Agent</b> — Khandeshwar's autonomous AI representative and full-spectrum coding assistant.
+              👋 <b>Hi! I am the KS AI Assistant</b> — Khandeshwar's autonomous AI representative and full-spectrum coding assistant.
               <br/><br/>
               <b>What I do:</b>
               <ul>
@@ -701,7 +883,7 @@
           <div class="ks-chip" data-q="What is Khandeshwar's core technical stack?">💻 Core Tech Stack</div>
           <div class="ks-chip" data-q="How can I contact or hire Khandeshwar?">🤝 Hire Him</div>
           <div class="ks-chip" data-q="Write a Python script for quicksort with complexity explanation">🐍 Quicksort in Python</div>
-          <div class="ks-chip" data-q="Explain how Manifest V3 works in Chrome extensions">🧠 Chrome MV3</div>
+          <div class="ks-chip" data-q="Explain how Manifest V3 works in Chrome extensions">🧩 Chrome MV3</div>
         </div>
 
         <div class="ks-footer">
@@ -748,6 +930,22 @@
     btnClose.addEventListener('click', () => {
       isChatOpen = false;
       win.classList.remove('ks-open');
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isChatOpen) {
+        isChatOpen = false;
+        win.classList.remove('ks-open');
+      }
+    });
+
+    // Close when clicking outside agent UI
+    document.addEventListener('click', (e) => {
+      if (isChatOpen && !root.contains(e.target)) {
+        isChatOpen = false;
+        win.classList.remove('ks-open');
+      }
     });
 
     btnClear.addEventListener('click', () => {
@@ -830,7 +1028,7 @@
       thoughtHtml = `
         <div class="ks-thought-box">
           <div class="ks-thought-header" onclick="const c = this.nextElementSibling; c.style.display = c.style.display === 'none' ? 'block' : 'none';">
-            <span>🧠 Reasoning Chain (${thoughts.length} steps)</span>
+            <span>🤖 Neural Reasoning Chain (${thoughts.length} steps)</span>
             <span>▾</span>
           </div>
           <div class="ks-thought-content">
@@ -868,8 +1066,8 @@
     thinkDiv.id = id;
     thinkDiv.innerHTML = `
       <div class="ks-bubble ks-thinking-pulse" style="display:flex;align-items:center;gap:8px;">
-        <span>🧠</span>
-        <span id="${id}-text" style="font-size:12px;color:#38bdf8;">KS Agent is activating cognitive brain...</span>
+        ${createRobotSVG(18, 'thk_' + id)}
+        <span id="${id}-text" style="font-size:12px;color:#38bdf8;">KS AI Assistant is analyzing query...</span>
       </div>
     `;
     container.appendChild(thinkDiv);
@@ -878,12 +1076,12 @@
     // Animate thinking steps
     setTimeout(() => {
       const el = document.getElementById(`${id}-text`);
-      if (el) el.textContent = 'Inspecting live GitHub telemetry & security boundaries...';
+      if (el) el.textContent = 'Inspecting live telemetry & architectural context...';
     }, 600);
 
     setTimeout(() => {
       const el = document.getElementById(`${id}-text`);
-      if (el) el.textContent = 'Synthesizing neural reasoning & formulating verified response...';
+      if (el) el.textContent = 'Synthesizing neural reasoning & formulating response...';
     }, 1400);
   }
 
@@ -971,7 +1169,7 @@ Would you like to explore the architectural design patterns or tech stacks in gr
 
     // Build rich, highly trained system prompt
     const systemPrompt = `
-You are "KS Thinking Agent", the autonomous, highly articulate AI representative and technical assistant of Khandeshwar Suryavanshi (khandeshwar51).
+You are "KS AI Assistant", the autonomous, highly articulate AI representative and technical assistant of Khandeshwar Suryavanshi (khandeshwar51).
 
 === PROFILE & BACKGROUND ===
 - Name: Khandeshwar Suryavanshi
@@ -1245,7 +1443,7 @@ int binarySearch(const vector<int>& arr, int target) {
     }
 
     return `
-🧠 **KS Thinking Agent Analysis:**
+🤖 **KS AI Assistant Analysis:**
 
 Regarding: *"**${originalQuery}**"*
 
