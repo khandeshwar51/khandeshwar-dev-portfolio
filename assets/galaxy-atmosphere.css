@@ -830,3 +830,16 @@ input:focus, textarea:focus {
     transform: none !important;
   }
 }
+
+/* -------------------------------------------------------------
+ * 14. Permanently Suppress Legacy Built-In React Bot Launcher
+ * ------------------------------------------------------------- */
+#root button.fixed.bottom-6.right-6,
+#root button[class*="bottom-6"][class*="right-6"],
+#root div[class*="fixed bottom-6 right-6"][class*="w-96"],
+button.fixed.bottom-6.right-6.rounded-full {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

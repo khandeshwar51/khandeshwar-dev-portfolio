@@ -859,15 +859,6 @@
           <span class="ks-tooltip-sub">Ask anything • Live Brain</span>
         </div>
       </div>
-        <div class="ks-robot-icon-wrap">
-          ${createRobotSVG(34, 'launcher')}
-          <div class="ks-robot-online-dot"></div>
-        </div>
-        <div class="ks-robot-tooltip">
-          <span class="ks-tooltip-title">KS AI Assistant</span>
-          <span class="ks-tooltip-sub">Ask anything • Live Brain</span>
-        </div>
-      </div>
 
       <div id="ks-agent-window">
         <div class="ks-header">
@@ -1544,14 +1535,28 @@ Feel free to ask about:
   // ==========================================
   // 10. MOUNT AGENT TO DOM
   // ==========================================
+  function suppressLegacyReactBot() {
+    const legacy = document.querySelectorAll('#root button.fixed.bottom-6.right-6, #root button[class*="bottom-6"][class*="right-6"], button.fixed.bottom-6.right-6.rounded-full');
+    legacy.forEach(b => {
+      b.style.setProperty('display', 'none', 'important');
+      b.style.setProperty('visibility', 'hidden', 'important');
+      b.style.setProperty('opacity', '0', 'important');
+      b.style.setProperty('pointer-events', 'none', 'important');
+    });
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+      suppressLegacyReactBot();
       createAgentUI();
       fetchLiveGitHubTelemetry();
+      setInterval(suppressLegacyReactBot, 500);
     });
   } else {
+    suppressLegacyReactBot();
     createAgentUI();
     fetchLiveGitHubTelemetry();
+    setInterval(suppressLegacyReactBot, 500);
   }
 
 })();
