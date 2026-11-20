@@ -651,46 +651,96 @@ a[href*="contact"] button:hover {
 }
 
 /* -------------------------------------------------------------
- * 11. Navigation Bar
+ * 11. Navigation Bar — Floating Cosmic Glass & Luminous Cyan Glow (Matches Image 3)
  * ------------------------------------------------------------- */
 nav,
 nav.fixed,
 header nav,
 div#root nav {
-  background: rgba(2, 9, 13, 0.92) !important;
+  background: linear-gradient(180deg, rgba(2, 9, 13, 0.85) 0%, rgba(2, 9, 13, 0.6) 100%) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(0, 229, 229, 0.22) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 229, 229, 0.08) !important;
+  border-bottom: 1px solid rgba(0, 229, 229, 0.18) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 229, 0.08) !important;
   z-index: 100 !important;
 }
 
-/* Brand KS Logo */
+/* Brand KS Neon Logo (Bright Glowing Cyan matching Image 3) */
 nav a[href="/"] span,
-nav .font-bold {
-  color: var(--ks-text-silver) !important;
-  text-shadow: 0 0 15px rgba(0, 229, 229, 0.6) !important;
+nav span.font-bold,
+nav .text-2xl.font-bold {
+  background-image: linear-gradient(135deg, #00CFFF 0%, #00E5E5 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 229, 0.95)) drop-shadow(0 0 25px rgba(0, 207, 255, 0.6)) !important;
 }
 
-/* Active navigation pill (Home or current route) */
-nav a.bg-gradient-to-r,
-nav a[class*="from-blue-500"] {
-  background: linear-gradient(135deg, rgba(0, 207, 255, 0.9) 0%, rgba(0, 143, 156, 0.85) 100%) !important;
+/* Active Navigation Pill (Desktop & Mobile — Luminous Electric Cyan Pill with Neon Halo matching Image 3) */
+nav a div[class*="from-blue-500"],
+nav a[class*="from-blue-500"],
+nav [class*="from-blue-500"] {
+  background: linear-gradient(135deg, #00E5E5 0%, #00CFFF 50%, #008F9C 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 0 25px rgba(0, 229, 229, 0.9), 0 0 45px rgba(0, 207, 255, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45) !important;
+  padding: 6px 18px !important;
+}
+
+nav a div[class*="from-blue-500"] svg,
+nav a[class*="from-blue-500"] svg {
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)) !important;
+}
+
+/* Inactive Navigation Pills (Sleek Dark Glass Capsules matching Image 3) */
+nav a > div:not([class*="from-blue-500"]),
+nav a:not([class*="from-blue-500"]):not([href="/"]) {
+  background: rgba(7, 23, 29, 0.72) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 229, 229, 0.22) !important;
+  border-radius: 9999px !important;
+  color: #e2e8f0 !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  padding: 6px 16px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+nav a > div:not([class*="from-blue-500"]):hover,
+nav a:not([class*="from-blue-500"]):not([href="/"]):hover {
+  background: rgba(0, 229, 229, 0.16) !important;
+  border-color: rgba(0, 229, 229, 0.7) !important;
   color: #ffffff !important;
   box-shadow: 0 0 20px rgba(0, 229, 229, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-  border-radius: 9999px !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Inactive navigation links */
-nav a:not([class*="from-blue-500"]) {
-  color: var(--ks-text-sec) !important;
-  transition: all 0.25s ease !important;
+nav a > div:not([class*="from-blue-500"]) svg,
+nav a:not([class*="from-blue-500"]):not([href="/"]) svg {
+  color: #cbd5e1 !important;
+  transition: color 0.2s ease, filter 0.2s ease !important;
 }
 
-nav a:not([class*="from-blue-500"]):hover {
-  color: var(--ks-text-silver) !important;
-  background: rgba(0, 229, 229, 0.12) !important;
-  text-shadow: 0 0 10px rgba(0, 229, 229, 0.4) !important;
+nav a > div:not([class*="from-blue-500"]):hover svg,
+nav a:not([class*="from-blue-500"]):not([href="/"]):hover svg {
+  color: #00E5E5 !important;
+  filter: drop-shadow(0 0 8px rgba(0, 229, 229, 0.7)) !important;
+}
+
+/* Mobile dropdown menu glass */
+nav .md\:hidden > div {
+  background: rgba(6, 21, 27, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 229, 229, 0.25) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 229, 0.1) !important;
 }
 
 /* -------------------------------------------------------------

@@ -205,19 +205,20 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Compact Futuristic Miniature Robot Head Launcher */
+    /* Compact Futuristic Silver Metallic Robot Head Launcher */
     #ks-agent-launcher {
       position: relative;
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(7, 23, 29, 0.94) 0%, rgba(2, 9, 13, 0.98) 100%);
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 45%, #02090d 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(0, 229, 229, 0.45);
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.85),
+      border: 1.8px solid #94a3b8;
+      box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.9),
                   0 0 25px rgba(0, 229, 229, 0.35),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                  inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                  inset 0 -1px 2px rgba(0, 0, 0, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -228,11 +229,11 @@
     }
 
     #ks-agent-launcher:hover {
-      transform: translateY(-4px) scale(1.06);
+      transform: translateY(-4px) scale(1.07);
       border-color: #00E5E5;
-      box-shadow: 0 16px 35px -5px rgba(0, 0, 0, 0.95),
-                  0 0 35px rgba(0, 229, 229, 0.65),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow: 0 18px 40px -5px rgba(0, 0, 0, 0.95),
+                  0 0 35px rgba(0, 229, 229, 0.7),
+                  inset 0 1px 2px rgba(255, 255, 255, 0.6);
     }
 
     #ks-agent-launcher:active {
@@ -262,22 +263,22 @@
 
     .ks-robot-icon-wrap {
       position: relative;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .ks-robot-svg {
-      width: 38px;
-      height: 38px;
-      filter: drop-shadow(0 0 10px rgba(0, 229, 229, 0.55));
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 12px rgba(0, 229, 229, 0.45));
       transition: transform 0.25s ease;
     }
 
     #ks-agent-launcher:hover .ks-robot-svg {
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     /* Small Pulsing Online Status Indicator */
@@ -791,54 +792,99 @@
   // 4. UI CREATION & EVENT LISTENERS
   // ==========================================
   function createRobotSVG(size, idSuffix) {
-    const s = size || 36;
+    const s = size || 38;
     const uid = idSuffix || ('r' + Math.random().toString(36).slice(2, 6));
     return `
-      <svg class="ks-robot-svg" viewBox="0 0 44 44" width="${s}" height="${s}" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="ks-robot-svg" viewBox="0 0 52 52" width="${s}" height="${s}" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="chassis-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#162933" />
-            <stop offset="50%" stop-color="#0a1820" />
-            <stop offset="100%" stop-color="#030c10" />
+          <!-- 3D Polished Chrome & Brushed Silver Body Gradient -->
+          <linearGradient id="silver-body-${uid}" x1="15%" y1="10%" x2="85%" y2="90%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="20%" stop-color="#e2e8f0" />
+            <stop offset="45%" stop-color="#cbd5e1" />
+            <stop offset="70%" stop-color="#94a3b8" />
+            <stop offset="85%" stop-color="#64748b" />
+            <stop offset="100%" stop-color="#475569" />
           </linearGradient>
-          <linearGradient id="border-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00CFFF" />
-            <stop offset="50%" stop-color="#00E5E5" />
+
+          <!-- Chrome Bevel Border Gradient -->
+          <linearGradient id="silver-bevel-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="35%" stop-color="#cbd5e1" />
+            <stop offset="70%" stop-color="#475569" />
             <stop offset="100%" stop-color="#94a3b8" />
           </linearGradient>
-          <linearGradient id="sheen-${uid}" x1="0%" y1="0%" x2="100%" y2="50%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
-            <stop offset="60%" stop-color="#ffffff" stop-opacity="0.06" />
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-          </linearGradient>
-          <radialGradient id="eyeglow-${uid}" cx="50%" cy="50%" r="50%">
+
+          <!-- Metallic Ear Coupler Gradient -->
+          <linearGradient id="silver-ear-${uid}" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="45%" stop-color="#00E5E5" />
+            <stop offset="25%" stop-color="#cbd5e1" />
+            <stop offset="60%" stop-color="#64748b" />
+            <stop offset="100%" stop-color="#334155" />
+          </linearGradient>
+
+          <!-- Specular Curved Glass Visor Reflection -->
+          <linearGradient id="visor-glass-${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+            <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#02090d" stop-opacity="0" />
+          </linearGradient>
+
+          <!-- Eye Glowing Core -->
+          <radialGradient id="eyeglow-${uid}" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="40%" stop-color="#00E5E5" />
+            <stop offset="80%" stop-color="#00CFFF" />
             <stop offset="100%" stop-color="#008F9C" />
           </radialGradient>
         </defs>
-        <!-- Antenna Pole & Glowing Sensor Beacon -->
-        <line x1="22" y1="2" x2="22" y2="7.5" stroke="#00E5E5" stroke-width="1.8" stroke-linecap="round" />
-        <circle cx="22" cy="2.5" r="2.2" fill="#00E5E5" filter="drop-shadow(0 0 4px #00CFFF)" />
-        <circle cx="22" cy="2.5" r="1.1" fill="#ffffff" />
-        <!-- Cybernetic Lateral Ear Nodes (Illuminated Cyan / Teal) -->
-        <rect x="2.5" y="15" width="3.5" height="11" rx="1.75" fill="#008F9C" stroke="#00E5E5" stroke-width="0.8" />
-        <rect x="38" y="15" width="3.5" height="11" rx="1.75" fill="#008F9C" stroke="#00E5E5" stroke-width="0.8" />
-        <!-- Robot Geometric Cranium -->
-        <rect x="6" y="7.5" width="32" height="28" rx="8" fill="url(#chassis-${uid})" stroke="url(#border-${uid})" stroke-width="1.6" />
-        <!-- Specular 3D Curved Glass Sheen -->
-        <path d="M 8 13 Q 22 9 36 13 L 36 17 Q 22 13 8 17 Z" fill="url(#sheen-${uid})" />
-        <!-- Dark Curved Visor Display -->
-        <rect x="10" y="13.5" width="24" height="13.5" rx="4.5" fill="#02090D" stroke="rgba(0, 229, 229, 0.45)" stroke-width="1" />
+
+        <!-- Antenna Mast with Chrome Mount & Cyan Beacon -->
+        <rect x="24.5" y="3.5" width="3" height="8.5" rx="1.5" fill="url(#silver-ear-${uid})" stroke="#94a3b8" stroke-width="0.5" />
+        <ellipse cx="26" cy="11.5" rx="3.5" ry="1.2" fill="#64748b" />
+        <circle cx="26" cy="3.5" r="3.2" fill="#00E5E5" filter="drop-shadow(0 0 6px #00CFFF)" />
+        <circle cx="26" cy="2.7" r="1.3" fill="#ffffff" />
+
+        <!-- Lateral 3D Ear Couplers (Stepped Chrome Audio Cylinders) -->
+        <rect x="2" y="19" width="4.5" height="15" rx="2" fill="url(#silver-ear-${uid})" stroke="#94a3b8" stroke-width="0.8" />
+        <rect x="4.5" y="21" width="2" height="11" rx="1" fill="#00E5E5" opacity="0.8" filter="drop-shadow(0 0 3px #00E5E5)" />
+        <rect x="45.5" y="19" width="4.5" height="15" rx="2" fill="url(#silver-ear-${uid})" stroke="#94a3b8" stroke-width="0.8" />
+        <rect x="45.5" y="21" width="2" height="11" rx="1" fill="#00E5E5" opacity="0.8" filter="drop-shadow(0 0 3px #00E5E5)" />
+
+        <!-- Robotic Metallic Neck / Joint Collar -->
+        <rect x="20" y="44" width="12" height="4" rx="2" fill="url(#silver-ear-${uid})" stroke="#475569" stroke-width="0.7" />
+        <line x1="23" y1="46" x2="29" y2="46" stroke="#00E5E5" stroke-width="0.8" opacity="0.8" />
+
+        <!-- Robot Cranium (Chassis Outer Bevel & Silver Body) -->
+        <rect x="6.5" y="10.5" width="39" height="34.5" rx="10" fill="url(#silver-body-${uid})" stroke="url(#silver-bevel-${uid})" stroke-width="1.8" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.6))" />
+
+        <!-- Forehead Seam Plate / Panel Lines -->
+        <path d="M 12 14 Q 26 11 40 14" stroke="#ffffff" stroke-width="1" opacity="0.85" fill="none" />
+        <path d="M 12 15 Q 26 12 40 15" stroke="#475569" stroke-width="0.75" opacity="0.6" fill="none" />
+        <circle cx="26" cy="13.5" r="1.4" fill="#64748b" stroke="#cbd5e1" stroke-width="0.6" />
+
+        <!-- Recessed Visor Frame (Metallic Inset Ring) -->
+        <rect x="11.5" y="18" width="29" height="17" rx="5.5" fill="#02090D" stroke="#64748b" stroke-width="1.4" />
+        <rect x="12.2" y="18.7" width="27.6" height="15.6" rx="4.8" fill="#061219" stroke="rgba(0, 229, 229, 0.35)" stroke-width="0.8" />
+
+        <!-- Curved Specular Glass Reflection on Visor -->
+        <path d="M 13 22 Q 26 18 39 21 L 39 25 Q 26 21 13 24 Z" fill="url(#visor-glass-${uid})" />
+
         <!-- Expressive Glowing Cyan Eyes -->
         <g class="ks-robot-eyes">
-          <rect class="ks-robot-eye" x="13" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 4px #00E5E5)" />
-          <circle cx="15.2" cy="19.2" r="1.1" fill="#ffffff" />
-          <rect class="ks-robot-eye" x="24.5" y="17.5" width="6.5" height="5" rx="2.2" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 4px #00E5E5)" />
-          <circle cx="26.7" cy="19.2" r="1.1" fill="#ffffff" />
+          <rect class="ks-robot-eye" x="16.5" y="22" width="7" height="6.5" rx="2.5" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 6px #00E5E5)" />
+          <circle cx="18.8" cy="24.2" r="1.3" fill="#ffffff" />
+          <rect class="ks-robot-eye" x="28.5" y="22" width="7" height="6.5" rx="2.5" fill="url(#eyeglow-${uid})" filter="drop-shadow(0 0 6px #00E5E5)" />
+          <circle cx="30.8" cy="24.2" r="1.3" fill="#ffffff" />
         </g>
-        <!-- Audio / Communication Data Slit -->
-        <line x1="16.5" y1="30" x2="27.5" y2="30" stroke="rgba(0, 229, 229, 0.75)" stroke-width="1.4" stroke-linecap="round" />
+
+        <!-- Metallic Voice / Speaker Slit -->
+        <rect x="20.5" y="38" width="11" height="2" rx="1" fill="#334155" stroke="#64748b" stroke-width="0.5" />
+        <line x1="22" y1="39" x2="30" y2="39" stroke="#00E5E5" stroke-width="0.8" stroke-linecap="round" opacity="0.9" />
+
+        <!-- Corner Hardware Rivets on Cheeks -->
+        <circle cx="11.5" cy="39" r="1.1" fill="#94a3b8" stroke="#475569" stroke-width="0.5" />
+        <circle cx="40.5" cy="39" r="1.1" fill="#94a3b8" stroke="#475569" stroke-width="0.5" />
       </svg>
     `;
   }
@@ -848,15 +894,11 @@
     root.id = 'ks-agent-root';
 
     root.innerHTML = `
-      <div id="ks-agent-launcher" title="KS AI Assistant" aria-label="Open KS AI Assistant">
+      <div id="ks-agent-launcher" aria-label="Open KS AI Assistant">
         <div class="ks-robot-pill-badge">KS AI Assistant</div>
         <div class="ks-robot-icon-wrap">
-          ${createRobotSVG(36, 'launcher')}
+          ${createRobotSVG(42, 'launcher')}
           <div class="ks-robot-online-dot"></div>
-        </div>
-        <div class="ks-robot-tooltip">
-          <span class="ks-tooltip-title">KS AI Assistant</span>
-          <span class="ks-tooltip-sub">Ask anything • Live Brain</span>
         </div>
       </div>
 
