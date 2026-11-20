@@ -509,32 +509,67 @@ body:not(.ks-is-home) .ks-right-cluster {
 /* -------------------------------------------------------------
  * 10. Hero Typography & Central Composition
  * ------------------------------------------------------------- */
-/* Name: Khandeshwar in silver-white, Suryavanshi in bright cyan-teal gradient */
+/* Name: Khandeshwar in brilliant white, Suryavanshi in luminous white-to-aqua gradient with full 'y' descender */
 h1 {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.25 !important;
+  overflow: visible !important;
+}
+
+h1 span {
+  display: block !important;
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.25 !important;
+  overflow: visible !important;
 }
 
 h1 span:first-child {
-  color: var(--ks-text-silver) !important;
+  color: #ffffff !important;
   font-weight: 800 !important;
-  text-shadow: 0 2px 25px rgba(255, 255, 255, 0.25) !important;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.45), 0 0 45px rgba(0, 229, 229, 0.3) !important;
+  padding-bottom: 0.1em !important;
+  line-height: 1.25 !important;
 }
 
+/* "Suryavanshi": Luminous White-to-Aqua gradient with full 'y' descender protection */
 h1 span:last-child,
+h1 span.bg-gradient-to-r,
+h1 span.bg-clip-text,
 .bg-gradient-to-r.from-blue-400.to-purple-400 {
-  background-image: linear-gradient(135deg, var(--ks-cyan-electric) 0%, var(--ks-teal-primary) 50%, var(--ks-teal-deep) 100%) !important;
+  display: inline-block !important;
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  line-height: 1.25 !important;
+  /* Critical: 0.35em padding-bottom extends the background box below baseline so the 'y' descender is 100% visible */
+  padding-top: 0.05em !important;
+  padding-bottom: 0.35em !important;
+  padding-left: 0.08em !important;
+  padding-right: 0.08em !important;
+  margin-bottom: -0.3em !important;
+  overflow: visible !important;
+  box-sizing: content-box !important;
+  background-origin: padding-box !important;
+  background-image: linear-gradient(135deg, #ffffff 0%, #a5f3fc 25%, #00E5E5 65%, #00CFFF 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  filter: drop-shadow(0 0 25px rgba(0, 229, 229, 0.45)) !important;
+  filter: drop-shadow(0 0 25px rgba(0, 229, 229, 0.55)) !important;
   font-weight: 800 !important;
   transition: filter 0.3s ease !important;
 }
 
 h1 span:last-child:hover,
+h1 span.bg-gradient-to-r:hover,
+h1 span.bg-clip-text:hover,
 .bg-gradient-to-r.from-blue-400.to-purple-400:hover {
-  filter: drop-shadow(0 0 35px rgba(0, 229, 229, 0.8)) brightness(1.1) !important;
+  filter: drop-shadow(0 0 35px rgba(0, 229, 229, 0.95)) brightness(1.15) !important;
 }
 
 /* Subtitle: Full-Stack Developer, AI Systems & Software Engineering */
@@ -651,96 +686,196 @@ a[href*="contact"] button:hover {
 }
 
 /* -------------------------------------------------------------
- * 11. Navigation Bar — Floating Cosmic Glass & Luminous Cyan Glow (Matches Image 3)
+ * 11. Navigation Bar — Slim Cosmic Glass & Mid-Glow Capsule Buttons
  * ------------------------------------------------------------- */
 nav,
 nav.fixed,
 header nav,
 div#root nav {
-  background: linear-gradient(180deg, rgba(2, 9, 13, 0.85) 0%, rgba(2, 9, 13, 0.6) 100%) !important;
+  background: linear-gradient(180deg, rgba(2, 9, 13, 0.88) 0%, rgba(2, 9, 13, 0.65) 100%) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(0, 229, 229, 0.18) !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 229, 0.08) !important;
+  border-bottom: 1px solid rgba(0, 229, 229, 0.16) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 229, 229, 0.05) !important;
   z-index: 100 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Brand KS Neon Logo (Bright Glowing Cyan matching Image 3) */
-nav a[href="/"] span,
-nav span.font-bold,
+/* Slim Navbar Height */
+nav .h-16,
+nav .max-w-7xl > div {
+  height: 48px !important;
+  min-height: 48px !important;
+}
+
+/* Brand KS Logo (Aesthetic Mid Glow, Perfectly Scaled) */
+nav a.flex-shrink-0,
+nav a[href="/"].flex-shrink-0 {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+nav a.flex-shrink-0 span,
+nav a[href="/"].flex-shrink-0 span,
 nav .text-2xl.font-bold {
   background-image: linear-gradient(135deg, #00CFFF 0%, #00E5E5 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
   font-weight: 800 !important;
+  font-size: 1.35rem !important;
   letter-spacing: 0.04em !important;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 229, 0.95)) drop-shadow(0 0 25px rgba(0, 207, 255, 0.6)) !important;
+  filter: drop-shadow(0 0 6px rgba(0, 229, 229, 0.65)) drop-shadow(0 0 12px rgba(0, 207, 255, 0.35)) !important;
 }
 
-/* Active Navigation Pill (Desktop & Mobile — Luminous Electric Cyan Pill with Neon Halo matching Image 3) */
+/* Neutralize Outer <a> wrapper so ONLY the inner <div> is the single capsule pill */
+nav a.relative.group,
+nav a:not(.flex-shrink-0) {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 2px !important;
+  box-shadow: none !important;
+  border-radius: 9999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+/* Unified Slim Capsule Pill Geometry for ALL Navbar Buttons */
+nav a.relative.group > div,
+nav .hidden.md\:block nav a > div,
+nav div[class*="items-baseline"] a > div {
+  height: 32px !important;
+  min-height: 32px !important;
+  box-sizing: border-box !important;
+  border-radius: 9999px !important;
+  padding: 4px 13px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  line-height: 1 !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Active Navigation Pill (Home or Active Page — Mid Glow, Clean Pure White Text) */
 nav a div[class*="from-blue-500"],
 nav a[class*="from-blue-500"],
 nav [class*="from-blue-500"] {
-  background: linear-gradient(135deg, #00E5E5 0%, #00CFFF 50%, #008F9C 100%) !important;
+  background: linear-gradient(135deg, #00E5E5 0%, #00CFFF 45%, #008F9C 100%) !important;
   color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
   border-radius: 9999px !important;
-  box-shadow: 0 0 25px rgba(0, 229, 229, 0.9), 0 0 45px rgba(0, 207, 255, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45) !important;
-  padding: 6px 18px !important;
+  box-shadow: 0 0 12px rgba(0, 229, 229, 0.55), 0 0 22px rgba(0, 207, 255, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+nav a div[class*="from-blue-500"] span,
+nav a[class*="from-blue-500"] span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  font-weight: 600 !important;
 }
 
 nav a div[class*="from-blue-500"] svg,
 nav a[class*="from-blue-500"] svg {
   color: #ffffff !important;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)) !important;
+  width: 14px !important;
+  height: 14px !important;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7)) !important;
 }
 
-/* Inactive Navigation Pills (Sleek Dark Glass Capsules matching Image 3) */
-nav a > div:not([class*="from-blue-500"]),
-nav a:not([class*="from-blue-500"]):not([href="/"]) {
-  background: rgba(7, 23, 29, 0.72) !important;
+/* Inactive Navigation Pills (Sleek Dark Glass Capsules, Identical Capsule Pill Geometry) */
+nav a.relative.group > div:not([class*="from-blue-500"]),
+nav a > div:not([class*="from-blue-500"]) {
+  background: rgba(7, 26, 34, 0.78) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(0, 229, 229, 0.22) !important;
+  border: 1px solid rgba(0, 229, 229, 0.25) !important;
   border-radius: 9999px !important;
   color: #e2e8f0 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+}
+
+nav a.relative.group > div:not([class*="from-blue-500"]) span,
+nav a > div:not([class*="from-blue-500"]) span {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
   font-weight: 500 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  padding: 6px 16px !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-nav a > div:not([class*="from-blue-500"]):hover,
-nav a:not([class*="from-blue-500"]):not([href="/"]):hover {
-  background: rgba(0, 229, 229, 0.16) !important;
-  border-color: rgba(0, 229, 229, 0.7) !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 20px rgba(0, 229, 229, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-  transform: translateY(-1px) !important;
-}
-
-nav a > div:not([class*="from-blue-500"]) svg,
-nav a:not([class*="from-blue-500"]):not([href="/"]) svg {
+nav a.relative.group > div:not([class*="from-blue-500"]) svg,
+nav a > div:not([class*="from-blue-500"]) svg {
   color: #cbd5e1 !important;
+  width: 14px !important;
+  height: 14px !important;
   transition: color 0.2s ease, filter 0.2s ease !important;
 }
 
-nav a > div:not([class*="from-blue-500"]):hover svg,
-nav a:not([class*="from-blue-500"]):not([href="/"]):hover svg {
-  color: #00E5E5 !important;
-  filter: drop-shadow(0 0 8px rgba(0, 229, 229, 0.7)) !important;
+/* Inactive Navigation Pill Hover (Tasteful Cyan Highlight & Mid Glow) */
+nav a.relative.group:hover > div:not([class*="from-blue-500"]),
+nav a > div:not([class*="from-blue-500"]):hover {
+  background: rgba(0, 229, 229, 0.16) !important;
+  border-color: rgba(0, 229, 229, 0.7) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(0, 229, 229, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Mobile dropdown menu glass */
+nav a.relative.group:hover > div:not([class*="from-blue-500"]) span,
+nav a > div:not([class*="from-blue-500"]):hover span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+nav a.relative.group:hover > div:not([class*="from-blue-500"]) svg,
+nav a > div:not([class*="from-blue-500"]):hover svg {
+  color: #00E5E5 !important;
+  filter: drop-shadow(0 0 6px rgba(0, 229, 229, 0.6)) !important;
+}
+
+/* Mobile dropdown menu glass & slim pill items */
 nav .md\:hidden > div {
   background: rgba(6, 21, 27, 0.95) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid rgba(0, 229, 229, 0.25) !important;
   border-radius: 14px !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 229, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 229, 229, 0.1) !important;
+  padding: 8px 12px !important;
+}
+
+nav .md\:hidden a {
+  border-radius: 9999px !important;
+  padding: 6px 14px !important;
+  font-size: 14px !important;
+  margin-bottom: 4px !important;
+  border: 1px solid transparent !important;
+}
+
+nav .md\:hidden a[class*="from-blue-500"] {
+  background: linear-gradient(135deg, #00E5E5 0%, #00CFFF 45%, #008F9C 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 0 12px rgba(0, 229, 229, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+}
+
+nav .md\:hidden a:not([class*="from-blue-500"]) {
+  background: rgba(7, 26, 34, 0.7) !important;
+  border: 1px solid rgba(0, 229, 229, 0.2) !important;
+  color: #e2e8f0 !important;
 }
 
 /* -------------------------------------------------------------

@@ -576,6 +576,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   letter-spacing: -0.035em !important;
   font-weight: 800 !important;
+  line-height: 1.25 !important;
+  overflow: visible !important;
 }
 
 /* Pristine Gradient Text & Shield against Distortion */
@@ -587,11 +589,13 @@ h1 {
   box-shadow: none !important;
   border: none !important;
   outline: none !important;
+  overflow: visible !important;
 }
 
-/* Hero Name: "Suryavanshi" Vibrant Blue-to-Purple Gradient */
-h1 span.bg-gradient-to-r {
-  background-image: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%) !important;
+/* Hero Name: "Suryavanshi" Luminous White-to-Aqua Gradient with Full 'y' Descender Preservation */
+h1 span.bg-gradient-to-r,
+h1 span.bg-clip-text {
+  background-image: linear-gradient(135deg, #ffffff 0%, #a5f3fc 25%, #00E5E5 65%, #00CFFF 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -600,6 +604,16 @@ h1 span.bg-gradient-to-r {
   border: none !important;
   outline: none !important;
   transform: none !important;
+  line-height: 1.25 !important;
+  padding-top: 0.05em !important;
+  padding-bottom: 0.35em !important;
+  padding-left: 0.08em !important;
+  padding-right: 0.08em !important;
+  margin-bottom: -0.3em !important;
+  overflow: visible !important;
+  box-sizing: content-box !important;
+  background-origin: padding-box !important;
+  filter: drop-shadow(0 0 25px rgba(0, 229, 229, 0.55)) !important;
 }
 
 /* Pristine Hero Name Hover Effect: 100% stable, zero glitch, celestial glow */
@@ -610,6 +624,8 @@ h1 span {
   width: fit-content !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  line-height: 1.25 !important;
+  overflow: visible !important;
   transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease !important;
   box-shadow: none !important;
   border: none !important;
@@ -621,17 +637,25 @@ h1 span {
 }
 
 /* "Khandeshwar" pure white celestial halo */
+h1 span:first-child,
+h1 span:not(.bg-clip-text) {
+  color: #ffffff !important;
+  padding-bottom: 0.1em !important;
+  line-height: 1.25 !important;
+}
+
 h1 span:not(.bg-clip-text):hover {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.55), 0 0 35px rgba(56, 189, 248, 0.3) !important;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.75), 0 0 35px rgba(0, 229, 229, 0.5) !important;
   box-shadow: none !important;
   border: none !important;
   outline: none !important;
   transform: none !important;
 }
 
-/* "Suryavanshi" dual-tone cyan & purple letterform glow */
-h1 span.bg-clip-text:hover {
-  filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.65)) drop-shadow(0 0 32px rgba(192, 132, 252, 0.45)) !important;
+/* "Suryavanshi" brilliant cyan & aqua letterform glow */
+h1 span.bg-clip-text:hover,
+h1 span.bg-gradient-to-r:hover {
+  filter: drop-shadow(0 0 20px rgba(0, 229, 229, 0.95)) drop-shadow(0 0 40px rgba(0, 207, 255, 0.7)) !important;
   box-shadow: none !important;
   border: none !important;
   outline: none !important;
