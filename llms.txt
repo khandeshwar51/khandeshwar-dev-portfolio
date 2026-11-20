@@ -16,6 +16,7 @@
 - Programming Languages: Python, C++, TypeScript, JavaScript, SQL, HTML5, CSS3
 - Frontend & Styling: React, Vite, Tailwind CSS, Framer Motion, Vanilla JS, HTML5 Canvas
 - Backend & Systems: Node.js, Express, RESTful APIs, Local-First Storage Architecture
+- Web & App Security: 20-Point Defense Matrix (SQLi, XSS, CSRF, BOLA/IDOR, Rate Limiting, Argon2/bcrypt, MFA, DB RLS, JWT Security, HttpOnly Cookies, CORS, Webhook HMAC Verification, Source Map Obfuscation, CVE Auditing)
 - Browser Engineering: Chrome Extensions Manifest V3 (MV3), Service Workers, Declarative Net Request
 - SEO & Web Performance: Technical SEO, Schema.org JSON-LD, Core Web Vitals, Open Graph Optimization
 

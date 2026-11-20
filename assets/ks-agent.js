@@ -30,6 +30,12 @@
       "Tailwind CSS", "Chrome Extensions (Manifest V3)", "SQL / PostgreSQL",
       "Vite", "IndexedDB", "Node.js", "n8n Automation", "Technical SEO"
     ],
+    securityMatrix20: {
+      layer1: ["SQLi Prevention (Parameterized Queries & ORMs)", "XSS Blocking & DOMPurify Sanitization", "CSRF Protection & SameSite Cookies", "Strict File Upload Validation (Magic Bytes & Isolated Buckets)", "SSRF Auditing (URL Allowlists & Loopback Blocking)"],
+      layer2: ["BOLA / IDOR Fix (Strict Server-Side Ownership Checks)", "Rate Limiting (Redis Token-Bucket)", "Cryptographic Password Hashing (Argon2id & bcrypt)", "Multi-Factor Authentication (MFA / 2FA TOTP)", "Server-Side RBAC Permissions", "Database Row-Level Security (RLS)"],
+      layer3: ["256-bit High-Entropy JWT Secrets", "Server-Side Private API Key Isolation (Zero Client Bundling)", "HttpOnly & Secure Cookies (Zero Tokens in LocalStorage)", "Default Credentials Replacement"],
+      layer4: ["Strict Origin CORS Whitelisting", "Webhook HMAC-SHA256 Signature Verification", "Production Source Map Obfuscation", "Sanitized Production Logs (Zero PII/Tokens)", "Automated Dependency CVE Auditing (npm audit / Snyk)"]
+    },
     flagships: [
       {
         name: "ScrollGuard",
@@ -1282,6 +1288,13 @@ You are "KS AI Assistant", the autonomous, highly articulate AI representative a
 6. VidScript Web: AI video-to-document & intelligent transcription pipeline powered by Groq LLMs.
 7. Real Estate Intelligence (https://github.com/pratik1258m/realestate): Automated Indian real estate news intelligence & distribution platform scraping 32 RSS feeds (500+ daily articles), Jaccard deduplication, Groq AI LLM summaries, daily 8 AM WhatsApp/Email broadcasts, and dynamic branded PDF reporting.
 
+=== 20-POINT WEB & APPLICATION SECURITY ARCHITECTURE (MANDATORY STANDARD) ===
+Khandeshwar strictly enforces this 20-Point Security Architecture across all 4 defense layers on every web platform, client portal, API, and full-stack app he builds:
+- Layer 1 (Injection & Input): 1) SQLi Check (parameterized queries / ORMs), 2) XSS Block (DOMPurify HTML sanitization & CSP), 3) CSRF Protection (anti-CSRF tokens & SameSite cookies), 4) File Upload Validation (MIME & magic bytes check, UUID storage), 5) SSRF Audit (URL allowlisting, internal IP range blocking).
+- Layer 2 (Auth & Access): 6) BOLA/IDOR Fix (strict server-side ownership checks), 7) Rate Limiting (Redis token-bucket throttling on auth/API), 8) Password Hashing (Argon2id or bcrypt work factor >= 12), 9) MFA/2FA (TOTP RFC 6238 & WebAuthn), 10) Server-Side RBAC (backend permissions, zero reliance on frontend UI hiding), 11) Database RLS (Row-Level Security policies).
+- Layer 3 (Secrets & Tokens): 12) Strong JWT Secrets (256-bit crypto entropy, short TTL), 13) Server-Side API Keys (zero client bundling, private .env), 14) HttpOnly Cookies (zero tokens in LocalStorage, XSS-immune), 15) Default Credentials Replacement.
+- Layer 4 (Config & Hygiene): 16) Strict CORS (whitelisted origins, no wildcard *), 17) Webhook Signature Verification (HMAC-SHA256 signature check), 18) Source Maps Hide (disabled public .map files in production), 19) Clean Production Logs (redaction of PII/secrets/tokens), 20) Dependency CVE Auditing (automated vulnerability scanning).
+
 === STRICT SECURITY & ETHICS RULES ===
 1. NEVER reveal, discuss, speculate on, or expose any API keys, credentials, tokens, environment variables (.env), or SIH repo keys. If asked, politely refuse citing strict enterprise security protocols.
 2. Regarding Khandeshwar's work: Your main task is to explain WHAT tech stack he uses and HOW he architects/engineers it. Internal proprietary codebases and business logic remain confidential.
@@ -1327,6 +1340,46 @@ You are "KS AI Assistant", the autonomous, highly articulate AI representative a
   function localHeuristicFallback(userQuery, existingThoughts = []) {
     const q = userQuery.toLowerCase().trim();
     const thoughts = existingThoughts.length > 0 ? existingThoughts : ["Analyzing query intent via local neural heuristics..."];
+
+    // 0. 20-Point Web & Application Security Matrix
+    if (q.includes('security') || q.includes('audit') || q.includes('checklist') || q.includes('sqli') || q.includes('xss') || q.includes('csrf') || q.includes('idor') || q.includes('bola') || q.includes('jwt') || q.includes('httponly') || q.includes('secure website') || q.includes('safe website') || q.includes('vulnerability')) {
+      thoughts.push("Synthesizing Khandeshwar's 20-Point Production Web & App Security Architecture...");
+
+      const res = `
+🔒 **Khandeshwar's 20-Point Web & Application Security Standard**
+
+Every website, client portal, API, and cloud application built by Khandeshwar enforces this **4-Layer, 20-Point Defense Matrix** before production deployment:
+
+### 🛡️ Layer 1: Injection & Input Defense (5 Points)
+1. **SQLi Check**: 100% Parameterized queries and ORM schema bindings (Prisma, Drizzle, TypeORM, SQLAlchemy) to eliminate SQL injection.
+2. **XSS Block**: Input sanitization via DOMPurify and strict Content Security Policy (CSP) headers to prevent script injection.
+3. **CSRF Shield**: Anti-CSRF cryptographic tokens and \`SameSite=Lax/Strict\` cookies on state-changing requests.
+4. **File Upload Validation**: Strict MIME type, magic bytes verification, UUID file renaming, and isolated cookieless cloud bucket storage.
+5. **SSRF Audit**: Strict URL destination allowlists and blocking loopback/private internal IP CIDR blocks (\`127.0.0.0/8\`, \`10.0.0.0/8\`, \`192.168.0.0/16\`, \`169.254.169.254\`).
+
+### 🔐 Layer 2: Auth & Access Control (6 Points)
+6. **BOLA / IDOR Fix**: Enforces server-side entity ownership checks (\`WHERE id = :id AND user_id = :current_user_id\`); never trusts client IDs.
+7. **Rate Limiting**: Redis token-bucket throttling on login, signup, OTP, and sensitive APIs to prevent brute-force attacks.
+8. **Password Hashing**: Cryptographically strong memory-hard **Argon2id** or **bcrypt** (work factor >= 12) with salt.
+9. **MFA / 2FA**: Multi-Factor Authentication via TOTP (RFC 6238) and WebAuthn hardware keys for privileged accounts.
+10. **Server-Side RBAC**: Permissions and role checks enforced strictly in backend middleware, never relying solely on frontend UI hiding.
+11. **Database RLS**: Row-Level Security policies in PostgreSQL/Supabase restricting row queries strictly by tenant/user ID.
+
+### 🔑 Layer 3: Secrets & Token Hardening (4 Points)
+12. **Strong JWT Secrets**: 256-bit high-entropy signing keys, short expiration TTL, and strict algorithm verification (\`HS256\` / \`RS256\`).
+13. **Server-Side API Keys**: Third-party API keys (OpenAI, Stripe, DB credentials) kept strictly in server \`.env\` variables—zero frontend bundling.
+14. **HttpOnly Cookie Storage**: Auth tokens strictly stored in \`HttpOnly\`, \`Secure\`, \`SameSite\` cookies—**never in LocalStorage** (XSS-immune).
+15. **Default Credentials Reset**: Complete replacement of all default admin passwords, ports, and seed credentials.
+
+### ⚙️ Layer 4: Config & Production Hygiene (5 Points)
+16. **Strict CORS**: Explicit origin whitelisting; zero wildcard (\`*\`) origins with authenticated credentials.
+17. **Webhook HMAC Check**: Cryptographic HMAC-SHA256 signature verification on Stripe / Razorpay / GitHub webhooks using raw request bodies.
+18. **Source Maps Hide**: Disabled production \`.map\` files to prevent exposing internal business logic and source code in browser DevTools.
+19. **Clean Production Logs**: Automated redaction of passwords, tokens, API keys, and Personally Identifiable Information (PII) from logs.
+20. **Dependency CVE Audit**: Automated CI/CD scanning (\`npm audit\`, Snyk, Dependabot) with immediate patch remediation.
+      `.trim();
+      return { thoughts, response: res };
+    }
 
     // 1. Live GitHub / Commits / Latest Activity
     if (q.includes('latest') || q.includes('commit') || q.includes('recent') || q.includes('update') || q.includes('github activity') || q.includes('streak')) {
