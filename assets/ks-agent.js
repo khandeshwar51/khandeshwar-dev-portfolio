@@ -500,6 +500,7 @@
       flex: 1;
       padding: 16px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -757,14 +758,25 @@
 
     @media (max-width: 640px) {
       #ks-agent-root {
-        bottom: 16px;
-        right: 16px;
+        bottom: max(14px, env(safe-area-inset-bottom, 14px));
+        right: max(14px, env(safe-area-inset-right, 14px));
+      }
+      #ks-agent-launcher {
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+      }
+      .ks-robot-pill-badge {
+        display: none !important;
       }
       #ks-agent-window {
-        bottom: 78px;
-        right: 16px;
-        width: calc(100vw - 32px);
-        height: calc(100vh - 100px);
+        bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 70px));
+        right: 12px;
+        width: calc(100vw - 24px);
+        max-width: 400px;
+        height: calc(100vh - 90px);
+        max-height: 540px;
+        border-radius: 18px;
       }
       .ks-robot-tooltip {
         display: none !important;
