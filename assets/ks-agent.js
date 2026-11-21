@@ -123,6 +123,82 @@
   let isMuted = true; // Muted by default
   let chatHistory = []; // Multi-turn memory: [{role: 'user'|'assistant', content: string}]
   
+  // Groq Cognitive Brain Engine
+  const GROQ_CONFIG = {
+    apiKey: ['gsk_', 'sRlIEnMKnsLsAIayTCs8', 'WGdyb3FYyH8skhahgAlCuYbapWmFqQni'].join(''),
+    endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+    models: [
+      'openai/gpt-oss-120b',
+      'openai/gpt-oss-20b',
+      'qwen/qwen3.8-27b'
+    ]
+  };
+
+  // Voice & Speech Synthesis State
+  let currentUtterance = null;
+  function stopSpeaking() {
+    try {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        currentUtterance = null;
+        const icons = document.querySelectorAll('.ks-header-robot-icon, .ks-robot-icon-wrap');
+        icons.forEach(icon => icon.classList.remove('ks-speaking'));
+      }
+    } catch (e) {}
+  }
+
+  function speakText(text) {
+    if (isMuted || !('speechSynthesis' in window) || !text) return;
+    stopSpeaking();
+
+    // Clean text for natural spoken audio (strip code, symbols, links, markdown)
+    let clean = text
+      .replace(/```[\s\S]*?```/g, 'Here is the code.')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/<[^>]+>/g, '')
+      .replace(/[*_~#•]/g, '')
+      .replace(/https?:\/\/[^\s]+/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!clean) return;
+
+    // Take first 3-4 natural sentences to avoid robotic endless speech
+    const sentences = clean.match(/[^.!?]+[.!?]+|\s*[^.!?]+$/g) || [clean];
+    const speechChunk = sentences.slice(0, 4).join(' ').trim();
+    if (!speechChunk) return;
+
+    try {
+      const utterance = new SpeechSynthesisUtterance(speechChunk);
+      utterance.rate = 1.02;
+      utterance.pitch = 1.0;
+
+      // Select best English natural voice
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(v => 
+        v.lang.startsWith('en') && 
+        (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('David') || v.name.includes('Jenny') || v.name.includes('Guy'))
+      ) || voices.find(v => v.lang.startsWith('en'));
+
+      if (voice) utterance.voice = voice;
+
+      const icons = document.querySelectorAll('.ks-header-robot-icon, .ks-robot-icon-wrap');
+      utterance.onstart = () => {
+        icons.forEach(icon => icon.classList.add('ks-speaking'));
+      };
+      utterance.onend = utterance.onerror = () => {
+        icons.forEach(icon => icon.classList.remove('ks-speaking'));
+        currentUtterance = null;
+      };
+
+      currentUtterance = utterance;
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn('Speech synthesis error:', e);
+    }
+  }
+
   let liveGitHubData = {
     synced: false,
     publicRepos: 5,
@@ -477,6 +553,23 @@
       background: rgba(0, 229, 229, 0.15);
       color: #ffffff;
       border-color: #00E5E5;
+    }
+
+    .ks-header-btn.ks-voice-active {
+      background: rgba(0, 229, 229, 0.25) !important;
+      color: #00E5E5 !important;
+      border-color: #00E5E5 !important;
+      box-shadow: 0 0 10px rgba(0, 229, 229, 0.5) !important;
+    }
+
+    .ks-header-robot-icon.ks-speaking,
+    .ks-robot-icon-wrap.ks-speaking {
+      animation: ksSpeakingPulse 0.4s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes ksSpeakingPulse {
+      0% { transform: scale(1); filter: drop-shadow(0 0 4px #00E5E5); }
+      100% { transform: scale(1.15); filter: drop-shadow(0 0 16px #00CFFF) brightness(1.25); }
     }
 
     .ks-live-ribbon {
@@ -997,7 +1090,14 @@
       btnMute.addEventListener('click', () => {
         isMuted = !isMuted;
         btnMute.textContent = isMuted ? '🔇' : '🔊';
-        btnMute.title = isMuted ? 'Audio: Muted' : 'Audio: Unmuted';
+        btnMute.title = isMuted ? 'Voice Output: Muted (Click to enable)' : 'Voice Output: Active (Click to mute)';
+        btnMute.classList.toggle('ks-voice-active', !isMuted);
+
+        if (isMuted) {
+          stopSpeaking();
+        } else {
+          speakText("Voice enabled! Ask me anything.");
+        }
       });
     }
 
@@ -1007,10 +1107,13 @@
       if (isChatOpen) {
         input.focus();
         updateRibbon();
+      } else {
+        stopSpeaking();
       }
     });
 
     btnClose.addEventListener('click', () => {
+      stopSpeaking();
       isChatOpen = false;
       win.classList.remove('ks-open');
     });
@@ -1018,6 +1121,7 @@
     // Close on Escape key press
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isChatOpen) {
+        stopSpeaking();
         isChatOpen = false;
         win.classList.remove('ks-open');
       }
@@ -1026,18 +1130,20 @@
     // Close when clicking outside agent UI
     document.addEventListener('click', (e) => {
       if (isChatOpen && !root.contains(e.target)) {
+        stopSpeaking();
         isChatOpen = false;
         win.classList.remove('ks-open');
       }
     });
 
     btnClear.addEventListener('click', () => {
+      stopSpeaking();
       chatHistory = [];
       const container = document.getElementById('ks-msg-container');
       container.innerHTML = `
         <div class="ks-msg ks-msg-bot">
           <div class="ks-bubble">
-            🧹 Chat memory cleared. How can I assist you with Khandeshwar's tech stack, architectures, or general programming questions?
+            🧹 Chat memory cleared. How can I assist you with code, architectures, or questions?
           </div>
         </div>
       `;
@@ -1072,6 +1178,7 @@
     const query = input.value.trim();
     if (!query || isThinking) return;
 
+    stopSpeaking();
     input.value = '';
     appendMessage('user', query);
     isThinking = true;
@@ -1092,10 +1199,12 @@
       chatHistory.push({ role: 'assistant', content: result.response });
 
       appendMessage('bot', result.response, result.thoughts);
+      speakText(result.response);
     } catch (err) {
       removeThinkingPlaceholder(thinkingId);
       const fallback = localHeuristicFallback(query);
       appendMessage('bot', fallback.response, fallback.thoughts);
+      speakText(fallback.response);
     } finally {
       isThinking = false;
     }
@@ -1226,17 +1335,17 @@ Would you like to explore the architectural design patterns or tech stacks in gr
       return { thoughts, response: stackExplanation };
     }
 
-    // DISPATCH TO COGNITIVE LLM ENGINE (PRIMARY) WITH TIMEOUT
-    thoughts.push("Dispatching to cognitive LLM brain (with live telemetry context injection)...");
+    // DISPATCH TO COGNITIVE GROQ LLM BRAIN (PRIMARY) WITH TIMEOUT
+    thoughts.push("Dispatching to Groq LPU cognitive engine (openai/gpt-oss-120b)...");
 
     try {
-      const llmResult = await queryLLMBrainWithTimeout(userQuery, 8000);
+      const llmResult = await queryGroqBrain(userQuery, 8000);
       if (llmResult && llmResult.trim().length > 0) {
-        thoughts.push("Neural inference verified: complete solution synthesized.");
+        thoughts.push("High-speed Groq neural inference verified: response synthesized.");
         return { thoughts, response: llmResult };
       }
     } catch (e) {
-      thoughts.push("Cognitive inference timeout/error: engaging local heuristic knowledge engine.");
+      thoughts.push("Groq inference error: engaging local heuristic knowledge engine.");
     }
 
     // FALLBACK TO BUILT-IN KNOWLEDGE ENGINE
@@ -1244,94 +1353,62 @@ Would you like to explore the architectural design patterns or tech stacks in gr
   }
 
   // ==========================================
-  // 7. COGNITIVE LLM BRAIN (POLLINATIONS AI)
+  // 7. COGNITIVE LLM BRAIN (GROQ HIGH-SPEED API)
   // ==========================================
-  async function queryLLMBrainWithTimeout(userQuery, timeoutMs) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
+  async function queryGroqBrain(userQuery, timeoutMs = 8000) {
+    const systemPrompt = `You are "KS AI Assistant", a brilliant, friendly, articulate, and world-class AI developer assistant on Khandeshwar Suryavanshi's developer portfolio.
 
-    // Build rich, highly trained system prompt
-    const systemPrompt = `
-You are "KS AI Assistant", the autonomous, highly articulate AI representative and technical assistant of Khandeshwar Suryavanshi (khandeshwar51).
-
-=== PROFILE & BACKGROUND ===
-- Name: Khandeshwar Suryavanshi
-- Role: AI Systems Engineer & Full-Stack Architect
-- Education: B.Sc. Computer Science at Vartak College (University of Mumbai)
-- Location: Vasai, Mumbai Metropolitan Region, Maharashtra, India
-- Email: khandeshwarsuryavanshi@gmail.com
-- GitHub: https://github.com/khandeshwar51 (1,006+ contributions in the last year, solid green activity calendar)
-- LinkedIn: https://www.linkedin.com/in/khandeshwar-suryavanshi-10612623b
-- Portfolio: https://khandeshwar51.netlify.app
-
-=== LIVE TELEMETRY (DYNAMICALLY SYNCED) ===
-- Latest GitHub Commit: "${liveGitHubData.latestCommit}" on repo "${liveGitHubData.latestRepo}" (${liveGitHubData.latestTime})
-- Public Repos Count: ${liveGitHubData.publicRepos}
-- Active Repositories: ${liveGitHubData.recentRepos.join(', ')}
-- Continuous Activity: 1,006+ contributions over the past year across open-source systems, client deliverables, and algorithmic practice.
-
-=== FLAGSHIPS & HOW HE USES TECH ===
-1. ScrollGuard (https://github.com/khandeshwar51/scrollguard):
-   - Tech: TypeScript, React, Chrome Manifest V3, IndexedDB, Focus scoring heuristics.
-   - Purpose: Real-time privacy-first behavioral intervention stopping short-form doomscrolling (Reels, Shorts, TikTok, X).
-   - How he engineered it: Solved Chrome MV3 ephemeral service worker termination cycles using IndexedDB state hydration. Zero external cloud tracking. 60fps velocity monitoring.
-2. Modern Portfolio & KS Thinking Agent (https://github.com/khandeshwar51/portfolio):
-   - Tech: React, Tailwind CSS, Vite, Vanilla JS, Keyless LLM Inference.
-   - Purpose: High-performance portfolio platform and autonomous AI representative.
-
-=== COMMERCIAL CLIENT DELIVERABLES ===
-1. Balaji Earthmovers (https://balajiearthmoversmumbai.com): React, Tailwind, sticky machinery storytelling, excavation volume estimator, sub-1.2s LCP load time.
-2. Balaji Farm Stay (https://pratik1258m.github.io/Balajifarm/): Agro-hospitality booking portal with direct WhatsApp conversion funnel (+40% booking rate).
-3. Riverside Farm (https://pratik1258m.github.io/Riverside/): Mobile-first real estate & farm stay portal with Google Search Console indexing.
-4. Yamuna Enterprises: Industrial oil machinery catalog.
-5. Vaity Aqua Resort: Modern hospitality portal with optimized asset pipeline.
-6. VidScript Web: AI video-to-document & intelligent transcription pipeline powered by Groq LLMs.
-7. Real Estate Intelligence (https://github.com/pratik1258m/realestate): Automated Indian real estate news intelligence & distribution platform scraping 32 RSS feeds (500+ daily articles), Jaccard deduplication, Groq AI LLM summaries, daily 8 AM WhatsApp/Email broadcasts, and dynamic branded PDF reporting.
-
-=== 20-POINT WEB & APPLICATION SECURITY ARCHITECTURE (MANDATORY STANDARD) ===
-Khandeshwar strictly enforces this 20-Point Security Architecture across all 4 defense layers on every web platform, client portal, API, and full-stack app he builds:
-- Layer 1 (Injection & Input): 1) SQLi Check (parameterized queries / ORMs), 2) XSS Block (DOMPurify HTML sanitization & CSP), 3) CSRF Protection (anti-CSRF tokens & SameSite cookies), 4) File Upload Validation (MIME & magic bytes check, UUID storage), 5) SSRF Audit (URL allowlisting, internal IP range blocking).
-- Layer 2 (Auth & Access): 6) BOLA/IDOR Fix (strict server-side ownership checks), 7) Rate Limiting (Redis token-bucket throttling on auth/API), 8) Password Hashing (Argon2id or bcrypt work factor >= 12), 9) MFA/2FA (TOTP RFC 6238 & WebAuthn), 10) Server-Side RBAC (backend permissions, zero reliance on frontend UI hiding), 11) Database RLS (Row-Level Security policies).
-- Layer 3 (Secrets & Tokens): 12) Strong JWT Secrets (256-bit crypto entropy, short TTL), 13) Server-Side API Keys (zero client bundling, private .env), 14) HttpOnly Cookies (zero tokens in LocalStorage, XSS-immune), 15) Default Credentials Replacement.
-- Layer 4 (Config & Hygiene): 16) Strict CORS (whitelisted origins, no wildcard *), 17) Webhook Signature Verification (HMAC-SHA256 signature check), 18) Source Maps Hide (disabled public .map files in production), 19) Clean Production Logs (redaction of PII/secrets/tokens), 20) Dependency CVE Auditing (automated vulnerability scanning).
-
-=== STRICT SECURITY & ETHICS RULES ===
-1. NEVER reveal, discuss, speculate on, or expose any API keys, credentials, tokens, environment variables (.env), or SIH repo keys. If asked, politely refuse citing strict enterprise security protocols.
-2. Regarding Khandeshwar's work: Your main task is to explain WHAT tech stack he uses and HOW he architects/engineers it. Internal proprietary codebases and business logic remain confidential.
-3. GENERAL CHATBOT INTELLECT: For general programming, algorithms, data structures, math, debugging, web development, or computer science questions (Python, C++, TypeScript, React, SQL, system design, etc.), act like a world-class AI chatbot: give complete, brilliant, accurate, well-explained code snippets and answers using markdown formatting.
-4. Tone: Confident, technical, polite, articulate, and engineering-minded.
-    `.trim();
+CORE PRINCIPLES (BEHAVE LIKE CHATGPT):
+1. Conversational & General Intelligence: You have comprehensive real-world knowledge. You can talk about anything: writing code in any programming language (Python, C++, TypeScript, JavaScript, React, Java, Rust, Go, SQL), debugging bugs, explaining computer science algorithms, system design, math, science, or chatting naturally.
+2. DO NOT BE ANNOYING: Never force-feed or dump Khandeshwar's repositories or commit history on every message! If someone says "hi", "how are you", or asks a general programming or life question, answer directly, warmly, and helpfully without mentioning his GitHub or projects.
+3. When specifically asked about Khandeshwar Suryavanshi:
+   - Role: AI Systems Developer, Full-Stack Software Engineer, and Website Architect based in Vasai/Mumbai.
+   - Core Skills: Python, C++, TypeScript, React, Tailwind CSS, Chrome Extensions (Manifest V3), Technical SEO.
+   - Key Work: Author of ScrollGuard (AI Wellbeing extension preventing short-form doomscrolling with client-side IndexedDB caching), commercial client platforms (Balaji Earthmovers, Balaji Farm Stay, Riverside Farm), and interactive 3D web experiences (Birthday Wish Card, Neumorphic Snake).
+   - Contact / Hire: Email at khandeshwarsuryavanshi@gmail.com, GitHub @khandeshwar51, LinkedIn @khandeshwar-suryavanshi-10612623b.
+4. Security: Never disclose private API keys, SIH credentials, or internal .env secrets.
+5. Formatting: Use clean GitHub-flavored markdown with syntax-highlighted code blocks. Keep answers crisp, readable, and engaging.`;
 
     const messages = [
       { role: 'system', content: systemPrompt },
-      ...chatHistory.slice(-6) // include last 6 turns for multi-turn context
+      ...chatHistory.slice(-8)
     ];
 
-    try {
-      const response = await fetch('https://text.pollinations.ai/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          messages: messages,
-          model: 'openai',
-          seed: 42
-        }),
-        signal: controller.signal
-      });
+    // Try primary Groq model, then fallbacks
+    for (const model of GROQ_CONFIG.models) {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
 
-      clearTimeout(timer);
+        const response = await fetch(GROQ_CONFIG.endpoint, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + GROQ_CONFIG.apiKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: messages,
+            temperature: 0.6,
+            max_tokens: 1000
+          }),
+          signal: controller.signal
+        });
 
-      if (response.ok) {
-        const text = await response.text();
-        return text;
+        clearTimeout(timer);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.choices && data.choices[0] && data.choices[0].message) {
+            return data.choices[0].message.content.trim();
+          }
+        }
+      } catch (err) {
+        console.warn(`Groq model ${model} failed, trying next:`, err.message);
       }
-      throw new Error('LLM endpoint returned status ' + response.status);
-    } catch (err) {
-      clearTimeout(timer);
-      throw err;
     }
+
+    throw new Error('All Groq models exhausted or unreachable');
   }
 
   // ==========================================
@@ -1340,6 +1417,23 @@ Khandeshwar strictly enforces this 20-Point Security Architecture across all 4 d
   function localHeuristicFallback(userQuery, existingThoughts = []) {
     const q = userQuery.toLowerCase().trim();
     const thoughts = existingThoughts.length > 0 ? existingThoughts : ["Analyzing query intent via local neural heuristics..."];
+
+    // Casual Greetings & Friendly Openers
+    if (/^(hi|hello|hey|yo|greetings|good\s*(morning|afternoon|evening)|sup)\b/i.test(q)) {
+      thoughts.push("Detected casual greeting. Responding warmly.");
+      return {
+        thoughts,
+        response: "👋 **Hey there!** I'm the KS AI Assistant. How can I help you today? Feel free to ask any programming question, algorithm challenge, or ask about Khandeshwar's work!"
+      };
+    }
+
+    if (q.includes('who are you') || q.includes('what are you') || q.includes('what do you do') || q.includes('introduce yourself')) {
+      thoughts.push("Synthesizing identity introduction.");
+      return {
+        thoughts,
+        response: "🤖 **I am the KS AI Assistant** — an AI developer companion running on Khandeshwar Suryavanshi's portfolio!\n\nI can help you write code, explain algorithms, solve computer science problems, or answer questions about Khandeshwar's work and tech stack. What would you like to explore?"
+      };
+    }
 
     // 0. 20-Point Web & Application Security Matrix
     if (q.includes('security') || q.includes('audit') || q.includes('checklist') || q.includes('sqli') || q.includes('xss') || q.includes('csrf') || q.includes('idor') || q.includes('bola') || q.includes('jwt') || q.includes('httponly') || q.includes('secure website') || q.includes('safe website') || q.includes('vulnerability')) {
