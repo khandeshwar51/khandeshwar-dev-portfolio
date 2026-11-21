@@ -42,7 +42,7 @@
   }
 
   function findHeroContainer() {
-    var hero = document.querySelector('.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden');
+    var hero = document.querySelector('.min-h-screen.flex.items-center.justify-center');
     if (hero) return hero;
     var candidates = document.querySelectorAll('.min-h-screen');
     for (var i = 0; i < candidates.length; i++) {

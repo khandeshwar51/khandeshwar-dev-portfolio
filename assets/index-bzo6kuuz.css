@@ -774,6 +774,19 @@ a.bg-gradient-to-r:hover {
 .min-h-screen {
   background-color: transparent !important;
   background-image: none !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+.min-h-screen.overflow-hidden,
+.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden {
+  overflow: visible !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
 }
 
 .bg-slate-900,
