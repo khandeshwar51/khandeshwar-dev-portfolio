@@ -264,7 +264,7 @@ iC=()=>{
   },[]);
   S.useEffect(()=>{
     const meta={
-      "/":{title:"Khandeshwar Suryavanshi | Full-Stack Developer & AI Systems",desc:"Portfolio of Khandeshwar Suryavanshi — Full-Stack Developer, AI Systems builder (ScrollGuard), and B.Sc. CS student at Vartak College, Mumbai."},
+      "/":{title:"Khandeshwar Suryavanshi | Professional AI System & Full-Stack Developer",desc:"Portfolio of Khandeshwar Suryavanshi — Professional AI System Developer, Full-Stack Software Developer, and Website Architect. Creator of ScrollGuard and commercial web platforms."},
       "/about":{title:"About | Khandeshwar Suryavanshi",desc:"Learn about Khandeshwar Suryavanshi — background, engineering values, open-source work, and technical journey."},
       "/education":{title:"Education | Khandeshwar Suryavanshi",desc:"Academic background of Khandeshwar Suryavanshi — B.Sc. Computer Science at Vartak College (University of Mumbai)."},
       "/skills":{title:"Tech Stack & Skills | Khandeshwar Suryavanshi",desc:"Technical skills across Python, C++, TypeScript, React, Tailwind CSS, Chrome Extensions (MV3), and Technical SEO."},
@@ -322,7 +322,7 @@ sC=()=>{
     skills:"Khandeshwar specializes in Python, C++, TypeScript, JavaScript, React.js, Node.js, Tailwind CSS, Chrome Extensions (Manifest V3), IndexedDB, and Technical SEO. He also speaks English, Hindi, and Marathi fluently.",
     projects:"Khandeshwar built ScrollGuard (an AI Wellbeing Chrome extension & analytics dashboard), delivered commercial client platforms for Balaji Earthmovers, Balaji Farm Stay, and Riverside Farm, and crafted interactive web experiences like the Birthday Wish Card and Neumorphic Snake Arcade.",
     contact:"You can reach Khandeshwar at khandeshwarsuryavanshi@gmail.com, call +91 7796441723, or connect on GitHub (github.com/khandeshwar51) and LinkedIn (linkedin.com/in/khandeshwar51).",
-    about:"Khandeshwar Suryavanshi is a Full-Stack Developer and AI Systems builder from Vasai, Maharashtra, pursuing B.Sc. Computer Science at Vartak College. He builds privacy-first AI tools, high-converting client websites, and open-source software.",
+    about:"Khandeshwar Suryavanshi is a professional AI System Developer, Full-Stack Software Engineer, and Website Developer based in Vasai, Maharashtra. He builds intelligent AI systems, high-converting commercial web platforms, and scalable production software.",
     python:"Python is one of Khandeshwar's core languages — used for automation, data analysis, backend APIs, and rapid AI prototyping.",
     javascript:"JavaScript & TypeScript power Khandeshwar's full-stack and browser engineering work — from React SPAs to Manifest V3 Chrome extension DOM engines.",
     react:"React + TypeScript + Tailwind CSS form Khandeshwar's go-to frontend stack for fast, animated, responsive web platforms.",
@@ -463,14 +463,14 @@ oC=()=>d.jsxs("div",{
             initial:{opacity:0,y:30},
             animate:{opacity:1,y:0},
             transition:{duration:1,delay:.4},
-            children:"Full-Stack Developer, AI Systems & Software Engineering"
+            children:"AI System Developer, Full-Stack Software Developer & Website Architect"
           }),
           d.jsx(M.p,{
             className:"text-lg text-gray-400 mb-8 max-w-2xl mx-auto",
             initial:{opacity:0,y:30},
             animate:{opacity:1,y:0},
             transition:{duration:1,delay:.7},
-            children:"B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software."
+            children:"Professional AI System Developer, Full-Stack Software Engineer, and Website Developer building intelligent autonomous systems, high-performance commercial web platforms, and scalable production software."
           }),
           d.jsxs(M.div,{
             className:"ks-hero-cta flex flex-col sm:flex-row gap-4 justify-center items-center",
@@ -587,7 +587,7 @@ aC=()=>{
               d.jsxs("div",{
                 children:[
                   d.jsx("h2",{className:"text-3xl font-bold text-white mb-6",children:"Hello, I'm Khandeshwar! 👋"}),
-                  d.jsx("p",{className:"text-gray-300 text-lg leading-relaxed mb-6",children:"I'm a B.Sc. Computer Science student at Vartak College (University of Mumbai) and an active Full-Stack & AI Systems developer based in Vasai, Maharashtra."}),
+                  d.jsx("p",{className:"text-gray-300 text-lg leading-relaxed mb-6",children:"I'm a professional AI System Developer, Full-Stack Software Engineer, and Website Developer based in Vasai, Maharashtra, crafting high-performance digital platforms and autonomous systems."}),
                   d.jsx("p",{className:"text-gray-300 text-lg leading-relaxed mb-6",children:"I specialize in turning complex ideas into fast, reliable products — from building ScrollGuard, a privacy-first AI wellbeing Chrome extension with real-time behavioral heuristics, to delivering high-converting commercial web platforms for clients like Balaji Earthmovers, Balaji Farm Stay, and Riverside Farm."}),
                   d.jsx("p",{className:"text-gray-300 text-lg leading-relaxed mb-6",children:"Across C++, Python, TypeScript, and React, I focus on clean architecture, sub-second page performance, and measurable real-world impact. You can explore all my code and verified contributions on GitHub (@khandeshwar51)."}),
                   d.jsxs("div",{

@@ -1488,7 +1488,7 @@ Khandeshwar is currently **Open to Software Engineering roles, Internships, and 
       const res = `
 👨‍💻 **About Khandeshwar Suryavanshi:**
 
-Khandeshwar is an **AI Systems Engineer, Full-Stack Developer, and Computer Science undergraduate** at Vartak College (University of Mumbai).
+Khandeshwar is a **Professional AI System Developer, Full-Stack Software Engineer, and Website Developer** based in Mumbai.
 
 He specializes in:
 1. **AI System Design & Cognitive Applications** (Author of ScrollGuard)
