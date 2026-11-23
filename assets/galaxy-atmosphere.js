@@ -823,6 +823,7 @@
       } else {
         var hero = findHeroContainer();
         if (hero) {
+          hero.style.paddingTop = 'clamp(85px, 12vh, 125px)';
           formatHeroSubtitle(hero);
           var existing = document.getElementById('ks-programmer-panels');
           if (!existing) {
@@ -881,9 +882,26 @@
     isHomeRoute: isHomeRoute
   };
 
+  /* -------------------------------------------------------------
+   * Global Floating WhatsApp Conversion CTA
+   * ------------------------------------------------------------- */
+  function mountWhatsAppCTA() {
+    if (document.getElementById('ks-floating-whatsapp')) return;
+
+    var wa = document.createElement('a');
+    wa.id = 'ks-floating-whatsapp';
+    wa.href = 'https://wa.me/917796441723?text=Hi%20Khandeshwar,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.';
+    wa.target = '_blank';
+    wa.rel = 'noopener noreferrer';
+    wa.setAttribute('aria-label', 'Chat with Khandeshwar on WhatsApp');
+    wa.innerHTML = '<span class="ks-wa-pulse" aria-hidden="true"></span><svg class="ks-wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.16 7C9.02 7 8.79 7.05 8.6 7.26C8.41 7.47 7.86 7.99 7.86 9.04C7.86 10.09 8.63 11.1 8.74 11.25C8.85 11.4 10.23 13.53 12.35 14.45C14.12 15.21 14.48 15.06 14.86 15.03C15.24 15 16.08 14.54 16.25 14.05C16.42 13.56 16.42 13.14 16.37 13.05C16.32 12.96 16.18 12.9 15.95 12.79C15.72 12.68 14.59 12.12 14.38 12.05C14.17 11.98 14.02 11.94 13.87 12.17C13.72 12.4 13.29 12.9 13.16 13.05C13.03 13.2 12.9 13.22 12.67 13.11C12.44 13 11.7 12.76 10.82 11.98C10.13 11.37 9.67 10.61 9.53 10.38C9.39 10.15 9.51 10.03 9.63 9.91C9.74 9.8 9.87 9.62 10 9.47C10.13 9.32 10.17 9.21 10.26 9.02C10.35 8.83 10.31 8.67 10.24 8.53C10.17 8.39 9.63 7.06 9.4 6.51C9.18 5.97 8.95 6.05 8.79 6.04C8.63 6.03 8.44 6.03 8.25 6.03L9.16 7Z"/></svg><span>WhatsApp</span>';
+    document.body.appendChild(wa);
+  }
+
   // Initialization
   function init() {
     mountAtmosphere();
+    mountWhatsAppCTA();
     syncProgrammerPanels();
 
     var checks = 0;
