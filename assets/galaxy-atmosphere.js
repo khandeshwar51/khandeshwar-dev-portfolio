@@ -340,19 +340,40 @@
   // Route-Level Navigation Interceptor & Auto-Sync
   var isSyncing = false;
 
-  // Format Hero Subtitle to guarantee balanced typography and eliminate cluster collision
-  function formatHeroSubtitle(hero) {
+  // Sync Hero content to match reference layout perfectly:
+  // Subtitle: "Full-Stack Developer, AI Systems & Software Engineering"
+  // Bio: "B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software."
+  function syncHeroContent(hero) {
     if (!hero) return;
     var pList = hero.querySelectorAll('p');
     for (var i = 0; i < pList.length; i++) {
       var p = pList[i];
-      if (p.textContent && p.textContent.indexOf('Website Architect') !== -1 && p.textContent.indexOf('AI System Developer') !== -1) {
-        p.classList.add('ks-hero-subtitle');
-        if (!p.getAttribute('data-ks-formatted')) {
-          p.setAttribute('data-ks-formatted', 'true');
-          p.innerHTML = 'AI System Developer, Full-Stack Software Developer<br class="ks-subtitle-break" /> &amp; Website Architect';
+      var txt = (p.textContent || '').trim();
+      // Subtitle detection (exclude the bio paragraph)
+      if (txt.indexOf('Developer') !== -1 && (txt.indexOf('Architect') !== -1 || txt.indexOf('AI') !== -1 || txt.indexOf('Full-Stack') !== -1)) {
+        if (!p.classList.contains('text-lg') && p.textContent !== 'Full-Stack Developer, AI Systems & Software Engineering') {
+          p.classList.add('ks-hero-subtitle');
+          p.textContent = 'Full-Stack Developer, AI Systems & Software Engineering';
         }
-        break;
+      }
+      // Bio description detection
+      if (txt.indexOf('building') !== -1 || txt.indexOf('autonomous systems') !== -1 || txt.indexOf('Vartak') !== -1) {
+        if (p.textContent !== 'B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software.') {
+          p.classList.add('ks-hero-bio');
+          p.textContent = 'B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software.';
+        }
+      }
+    }
+
+    // Ensure Explore Projects button has the arrow "Explore Projects →"
+    var projBtn = hero.querySelector('a[href="/projects"] button, a[href*="projects"] button');
+    if (projBtn) {
+      var btnText = projBtn.innerText || projBtn.textContent || '';
+      if (btnText.indexOf('→') === -1) {
+        var lastNode = projBtn.lastChild;
+        if (lastNode && lastNode.nodeType === 3) {
+          lastNode.nodeValue = 'Explore Projects →';
+        }
       }
     }
   }
@@ -823,8 +844,8 @@
       } else {
         var hero = findHeroContainer();
         if (hero) {
-          hero.style.paddingTop = 'clamp(100px, 14vh, 145px)';
-          formatHeroSubtitle(hero);
+          hero.style.paddingTop = '';
+          syncHeroContent(hero);
           var existing = document.getElementById('ks-programmer-panels');
           if (!existing) {
             mountProgrammerPanels(hero);
@@ -844,7 +865,7 @@
   window.addEventListener('popstate', syncProgrammerPanels);
   window.addEventListener('resize', function () {
     var hero = findHeroContainer();
-    if (hero) formatHeroSubtitle(hero);
+    if (hero) syncHeroContent(hero);
   }, { passive: true });
 
   var origPushState = history.pushState;

@@ -258,7 +258,7 @@ body:not(.ks-is-home) .ks-right-cluster {
   line-height: 1.6;
 }
 
-.ks-window-m
+.ks-window-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1155,61 +1155,123 @@ input:focus, textarea:focus {
 /* -------------------------------------------------------------
  * 13. Responsive Design & Hierarchy Guardrails
  * ------------------------------------------------------------- */
-/* Hero Navbar Clearance & Safe Top Spacing:
-   Guarantees the "Khandeshwar" hero title NEVER collides with or hides behind the fixed navbar */
-.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden,
-.min-h-screen.flex.items-center.justify-center,
+/* Hero Navbar Clearance & Compact Spacing:
+   Positions "Khandeshwar" naturally under the fixed navbar so everything fits on one screen without scrolling */
 .ks-is-home .min-h-screen.flex.items-center.justify-center,
 .ks-is-home .min-h-screen {
-  padding-top: clamp(100px, 14vh, 145px) !important;
-  padding-bottom: clamp(48px, 6vh, 85px) !important;
+  padding-top: clamp(55px, 7vh, 75px) !important;
+  padding-bottom: clamp(12px, 2vh, 24px) !important;
+  min-height: 100vh !important;
   box-sizing: border-box !important;
 }
 
-.min-h-screen.flex.items-center.justify-center h1,
 .ks-is-home .min-h-screen h1 {
-  line-height: 1.12 !important;
-  margin-top: 1.25rem !important;
-  margin-bottom: 1.25rem !important;
+  line-height: 1.08 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.45rem !important;
 }
 
-/* Hero Headline & Subtitle Layout Guardrails:
-   Guarantee hero text never extends edge-to-edge or collides with side floating clusters */
+.ks-is-home .min-h-screen h1 span {
+  font-size: clamp(2.5rem, 4.4vw, 4.25rem) !important;
+}
+
+/* Center Hero Layout: Max width 680px gives generous clearance to side clusters */
 .min-h-screen.flex.items-center.justify-center > .relative.z-10,
-.ks-is-home .min-h-screen > .relative.z-10 {
-  max-width: min(840px, calc(100vw - 32px)) !important;
+.ks-is-home .min-h-screen > .relative.z-10,
+.ks-is-home .min-h-screen .max-w-4xl {
+  max-width: min(680px, calc(100vw - 32px)) !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
-  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
   position: relative !important;
   z-index: 10 !important;
 }
 
-.ks-is-home .min-h-screen .max-w-4xl {
-  max-width: min(740px, calc(100vw - 32px)) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
+/* Subtitle: "Full-Stack Developer, AI Systems & Software Engineering" */
 .ks-hero-subtitle,
 .ks-is-home .min-h-screen h1 + p,
 .ks-is-home .min-h-screen p.text-xl {
+  font-size: clamp(1.05rem, 1.55vw, 1.3rem) !important;
+  font-weight: 500 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.55rem !important;
+  line-height: 1.35 !important;
+  color: var(--ks-text-silver) !important;
+  white-space: normal !important;
+}
+
+/* Bio Description: Compact 2-line college/student bio */
+.ks-hero-bio,
+.ks-is-home .min-h-screen p.text-lg {
+  font-size: clamp(0.82rem, 1.05vw, 0.92rem) !important;
+  margin-bottom: 0.95rem !important;
+  line-height: 1.55 !important;
   max-width: 620px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  line-height: 1.45 !important;
-  text-wrap: balance !important;
-  word-break: normal !important;
+  color: #cbd5e1 !important;
 }
 
-.ks-subtitle-break {
-  display: block !important;
+/* Primary CTA Buttons */
+.ks-hero-cta {
+  margin-bottom: 0.75rem !important;
+  gap: 0.85rem !important;
 }
 
-@media (max-width: 640px) {
-  .ks-subtitle-break {
-    display: inline !important;
+.ks-hero-cta button,
+.ks-hero-cta a {
+  padding: 0.55rem 1.6rem !important;
+  font-size: 0.95rem !important;
+}
+
+/* Social Dock (Email, Phone, GitHub, LinkedIn) */
+.ks-social-dock {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.ks-social-btn {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+/* 4 Quick Navigation Cards at Bottom */
+.ks-is-home .grid.grid-cols-2.md\:grid-cols-4 {
+  gap: 0.75rem !important;
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ks-is-home .grid.grid-cols-2.md\:grid-cols-4 > a > div {
+  padding: 0.6rem 0.85rem !important;
+  border-radius: 12px !important;
+}
+
+.ks-is-home .grid.grid-cols-2.md\:grid-cols-4 .text-2xl {
+  font-size: 1.25rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.ks-is-home .grid.grid-cols-2.md\:grid-cols-4 .font-semibold,
+.ks-is-home .grid.grid-cols-2.md\:grid-cols-4 div:last-child {
+  font-size: 0.82rem !important;
+}
+
+/* On Desktop Displays: Prevent home vertical scrolling completely so it fits 100vh like the reference image */
+@media (min-height: 600px) and (min-width: 1024px) {
+  body.ks-is-home {
+    overflow-y: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+  }
+  .ks-is-home .min-h-screen {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
   }
 }
 
