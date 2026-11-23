@@ -823,7 +823,7 @@
       } else {
         var hero = findHeroContainer();
         if (hero) {
-          hero.style.paddingTop = 'clamp(85px, 12vh, 125px)';
+          hero.style.paddingTop = 'clamp(100px, 14vh, 145px)';
           formatHeroSubtitle(hero);
           var existing = document.getElementById('ks-programmer-panels');
           if (!existing) {

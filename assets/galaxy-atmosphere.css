@@ -258,7 +258,7 @@ body:not(.ks-is-home) .ks-right-cluster {
   line-height: 1.6;
 }
 
-.ks-window-header {
+.ks-window-m
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1157,21 +1157,25 @@ input:focus, textarea:focus {
  * ------------------------------------------------------------- */
 /* Hero Navbar Clearance & Safe Top Spacing:
    Guarantees the "Khandeshwar" hero title NEVER collides with or hides behind the fixed navbar */
+.min-h-screen.flex.items-center.justify-center.relative.overflow-hidden,
+.min-h-screen.flex.items-center.justify-center,
 .ks-is-home .min-h-screen.flex.items-center.justify-center,
 .ks-is-home .min-h-screen {
-  padding-top: clamp(85px, 12vh, 125px) !important;
-  padding-bottom: clamp(40px, 6vh, 80px) !important;
+  padding-top: clamp(100px, 14vh, 145px) !important;
+  padding-bottom: clamp(48px, 6vh, 85px) !important;
   box-sizing: border-box !important;
 }
 
+.min-h-screen.flex.items-center.justify-center h1,
 .ks-is-home .min-h-screen h1 {
   line-height: 1.12 !important;
-  margin-top: 0.5rem !important;
+  margin-top: 1.25rem !important;
   margin-bottom: 1.25rem !important;
 }
 
 /* Hero Headline & Subtitle Layout Guardrails:
    Guarantee hero text never extends edge-to-edge or collides with side floating clusters */
+.min-h-screen.flex.items-center.justify-center > .relative.z-10,
 .ks-is-home .min-h-screen > .relative.z-10 {
   max-width: min(840px, calc(100vw - 32px)) !important;
   margin-left: auto !important;
