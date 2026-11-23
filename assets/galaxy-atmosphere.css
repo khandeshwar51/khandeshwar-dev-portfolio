@@ -196,8 +196,8 @@ body:not(.ks-is-home) .ks-right-cluster {
 .ks-left-cluster {
   position: absolute;
   top: clamp(140px, 18vh, 230px);
-  left: clamp(12px, 3vw, 55px);
-  width: 260px;
+  left: clamp(10px, 2.2vw, 45px);
+  width: 250px;
   pointer-events: none;
   perspective: 1100px;
   transform-style: preserve-3d;
@@ -354,8 +354,8 @@ body:not(.ks-is-home) .ks-right-cluster {
 .ks-right-cluster {
   position: absolute;
   top: clamp(140px, 19vh, 230px);
-  right: clamp(12px, 3vw, 55px);
-  width: 320px;
+  right: clamp(10px, 2.2vw, 45px);
+  width: 295px;
   pointer-events: none;
   perspective: 1100px;
   transform-style: preserve-3d;
@@ -1155,49 +1155,115 @@ input:focus, textarea:focus {
 /* -------------------------------------------------------------
  * 13. Responsive Design & Hierarchy Guardrails
  * ------------------------------------------------------------- */
+/* Hero Headline & Subtitle Layout Guardrails:
+   Guarantee hero text never extends edge-to-edge or collides with side floating clusters */
+.ks-is-home .min-h-screen > .relative.z-10 {
+  max-width: min(840px, calc(100vw - 32px)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.ks-is-home .min-h-screen .max-w-4xl {
+  max-width: min(740px, calc(100vw - 32px)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ks-hero-subtitle,
+.ks-is-home .min-h-screen h1 + p,
+.ks-is-home .min-h-screen p.text-xl {
+  max-width: 620px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.45 !important;
+  text-wrap: balance !important;
+  word-break: normal !important;
+}
+
+.ks-subtitle-break {
+  display: block !important;
+}
+
+@media (max-width: 640px) {
+  .ks-subtitle-break {
+    display: inline !important;
+  }
+}
+
+/* Cluster positioning for Ultra-Wide Displays (>= 1536px) */
 @media (min-width: 1536px) {
   .ks-left-cluster {
-    left: 4.5vw;
-    width: 280px;
+    left: clamp(20px, 3.5vw, 65px) !important;
+    width: 260px !important;
   }
   .ks-right-cluster {
-    right: 4.5vw;
-    width: 340px;
+    right: clamp(20px, 3.5vw, 65px) !important;
+    width: 310px !important;
   }
 }
 
-@media (max-width: 1440px) {
+/* Standard Desktops (1366px - 1535px):
+   Scale clusters slightly and push outward to preserve 120px+ clear center margin */
+@media (max-width: 1535px) and (min-width: 1366px) {
   .ks-left-cluster {
-    transform: scale(0.92) rotateY(18deg) rotateX(4deg);
-    transform-origin: left center;
+    transform: scale(0.85) rotateY(18deg) rotateX(4deg) !important;
+    transform-origin: left center !important;
+    left: 14px !important;
+    width: 245px !important;
   }
   .ks-right-cluster {
-    transform: scale(0.92) rotateY(-18deg) rotateX(4deg);
-    transform-origin: right center;
+    transform: scale(0.85) rotateY(-18deg) rotateX(4deg) !important;
+    transform-origin: right center !important;
+    right: 14px !important;
+    width: 290px !important;
+  }
+  .ks-is-home .min-h-screen .max-w-4xl {
+    max-width: 660px !important;
   }
 }
 
+/* Compact Desktops & Laptops (1280px - 1365px):
+   Scale down clusters and guarantee no visual overlap */
+@media (max-width: 1365px) and (min-width: 1280px) {
+  .ks-left-cluster {
+    transform: scale(0.74) rotateY(16deg) !important;
+    transform-origin: left center !important;
+    left: 8px !important;
+    width: 235px !important;
+    opacity: 0.85 !important;
+  }
+  .ks-right-cluster {
+    transform: scale(0.74) rotateY(-16deg) !important;
+    transform-origin: right center !important;
+    right: 8px !important;
+    width: 275px !important;
+    opacity: 0.85 !important;
+  }
+  .ks-is-home .min-h-screen .max-w-4xl {
+    max-width: 600px !important;
+  }
+  .ks-hero-subtitle,
+  .ks-is-home .min-h-screen h1 + p,
+  .ks-is-home .min-h-screen p.text-xl {
+    max-width: 560px !important;
+  }
+}
+
+/* Laptops, Tablets & Mobile (< 1280px):
+   Completely suppress floating 3D side clusters on screens < 1280px!
+   This gives the hero title, subtitle ("... & Website Architect"), bio description,
+   and action buttons 100% full-width breathing room with ZERO collision or crowding. */
 @media (max-width: 1279px) {
-  .ks-left-cluster {
-    transform: scale(0.82) rotateY(16deg);
-    opacity: 0.8;
-    left: 10px;
-  }
-  .ks-right-cluster {
-    transform: scale(0.82) rotateY(-16deg);
-    opacity: 0.8;
-    right: 10px;
-  }
-}
-
-/* Tablets & Mobile (< 1024px):
-   Hide floating developer panels so mobile
-   bio, buttons, cards, and touch targets have 100% clarity and zero overlap!
-   Keep the gorgeous cosmic teal atmosphere, stars, and nebulae active! */
-@media (max-width: 1023px) {
   .ks-left-cluster,
   .ks-right-cluster {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 

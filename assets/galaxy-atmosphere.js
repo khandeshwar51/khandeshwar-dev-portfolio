@@ -337,6 +337,476 @@
 
   // Route-Level Navigation Interceptor & Auto-Sync
   var isSyncing = false;
+  // Route-Level Navigation Interceptor & Auto-Sync
+  var isSyncing = false;
+
+  // Format Hero Subtitle to guarantee balanced typography and eliminate cluster collision
+  function formatHeroSubtitle(hero) {
+    if (!hero) return;
+    var pList = hero.querySelectorAll('p');
+    for (var i = 0; i < pList.length; i++) {
+      var p = pList[i];
+      if (p.textContent && p.textContent.indexOf('Website Architect') !== -1 && p.textContent.indexOf('AI System Developer') !== -1) {
+        p.classList.add('ks-hero-subtitle');
+        if (!p.getAttribute('data-ks-formatted')) {
+          p.setAttribute('data-ks-formatted', 'true');
+          p.innerHTML = 'AI System Developer, Full-Stack Software Developer<br class="ks-subtitle-break" /> &amp; Website Architect';
+        }
+        break;
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------
+   * 3. Projects Page: Commercial Client Deliveries Matrix & Cards
+   * ------------------------------------------------------------- */
+  function isProjectsRoute() {
+    var p = (window.location.pathname || '').toLowerCase();
+    var h = (window.location.hash || '').toLowerCase();
+    return p.indexOf('/projects') !== -1 || h.indexOf('projects') !== -1;
+  }
+
+  function getClientMatrixHTML() {
+    return [
+      '<div class="ks-client-matrix-section" id="ks-client-matrix-section">',
+      '  <div class="ks-matrix-header-bar">',
+      '    <div class="ks-matrix-title-area">',
+      '      <div class="ks-matrix-badge">',
+      '        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+      '        <span>Production Deliveries Ledger</span>',
+      '      </div>',
+      '      <h3 class="ks-matrix-title">Client Deliveries &amp; Commercial Systems Matrix</h3>',
+      '    </div>',
+      '    <span class="ks-matrix-count-badge">6 Verified Deployments</span>',
+      '  </div>',
+      '  <div class="ks-matrix-table-wrap">',
+      '    <table class="ks-matrix-table">',
+      '      <thead>',
+      '        <tr>',
+      '          <th style="width: 22%;">Client Project</th>',
+      '          <th style="width: 24%;">Focus &amp; Scope</th>',
+      '          <th style="width: 38%;">Deliverables &amp; Quantifiable Impact</th>',
+      '          <th style="width: 16%;">Stack</th>',
+      '        </tr>',
+      '      </thead>',
+      '      <tbody>',
+      '        <!-- 1. Balaji Earthmovers -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">🚜</span><span class="ks-proj-name">Balaji Earthmovers</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <a href="https://balajiearthmoversmumbai.com" target="_blank" rel="noopener noreferrer" class="ks-action-live orange">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
+      '                Live Site',
+      '              </a>',
+      '              <a href="https://github.com/pratik1258m/Balaji-Earthmovers" target="_blank" rel="noopener noreferrer" class="ks-action-repo">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '                Repository',
+      '              </a>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">Heavy Earthmoving &amp; Civil Engineering Platform (Est. 1991)</td>',
+      '          <td class="ks-td-deliverables">Engineered sticky scroll-pinned excavation storytelling, Volvo/Komatsu fleet spec sheets, landmark project ledger, and interactive volume estimation desk (&lt;1.2s LCP load time).</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">React</span><span class="ks-table-tag">Tailwind CSS</span><span class="ks-table-tag">Interactive UI</span></td>',
+      '        </tr>',
+      '        <!-- 2. Balaji Farm Stay -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">🏡</span><span class="ks-proj-name">Balaji Farm Stay</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <a href="https://pratik1258m.github.io/Balajifarm/" target="_blank" rel="noopener noreferrer" class="ks-action-live green">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+      '                Live Demo',
+      '              </a>',
+      '              <a href="https://github.com/pratik1258m/Balajifarm" target="_blank" rel="noopener noreferrer" class="ks-action-repo">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '                Repository',
+      '              </a>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">Tourism &amp; Agro-Hospitality Portal</td>',
+      '          <td class="ks-td-deliverables">Developed conversion-focused responsive design with interactive photo showcase and direct WhatsApp booking funnel (+40% booking inquiry conversion).</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">Responsive Web</span><span class="ks-table-tag">WhatsApp Funnel</span><span class="ks-table-tag">Technical SEO</span></td>',
+      '        </tr>',
+      '        <!-- 3. Riverside Farm -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">🌿</span><span class="ks-proj-name">Riverside Farm</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <a href="https://pratik1258m.github.io/Riverside/" target="_blank" rel="noopener noreferrer" class="ks-action-live blue">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+      '                Live Demo',
+      '              </a>',
+      '              <a href="https://github.com/pratik1258m/Riverside" target="_blank" rel="noopener noreferrer" class="ks-action-repo">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '                Repository',
+      '              </a>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">Real Estate &amp; Farm Stay Portal</td>',
+      '          <td class="ks-td-deliverables">Built mobile-first booking experience, speed-optimized UI, lead capture funnels, and Google Search Console indexing for high local search visibility.</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">Mobile-First</span><span class="ks-table-tag">Lead Funnels</span><span class="ks-table-tag">Search Console</span></td>',
+      '        </tr>',
+      '        <!-- 4. Yamuna Enterprises -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">⚙️</span><span class="ks-proj-name">Yamuna Enterprises</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <a href="https://github.com/pratik1258m/Yamuna_Enterprises" target="_blank" rel="noopener noreferrer" class="ks-action-repo">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '                Repository',
+      '              </a>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">Oil Machinery Manufacturing Enterprise</td>',
+      '          <td class="ks-td-deliverables">Architected industrial equipment catalog, structured product presentation, Search Console indexing, and custom domain routing.</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">Catalog Architecture</span><span class="ks-table-tag">SEO Indexing</span><span class="ks-table-tag">Performance</span></td>',
+      '        </tr>',
+      '        <!-- 5. VidScript Web -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">📄</span><span class="ks-proj-name">VidScript Web</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <span class="ks-action-private">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>',
+      '                Private Repo',
+      '              </span>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">AI Video-to-Document &amp; Intelligent Transcription</td>',
+      '          <td class="ks-td-deliverables">Architected full-stack pipeline for video audio ingestion, verbatim transcript generation, executive AI summaries via Groq LLMs, and multi-format export (PDF, DOCX, Excel).</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">Python</span><span class="ks-table-tag">GenAI / NLP</span><span class="ks-table-tag">Groq LLMs</span><span class="ks-table-tag">Document Pipelines</span></td>',
+      '        </tr>',
+      '        <!-- 6. Real Estate Intelligence -->',
+      '        <tr>',
+      '          <td class="ks-td-project">',
+      '            <div class="ks-proj-name-row"><span class="ks-proj-icon">🏢</span><span class="ks-proj-name">Real Estate Intelligence</span></div>',
+      '            <div class="ks-td-actions">',
+      '              <span class="ks-action-private">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>',
+      '                Private Repo',
+      '              </span>',
+      '              <a href="https://github.com/pratik1258m/realestate" target="_blank" rel="noopener noreferrer" class="ks-action-repo">',
+      '                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '                Repository',
+      '              </a>',
+      '            </div>',
+      '          </td>',
+      '          <td class="ks-td-focus">Automated Real Estate News Intelligence &amp; Distribution Platform</td>',
+      '          <td class="ks-td-deliverables">Scrapes 500+ daily articles from 32 RSS feeds, Jaccard deduplication, Groq AI LLM summaries, daily 8 AM WhatsApp/Email broadcasts, and branded PDF reports.</td>',
+      '          <td class="ks-td-stack"><span class="ks-table-tag">Python</span><span class="ks-table-tag">Groq AI</span><span class="ks-table-tag">Node.js</span><span class="ks-table-tag">WhatsApp API</span><span class="ks-table-tag">jsPDF</span></td>',
+      '        </tr>',
+      '      </tbody>',
+      '    </table>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
+  }
+
+  function getYamunaCardHTML() {
+    return [
+      '<div class="ks-project-card ks-injected-card" data-filter="Client Projects" id="ks-card-yamuna">',
+      '  <div class="ks-accent-bar" style="background: linear-gradient(90deg, #f59e0b, #10b981);"></div>',
+      '  <div class="ks-proj-body">',
+      '    <div class="ks-proj-header">',
+      '      <div>',
+      '        <div class="ks-proj-pills">',
+      '          <span class="ks-meta-pill" style="background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35);">Client Project</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(51,65,85,0.75); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.22);">Client Delivery • Oil Machinery Manufacturing</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(168,85,247,0.16); color: #e9d5ff; border: 1px solid rgba(168,85,247,0.32);">Industrial Catalog • Custom Routing</span>',
+      '        </div>',
+      '        <h3 class="text-3xl font-bold text-white" style="line-height: 1.25;">Yamuna Enterprises</h3>',
+      '      </div>',
+      '      <div class="ks-proj-actions">',
+      '        <a href="https://github.com/pratik1258m/Yamuna_Enterprises" target="_blank" rel="noopener noreferrer" class="ks-btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;">',
+      '          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '          Repository',
+      '        </a>',
+      '        <span class="ks-verified-badge" style="display:inline-flex;align-items:center;gap:0.35rem;">',
+      '          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>',
+      '          Verified Client Delivery',
+      '        </span>',
+      '      </div>',
+      '    </div>',
+      '    <p class="text-gray-300" style="font-size: 1rem; line-height: 1.65;">',
+      '      Architected industrial equipment catalog, structured product presentation, Search Console indexing, and custom domain routing for a commercial oil machinery enterprise.',
+      '    </p>',
+      '    <div class="ks-how-box">',
+      '      <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">',
+      '        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+      '        How It Works — System Architecture &amp; Flow',
+      '      </h4>',
+      '      <div class="ks-steps-grid cols-3">',
+      '        <div class="ks-step-card"><span class="ks-step-num">01. Equipment Showcase</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Structured catalog architecture highlighting edible oil extraction machinery, cold press units, and technical specifications.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">02. Search Console SEO</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Configured Google Search Console indexing and schema markup for targeted industrial B2B machinery buyer queries.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">03. Performance Routing</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Zero-overhead static distribution with clean custom domain routing and instant mobile spec sheet loading.</p></div>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-proj-matrix">',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #60a5fa; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Key Features</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Industrial equipment catalog &amp; machinery showcase</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Custom domain routing &amp; DNS architecture</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Google Search Console structured indexing</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #c084fc; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Engineering Challenges</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Organizing complex industrial specifications for mobile readability</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Achieving organic search rankings for niche machinery terms</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Results &amp; Outcomes</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>High organic search indexing across industrial machinery keywords</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Instant mobile spec retrieval for client inquiries</span></li>',
+      '        </ul>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-tech-row">',
+      '      <span class="ks-tech-pill">Catalog Architecture</span>',
+      '      <span class="ks-tech-pill">SEO Indexing</span>',
+      '      <span class="ks-tech-pill">Performance</span>',
+      '      <span class="ks-tech-pill">DNS &amp; Routing</span>',
+      '    </div>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
+  }
+
+  function getVidScriptCardHTML() {
+    return [
+      '<div class="ks-project-card ks-injected-card" data-filter="Client Projects" id="ks-card-vidscript">',
+      '  <div class="ks-accent-bar" style="background: linear-gradient(90deg, #38bdf8, #818cf8);"></div>',
+      '  <div class="ks-proj-body">',
+      '    <div class="ks-proj-header">',
+      '      <div>',
+      '        <div class="ks-proj-pills">',
+      '          <span class="ks-meta-pill" style="background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35);">Client Project</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(51,65,85,0.75); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.22);">AI Architecture • Video-to-Document</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(168,85,247,0.16); color: #e9d5ff; border: 1px solid rgba(168,85,247,0.32);">Groq LLMs • Multi-Format Export</span>',
+      '        </div>',
+      '        <h3 class="text-3xl font-bold text-white" style="line-height: 1.25;">VidScript Web</h3>',
+      '      </div>',
+      '      <div class="ks-proj-actions">',
+      '        <span class="ks-action-private" style="padding: 0.45rem 0.85rem; font-size: 0.85rem; border-radius: 0.5rem;">',
+      '          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>',
+      '          Private Commercial Repo',
+      '        </span>',
+      '        <span class="ks-verified-badge" style="display:inline-flex;align-items:center;gap:0.35rem;">',
+      '          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>',
+      '          Verified Client Delivery',
+      '        </span>',
+      '      </div>',
+      '    </div>',
+      '    <p class="text-gray-300" style="font-size: 1rem; line-height: 1.65;">',
+      '      Architected full-stack pipeline for video audio ingestion, verbatim transcript generation, executive AI summaries via Groq LLMs, and multi-format export (PDF, DOCX, Excel).',
+      '    </p>',
+      '    <div class="ks-how-box">',
+      '      <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">',
+      '        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+      '        How It Works — System Architecture &amp; Flow',
+      '      </h4>',
+      '      <div class="ks-steps-grid cols-4">',
+      '        <div class="ks-step-card"><span class="ks-step-num">01. Audio Ingestion</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Ingests video &amp; audio streams and extracts high-fidelity audio tracks for transcription processing.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">02. Transcription &amp; NLP</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Generates timestamped verbatim transcripts with speaker separation and entity extraction.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">03. Groq LLM Synthesizer</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Executes ultra-low latency summarization and structured document generation via Groq LLMs.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">04. Multi-Format Exporter</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Compiles formatted documents into styled PDF reports, DOCX briefings, and Excel matrices.</p></div>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-proj-matrix">',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #60a5fa; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Key Features</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Video/audio ingestion pipeline</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Groq LLM executive brief generation</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Multi-format export (PDF, DOCX, Excel)</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #c084fc; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Engineering Challenges</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Processing long-form video audio efficiently without memory overflow</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Maintaining structured formatting and tone in LLM summaries</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Results &amp; Outcomes</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Ultra-fast transcript and summary turnaround using Groq inference</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Production-ready document generation across 3 formats</span></li>',
+      '        </ul>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-tech-row">',
+      '      <span class="ks-tech-pill">Python</span>',
+      '      <span class="ks-tech-pill">GenAI / NLP</span>',
+      '      <span class="ks-tech-pill">Groq LLMs</span>',
+      '      <span class="ks-tech-pill">Document Pipelines</span>',
+      '    </div>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
+  }
+
+  function getRealEstateCardHTML() {
+    return [
+      '<div class="ks-project-card ks-injected-card" data-filter="Client Projects" id="ks-card-realestate">',
+      '  <div class="ks-accent-bar" style="background: linear-gradient(90deg, #10b981, #06b6d4);"></div>',
+      '  <div class="ks-proj-body">',
+      '    <div class="ks-proj-header">',
+      '      <div>',
+      '        <div class="ks-proj-pills">',
+      '          <span class="ks-meta-pill" style="background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35);">Client Project</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(51,65,85,0.75); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.22);">Data Engineering • Intelligence Automation</span>',
+      '          <span class="ks-meta-pill" style="background: rgba(168,85,247,0.16); color: #e9d5ff; border: 1px solid rgba(168,85,247,0.32);">500+ Daily Articles • 32 Feeds</span>',
+      '        </div>',
+      '        <h3 class="text-3xl font-bold text-white" style="line-height: 1.25;">Real Estate Intelligence</h3>',
+      '      </div>',
+      '      <div class="ks-proj-actions">',
+      '        <a href="https://github.com/pratik1258m/realestate" target="_blank" rel="noopener noreferrer" class="ks-btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;">',
+      '          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+      '          Repository',
+      '        </a>',
+      '        <span class="ks-verified-badge" style="display:inline-flex;align-items:center;gap:0.35rem;">',
+      '          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>',
+      '          Verified Client Delivery',
+      '        </span>',
+      '      </div>',
+      '    </div>',
+      '    <p class="text-gray-300" style="font-size: 1rem; line-height: 1.65;">',
+      '      Automated real estate intelligence platform scraping 500+ daily articles from 32 RSS feeds, utilizing Jaccard deduplication, Groq AI LLM summaries, daily 8 AM WhatsApp/Email broadcasts, and branded PDF reports.',
+      '    </p>',
+      '    <div class="ks-how-box">',
+      '      <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">',
+      '        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+      '        How It Works — System Architecture &amp; Flow',
+      '      </h4>',
+      '      <div class="ks-steps-grid cols-4">',
+      '        <div class="ks-step-card"><span class="ks-step-num">01. Feed Aggregator</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Ingests over 500 daily market articles from 32 curated real estate RSS feeds across India.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">02. Jaccard Deduplication</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Eliminates syndicated and duplicate stories with text tokenization and Jaccard similarity metrics.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">03. Groq AI Distillation</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Synthesizes top regulatory, market, and infrastructure moves into concise executive briefs.</p></div>',
+      '        <div class="ks-step-card"><span class="ks-step-num">04. Automated Broadcast</span><p class="text-gray-300 text-sm" style="line-height: 1.55;">Generates branded PDF reports and broadcasts daily 8:00 AM updates via WhatsApp API and Email.</p></div>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-proj-matrix">',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #60a5fa; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Key Features</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>32-feed RSS ingestion scraping 500+ daily articles</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Jaccard similarity deduplication</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Daily 8 AM automated WhatsApp &amp; Email broadcasts</span></li>',
+      '          <li class="text-gray-300 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #60a5fa; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Dynamic branded PDF generation</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #c084fc; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Engineering Challenges</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Handling irregular RSS XML formats and eliminating syndicated wire duplicates</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #c084fc; margin-top: 0.45rem; flex-shrink: 0;"></span><span>Ensuring automated 8:00 AM broadcast cron reliability on production servers</span></li>',
+      '        </ul>',
+      '      </div>',
+      '      <div class="ks-matrix-panel">',
+      '        <h4 style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.75rem;">Results &amp; Outcomes</h4>',
+      '        <ul class="space-y-2">',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>500+ articles filtered into a 2-minute daily executive digest</span></li>',
+      '          <li class="text-gray-400 text-sm" style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="width: 6px; height: 6px; border-radius: 9999px; background: #34d399; margin-top: 0.45rem; flex-shrink: 0;"></span><span>100% automated morning broadcast pipeline</span></li>',
+      '        </ul>',
+      '      </div>',
+      '    </div>',
+      '    <div class="ks-tech-row">',
+      '      <span class="ks-tech-pill">Python</span>',
+      '      <span class="ks-tech-pill">Groq AI</span>',
+      '      <span class="ks-tech-pill">Node.js</span>',
+      '      <span class="ks-tech-pill">WhatsApp API</span>',
+      '      <span class="ks-tech-pill">jsPDF</span>',
+      '    </div>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
+  }
+
+  var isProjectsSyncing = false;
+  function syncProjectsPage() {
+    if (isProjectsSyncing) return;
+    if (!isProjectsRoute()) {
+      var table = document.getElementById('ks-client-matrix-section');
+      if (table) table.remove();
+      var injected = document.querySelectorAll('.ks-injected-card');
+      for (var i = 0; i < injected.length; i++) {
+        injected[i].remove();
+      }
+      return;
+    }
+
+    isProjectsSyncing = true;
+    try {
+      // 1. Mount Client Deliveries Matrix Table
+      var banner = document.querySelector('.ks-client-banner');
+      if (banner && !document.getElementById('ks-client-matrix-section')) {
+        var wrap = document.createElement('div');
+        wrap.innerHTML = getClientMatrixHTML();
+        var tableEl = wrap.firstElementChild;
+        banner.insertAdjacentElement('afterend', tableEl);
+      }
+
+      // 2. Identify active filter & update button text
+      var filterBtns = document.querySelectorAll('.ks-filter-btn');
+      var activeFilter = 'All';
+      for (var b = 0; b < filterBtns.length; b++) {
+        var btn = filterBtns[b];
+        var txt = btn.textContent || '';
+        if (txt.indexOf('All Projects') !== -1 || txt === 'All') {
+          btn.textContent = 'All Projects (9)';
+        } else if (txt.indexOf('Client Projects') !== -1) {
+          btn.textContent = 'Client Projects (6)';
+        }
+        if (btn.classList.contains('active')) {
+          if (txt.indexOf('Interactive') !== -1) {
+            activeFilter = 'Interactive Web';
+          } else if (txt.indexOf('Client') !== -1) {
+            activeFilter = 'Client Projects';
+          } else {
+            activeFilter = 'All';
+          }
+        }
+      }
+
+      // 3. Inject Missing Cards into Cards Container
+      var filterBar = document.querySelector('.ks-filter-bar');
+      if (filterBar) {
+        var cardsContainer = filterBar.nextElementSibling;
+        if (cardsContainer && cardsContainer.children.length > 0) {
+          var showInjected = activeFilter === 'All' || activeFilter === 'Client Projects';
+
+          // Helper to ensure card
+          function ensureCard(id, html) {
+            var existing = document.getElementById(id);
+            if (!existing) {
+              if (showInjected) {
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+                var el = temp.firstElementChild;
+                cardsContainer.appendChild(el);
+              }
+            } else {
+              existing.style.display = showInjected ? 'block' : 'none';
+            }
+          }
+
+          ensureCard('ks-card-yamuna', getYamunaCardHTML());
+          ensureCard('ks-card-vidscript', getVidScriptCardHTML());
+          ensureCard('ks-card-realestate', getRealEstateCardHTML());
+        }
+      }
+    } finally {
+      isProjectsSyncing = false;
+    }
+  }
+
   function syncProgrammerPanels() {
     if (isSyncing) return;
     isSyncing = true;
@@ -353,6 +823,7 @@
       } else {
         var hero = findHeroContainer();
         if (hero) {
+          formatHeroSubtitle(hero);
           var existing = document.getElementById('ks-programmer-panels');
           if (!existing) {
             mountProgrammerPanels(hero);
@@ -362,12 +833,18 @@
         }
       }
 
+      syncProjectsPage();
+
     } finally {
       isSyncing = false;
     }
   }
 
   window.addEventListener('popstate', syncProgrammerPanels);
+  window.addEventListener('resize', function () {
+    var hero = findHeroContainer();
+    if (hero) formatHeroSubtitle(hero);
+  }, { passive: true });
 
   var origPushState = history.pushState;
   history.pushState = function () {
@@ -399,6 +876,7 @@
     mount: mountProgrammerPanels,
     unmount: unmountProgrammerPanels,
     sync: syncProgrammerPanels,
+    syncProjects: syncProjectsPage,
     isMounted: function () { return panelsMounted; },
     isHomeRoute: isHomeRoute
   };

@@ -1,12 +1,17 @@
-# Robots.txt for Khandeshwar Suryavanshi Portfolio
-# https://khandeshwarportfolio.netlify.app
+# Robots.txt for Khandeshwar Suryavanshi — AI System Developer & Website Architect
+# https://khandeshwar51.netlify.app
 
 User-agent: *
 Allow: /
+Disallow: /scratch/
+Disallow: /assets/*.map$
 
 # Search Engine & AI Crawler Discoverability
 User-agent: Googlebot
 Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/
 
 User-agent: Bingbot
 Allow: /
@@ -23,5 +28,5 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Host: https://khandeshwarportfolio.netlify.app
-Sitemap: https://khandeshwarportfolio.netlify.app/sitemap.xml
+Host: https://khandeshwar51.netlify.app
+Sitemap: https://khandeshwar51.netlify.app/sitemap.xml
