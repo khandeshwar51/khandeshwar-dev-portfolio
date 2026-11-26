@@ -341,8 +341,8 @@
   var isSyncing = false;
 
   // Sync Hero content to match reference layout perfectly:
-  // Subtitle: "Full-Stack Developer, AI Systems & Software Engineering"
-  // Bio: "B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software."
+  // Subtitle: "AI System Developer, Full-Stack Architect & Software Engineer"
+  // Bio: "AI System Developer & Full-Stack Web Architect based in Mumbai. I engineer high-performance commercial web platforms, autonomous AI automation systems, and scalable production software for businesses & startups."
   function syncHeroContent(hero) {
     if (!hero) return;
     var pList = hero.querySelectorAll('p');
@@ -357,10 +357,11 @@
         }
       }
       // Bio description detection
-      if (txt.indexOf('building') !== -1 || txt.indexOf('autonomous systems') !== -1 || txt.indexOf('Vartak') !== -1) {
-        if (p.textContent !== 'B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software.') {
+      if (txt.indexOf('building') !== -1 || txt.indexOf('autonomous systems') !== -1 || txt.indexOf('Vartak') !== -1 || txt.indexOf('student') !== -1 || txt.indexOf('commercial') !== -1 || txt.indexOf('Architect based in Mumbai') !== -1) {
+        var professionalBio = 'AI System Developer & Full-Stack Web Architect based in Mumbai. I engineer high-performance commercial web platforms, autonomous AI automation systems, and scalable production software for businesses & startups.';
+        if (p.textContent !== professionalBio) {
           p.classList.add('ks-hero-bio');
-          p.textContent = 'B.Sc. Computer Science student at Vartak College (University of Mumbai) building AI-powered browser systems, production client platforms, and scalable full-stack software.';
+          p.textContent = professionalBio;
         }
       }
     }
