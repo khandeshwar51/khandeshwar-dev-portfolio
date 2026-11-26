@@ -755,10 +755,12 @@
     if (isProjectsSyncing) return;
     if (!isProjectsRoute()) {
       var table = document.getElementById('ks-client-matrix-section');
-      if (table) table.remove();
+      if (table && table.parentNode) table.parentNode.removeChild(table);
+      var injectedWrap = document.getElementById('ks-injected-cards-wrap');
+      if (injectedWrap && injectedWrap.parentNode) injectedWrap.parentNode.removeChild(injectedWrap);
       var injected = document.querySelectorAll('.ks-injected-card');
       for (var i = 0; i < injected.length; i++) {
-        injected[i].remove();
+        if (injected[i].parentNode) injected[i].parentNode.removeChild(injected[i]);
       }
       return;
     }
@@ -774,16 +776,18 @@
         banner.insertAdjacentElement('afterend', tableEl);
       }
 
-      // 2. Identify active filter & update button text
+      // 2. Identify active filter & update button text (guarded to prevent infinite MutationObserver loop)
       var filterBtns = document.querySelectorAll('.ks-filter-btn');
       var activeFilter = 'All';
       for (var b = 0; b < filterBtns.length; b++) {
         var btn = filterBtns[b];
         var txt = btn.textContent || '';
-        if (txt.indexOf('All Projects') !== -1 || txt === 'All') {
+        if ((txt.indexOf('All Projects') !== -1 || txt === 'All') && txt !== 'All Projects (9)') {
           btn.textContent = 'All Projects (9)';
-        } else if (txt.indexOf('Client Projects') !== -1) {
+          txt = 'All Projects (9)';
+        } else if (txt.indexOf('Client Projects') !== -1 && txt !== 'Client Projects (6)') {
           btn.textContent = 'Client Projects (6)';
+          txt = 'Client Projects (6)';
         }
         if (btn.classList.contains('active')) {
           if (txt.indexOf('Interactive') !== -1) {
@@ -796,32 +800,61 @@
         }
       }
 
-      // 3. Inject Missing Cards into Cards Container
+      // 3. Inject Missing Cards in a separate sibling wrapper (never inside React's keyed list)
       var filterBar = document.querySelector('.ks-filter-bar');
       if (filterBar) {
         var cardsContainer = filterBar.nextElementSibling;
-        if (cardsContainer && cardsContainer.children.length > 0) {
+        if (cardsContainer && cardsContainer.id !== 'ks-injected-cards-wrap') {
           var showInjected = activeFilter === 'All' || activeFilter === 'Client Projects';
-
-          // Helper to ensure card
-          function ensureCard(id, html) {
-            var existing = document.getElementById(id);
-            if (!existing) {
-              if (showInjected) {
-                var temp = document.createElement('div');
-                temp.innerHTML = html;
-                var el = temp.firstElementChild;
-                cardsContainer.appendChild(el);
-              }
-            } else {
-              existing.style.display = showInjected ? 'block' : 'none';
+          var wrapEl = document.getElementById('ks-injected-cards-wrap');
+          if (!wrapEl) {
+            wrapEl = document.createElement('div');
+            wrapEl.id = 'ks-injected-cards-wrap';
+            wrapEl.style.display = showInjected ? 'flex' : 'none';
+            wrapEl.style.flexDirection = 'column';
+            wrapEl.style.gap = '2.25rem';
+            wrapEl.style.marginTop = '2.25rem';
+            wrapEl.innerHTML = [
+              getYamunaCardHTML(),
+              getVidScriptCardHTML(),
+              getRealEstateCardHTML()
+            ].join('\n');
+            cardsContainer.insertAdjacentElement('afterend', wrapEl);
+          } else {
+            var desiredDisplay = showInjected ? 'flex' : 'none';
+            if (wrapEl.style.display !== desiredDisplay) {
+              wrapEl.style.display = desiredDisplay;
             }
           }
-
-          ensureCard('ks-card-yamuna', getYamunaCardHTML());
-          ensureCard('ks-card-vidscript', getVidScriptCardHTML());
-          ensureCard('ks-card-realestate', getRealEstateCardHTML());
         }
+      }
+
+      // 4. Link Neumorphic Snake Arcade card to its dedicated GitHub repository
+      var snakeRepoUrl = 'https://github.com/khandeshwar51/neumorphic-snake-arcade';
+      var projCards = document.querySelectorAll('.ks-project-card:not(.ks-injected-card)');
+      for (var c = 0; c < projCards.length; c++) {
+        var cardTitle = projCards[c].querySelector('h3');
+        if (cardTitle && cardTitle.textContent.indexOf('Neumorphic Snake Arcade') !== -1) {
+          var ghBtn = projCards[c].querySelector('a.ks-btn-secondary');
+          if (ghBtn && ghBtn.getAttribute('href') !== snakeRepoUrl) {
+            ghBtn.setAttribute('href', snakeRepoUrl);
+          }
+        }
+      }
+
+      // 5. Scroll smoothly to the filtered Client Projects when "View Client Projects →" CTA is clicked
+      var ctaPill = document.querySelector('.ks-cta-pill');
+      if (ctaPill && !ctaPill.getAttribute('data-ks-scroll-bound')) {
+        ctaPill.setAttribute('data-ks-scroll-bound', 'true');
+        ctaPill.addEventListener('click', function () {
+          setTimeout(function () {
+            var target = document.querySelector('.ks-filter-bar');
+            if (target) {
+              var top = target.getBoundingClientRect().top + window.pageYOffset - 72;
+              window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+            }
+          }, 60);
+        });
       }
     } finally {
       isProjectsSyncing = false;

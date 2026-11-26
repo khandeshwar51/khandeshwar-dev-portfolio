@@ -113,6 +113,14 @@
         repo: "https://github.com/pratik1258m/realestate",
         tech: "Python, Groq AI LLM, Node.js, WhatsApp API, Resend API, jsPDF",
         howHeUsesIt: "Engineered automated pipeline scraping 500+ daily articles from 32 RSS feeds, Jaccard similarity deduplication, Groq AI LLM summaries, automated 8:00 AM WhatsApp and Email broadcasts, and dynamic branded PDF reports."
+      },
+      {
+        name: "Neumorphic Snake Arcade",
+        scope: "Interactive HTML5 Canvas Game",
+        live: "https://khandeshwar51.netlify.app/projects/snakegame.html",
+        repo: "https://github.com/khandeshwar51/neumorphic-snake-arcade",
+        tech: "HTML5 Canvas, CSS3 Neumorphic UI, Vanilla JavaScript",
+        howHeUsesIt: "Modern neumorphic reimagining of the classic Snake arcade game featuring gradient 2D Canvas rendering, keyboard arrows and mobile touch D-pad controls, and anti-reversal collision handling."
       }
     ]
   };

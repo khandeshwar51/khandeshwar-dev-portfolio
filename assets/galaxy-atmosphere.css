@@ -579,7 +579,7 @@ h1 span:first-child {
 h1 span:last-child,
 h1 span.bg-gradient-to-r,
 h1 span.bg-clip-text,
-.bg-gradient-to-r.from-blue-400.to-purple-400 {
+.ks-stat-tile .bg-gradient-to-r.from-blue-400.to-purple-400.bg-clip-text {
   display: inline-block !important;
   width: -webkit-fit-content !important;
   width: -moz-fit-content !important;
@@ -606,8 +606,7 @@ h1 span.bg-clip-text,
 
 h1 span:last-child:hover,
 h1 span.bg-gradient-to-r:hover,
-h1 span.bg-clip-text:hover,
-.bg-gradient-to-r.from-blue-400.to-purple-400:hover {
+h1 span.bg-clip-text:hover {
   filter: drop-shadow(0 0 35px rgba(0, 229, 229, 0.95)) brightness(1.15) !important;
 }
 
@@ -1442,6 +1441,255 @@ button.fixed.bottom-6.right-6.rounded-full {
     left: max(16px, env(safe-area-inset-left, 16px));
     padding: 9px 14px;
     font-size: 12px;
+  }
+}
+
+/* -------------------------------------------------------------
+ * 16. Commercial Client Deliveries & Flagships Matrix (Production Table)
+ * ------------------------------------------------------------- */
+.ks-client-matrix-section {
+  margin: 2rem 0 2.5rem 0 !important;
+  background: rgba(11, 19, 29, 0.72) !important;
+  border: 1px solid rgba(0, 229, 229, 0.22) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  overflow: hidden !important;
+  transition: border-color 0.3s ease !important;
+}
+
+.ks-client-matrix-section:hover {
+  border-color: rgba(0, 229, 229, 0.42) !important;
+}
+
+.ks-matrix-header-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 1.15rem 1.4rem !important;
+  background: linear-gradient(90deg, rgba(16, 28, 40, 0.9) 0%, rgba(8, 16, 24, 0.96) 100%) !important;
+  border-bottom: 1px solid rgba(0, 229, 229, 0.16) !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+}
+
+.ks-matrix-title-area {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+.ks-matrix-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: var(--ks-teal-primary) !important;
+}
+
+.ks-matrix-title {
+  margin: 0 !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.01em !important;
+}
+
+.ks-matrix-count-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.3rem 0.75rem !important;
+  border-radius: 9999px !important;
+  background: rgba(0, 229, 229, 0.12) !important;
+  border: 1px solid rgba(0, 229, 229, 0.32) !important;
+  color: #6ee7b7 !important;
+}
+
+.ks-matrix-table-wrap {
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.ks-matrix-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  text-align: left !important;
+  font-size: 0.875rem !important;
+  min-width: 840px !important;
+}
+
+.ks-matrix-table thead th {
+  background: rgba(13, 21, 32, 0.88) !important;
+  color: #94a3b8 !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 0.9rem 1.25rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  white-space: nowrap !important;
+}
+
+.ks-matrix-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+
+.ks-matrix-table tbody tr:hover {
+  background: rgba(0, 229, 229, 0.04) !important;
+}
+
+.ks-matrix-table td {
+  padding: 1.15rem 1.25rem !important;
+  vertical-align: top !important;
+  color: #cbd5e1 !important;
+  line-height: 1.55 !important;
+}
+
+.ks-td-project {
+  min-width: 180px !important;
+}
+
+.ks-proj-name-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 700 !important;
+  font-size: 0.98rem !important;
+  color: #ffffff !important;
+  margin-bottom: 0.45rem !important;
+}
+
+.ks-proj-icon {
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+}
+
+.ks-td-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+}
+
+.ks-action-live,
+.ks-action-repo,
+.ks-action-private {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  padding: 0.22rem 0.55rem !important;
+  border-radius: 0.375rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.ks-action-live.orange {
+  background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35) !important;
+}
+.ks-action-live.orange:hover {
+  filter: brightness(1.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ks-action-live.green {
+  background: linear-gradient(135deg, #16a34a, #15803d) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35) !important;
+}
+.ks-action-live.green:hover {
+  filter: brightness(1.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ks-action-live.blue {
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35) !important;
+}
+.ks-action-live.blue:hover {
+  filter: brightness(1.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ks-action-repo {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+}
+.ks-action-repo:hover {
+  background: rgba(51, 65, 85, 0.95) !important;
+  border-color: rgba(0, 229, 229, 0.5) !important;
+  color: #38bdf8 !important;
+  transform: translateY(-1px) !important;
+}
+
+.ks-action-private {
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #94a3b8 !important;
+  border: 1px solid rgba(71, 85, 105, 0.35) !important;
+  cursor: default !important;
+}
+
+.ks-td-focus {
+  font-weight: 500 !important;
+  color: #e2e8f0 !important;
+  font-size: 0.88rem !important;
+  min-width: 170px !important;
+}
+
+.ks-td-deliverables {
+  color: #94a3b8 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  min-width: 280px !important;
+}
+
+.ks-td-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.35rem !important;
+  min-width: 140px !important;
+}
+
+.ks-table-tag {
+  display: inline-block !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: 0.35rem !important;
+  background: rgba(30, 41, 59, 0.75) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  white-space: nowrap !important;
+}
+
+.ks-injected-card {
+  animation: ksCardFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes ksCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
