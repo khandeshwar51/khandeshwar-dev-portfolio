@@ -1223,23 +1223,8 @@
     const msgDiv = document.createElement('div');
     msgDiv.className = `ks-msg ks-msg-${role}`;
 
-    let thoughtHtml = '';
-    if (thoughts && thoughts.length > 0) {
-      thoughtHtml = `
-        <div class="ks-thought-box">
-          <div class="ks-thought-header" onclick="const c = this.nextElementSibling; c.style.display = c.style.display === 'none' ? 'block' : 'none';">
-            <span>🤖 Neural Reasoning Chain (${thoughts.length} steps)</span>
-            <span>▾</span>
-          </div>
-          <div class="ks-thought-content">
-            ${thoughts.map((t, idx) => `<div class="ks-thought-step"><span>•</span> <span>Step ${idx+1}: ${t}</span></div>`).join('')}
-          </div>
-        </div>
-      `;
-    }
-
+    // Clean, modern chat bubble (client-friendly, without raw internal debug/reasoning logs)
     msgDiv.innerHTML = `
-      ${thoughtHtml}
       <div class="ks-bubble">${formatMarkdown(content)}</div>
     `;
 
@@ -1375,7 +1360,9 @@ CORE PRINCIPLES (BEHAVE LIKE CHATGPT):
    - Key Work: Author of ScrollGuard (AI Wellbeing extension preventing short-form doomscrolling with client-side IndexedDB caching), commercial client platforms (Balaji Earthmovers, Balaji Farm Stay, Riverside Farm), and interactive 3D web experiences (Birthday Wish Card, Neumorphic Snake).
    - Contact / Hire: Email at khandeshwarsuryavanshi@gmail.com, GitHub @khandeshwar51, LinkedIn @khandeshwar-suryavanshi-10612623b.
 4. Security: Never disclose private API keys, SIH credentials, or internal .env secrets.
-5. Formatting: Use clean GitHub-flavored markdown with syntax-highlighted code blocks. Keep answers crisp, readable, and engaging.`;
+5. Formatting: Use clean GitHub-flavored markdown with syntax-highlighted code blocks. Keep answers crisp, readable, and engaging.
+6. When asked "How do you work?", "How are you built?", or "What powers you?":
+   Explain clearly and professionally that you are an autonomous AI representative engineered by Khandeshwar Suryavanshi, powered by advanced cloud LLM intelligence, real-time GitHub telemetry synchronization, and a resilient zero-downtime architecture. Describe your capabilities gracefully without exposing internal API providers, model identifiers (never say "Groq LPU" or "openai/gpt-oss-120b"), or internal debug tokens.`;
 
     const messages = [
       { role: 'system', content: systemPrompt },
@@ -1440,6 +1427,13 @@ CORE PRINCIPLES (BEHAVE LIKE CHATGPT):
       return {
         thoughts,
         response: "🤖 **I am the KS AI Assistant** — an AI developer companion running on Khandeshwar Suryavanshi's portfolio!\n\nI can help you write code, explain algorithms, solve computer science problems, or answer questions about Khandeshwar's work and tech stack. What would you like to explore?"
+      };
+    }
+
+    if (q.includes('how do you work') || q.includes('how you work') || q.includes('how does this work') || q.includes('how does the bot work') || q.includes('how are you built') || q.includes('what powers you')) {
+      return {
+        thoughts,
+        response: `🤖 **How the KS AI Assistant Works:**\n\nI am an autonomous digital assistant engineered by **Khandeshwar Suryavanshi** directly into his portfolio:\n\n1. **Cognitive LLM Intelligence:** I process inquiries, write and debug code, and answer technical challenges with sub-second response times.\n2. **Live GitHub Telemetry:** I sync live with Khandeshwar's public GitHub activity, keeping up to date with his latest commits, repos, and engineering milestones.\n3. **Verified Knowledge Graph:** I have architectural specifications on his key platforms (ScrollGuard, Balaji Earthmovers, Real Estate AI platform) and his 20-Point Web Application Security Standard.\n4. **Resilient Zero-Downtime Architecture:** Built with an intelligent client-side fallback system so I remain operational even during network fluctuations.\n\nFeel free to ask me about any programming language, system design concept, or how Khandeshwar can help with your software project!`
       };
     }
 
