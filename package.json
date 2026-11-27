@@ -1,0 +1,14 @@
+{
+  "name": "khandeshwar-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Khandeshwar Suryavanshi — AI System Developer & Full-Stack Web Architect",
+  "scripts": {
+    "seo": "node scripts/seo-automation/runner.js",
+    "seo:audit": "node scripts/seo-automation/runner.js audit",
+    "seo:post": "node scripts/seo-automation/runner.js post",
+    "seo:rank": "node scripts/seo-automation/runner.js rank",
+    "seo:review": "node scripts/seo-automation/runner.js review",
+    "seo:all": "node scripts/seo-automation/runner.js all"
+  }
+}
